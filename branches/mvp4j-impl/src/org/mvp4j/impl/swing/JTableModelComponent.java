@@ -48,10 +48,6 @@ public class JTableModelComponent extends ModelComponent {
 
 	@Override
 	public void bind() {
-//		customizedColumns = new HashMap<Integer, String>();
-//		customizedColumns.put(0, "idModified");
-//		customizedColumns.put(3, "nodjeameModified");
-//		setCustomizedColumns(customizedColumns);
 		table.setModel((DefaultTableModel) initTableModel(getCustomizedColumns()));
 
 		mouseListener = new MouseListener() {

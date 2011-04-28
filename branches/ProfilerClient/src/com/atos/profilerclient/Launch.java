@@ -9,7 +9,6 @@ import org.mvp4j.impl.reflect.AppControllerReflectFactory;
 import org.mvp4j.impl.swing.SwingAdapter;
 
 import com.atos.profilerclient.ui.model.UserModel;
-import com.atos.profilerclient.ui.presenter.CustomizedTableModel;
 import com.atos.profilerclient.ui.presenter.UserPresenter;
 import com.atos.profilerclient.ui.view.UserView;
 
@@ -23,12 +22,9 @@ public class Launch {
 		view.setVisible(true);
 		
 		
-		MVPAdapter swingAdapater = new SwingAdapter();
-		swingAdapater.setComponentModel(JTable.class, CustomizedTableModel.class);
-		
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
-		appController.getCurrentAdapter().setComponentModel(JTable.class,CustomizedTableModel.class);
+//		appController.getCurrentAdapter().setComponentModel(JTable.class,CustomizedTableModel.class);
 		appController.bind(view, model, presenter);
 		
 

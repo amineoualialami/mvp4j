@@ -17,8 +17,8 @@ public class JtableUtils {
 
 		List<Object> columns = new ArrayList();
 
-		if (customizedColumns == null) {
-			initFields(initListObject, null);
+		if (customizedColumns.size() == 0) {
+			initFields(initListObject, customizedColumns);
 			for (Field field : getFields()) {
 				field.setAccessible(true);
 				columns.add(field.getName());
@@ -72,7 +72,7 @@ public class JtableUtils {
 		Class objectClass = object.getClass();
 		
 		
-		if (customizedColumns == null) {
+		if (customizedColumns.size() == 0) {
 
 			Field[] allFields = objectClass.getDeclaredFields();
 			for (Field field : allFields) {

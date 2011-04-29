@@ -53,8 +53,6 @@ public class JComboBoxActionComponent extends ActionComponent{
 	private MouseWheelListener mouseWheelListener;
 	private PopupMenuListener popupMenuListener;
 	private PropertyChangeListener propertyChangeListener;
-	
-	private boolean MethodIsInvoked=true;
 	private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
@@ -85,13 +83,8 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void itemStateChanged(ItemEvent e) {
 					if(eventAction.equals("itemStateChanged")){
 					actionBinding.callAction(e);
-					MethodIsInvoked=true;
-					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
-				}
+					
+					}}
 				
 			};
 			jcombobox.addItemListener(itemListener);
@@ -107,12 +100,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void actionPerformed(ActionEvent e) {
 					if(eventAction.equals("actionPerformed")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					  
 				}
 	    		
 	    	};
@@ -125,12 +115,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void mouseReleased(MouseEvent e) {
 					if(eventAction.equals("mouseReleased")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -138,12 +125,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void mousePressed(MouseEvent e) {
 					if(eventAction.equals("mousePressed")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -151,12 +135,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void mouseExited(MouseEvent e) {
 					if(eventAction.equals("mouseExited")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -164,12 +145,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void mouseEntered(MouseEvent e) {
 					if(eventAction.equals("mouseEntered")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 					
 				}
@@ -178,12 +156,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void mouseClicked(MouseEvent e) {
 					if(eventAction.equals("mouseClicked")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 			};
@@ -199,12 +174,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 			public void keyTyped(KeyEvent e) {
 				if(eventAction.equals("keyTyped")){
 					actionBinding.callAction(e);
-					MethodIsInvoked=true;
+					
 				}
-				if(MethodIsInvoked==false){
-					  
-					  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-				  }
+				
 				
 			}
 			
@@ -212,12 +184,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 			public void keyReleased(KeyEvent e) {
 				if(eventAction.equals("keyReleased")){
 					actionBinding.callAction(e);
-					MethodIsInvoked=true;
+					
 				}
-				if(MethodIsInvoked==false){
-					  
-					  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-				  }
+				
 				
 			}
 			
@@ -225,12 +194,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 			public void keyPressed(KeyEvent e) {
 				if(eventAction.equals("keyPressed")){
 					actionBinding.callAction(e);
-					MethodIsInvoked=true;
+					
 				}
-				if(MethodIsInvoked==false){
-					  
-					  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-				  }
+				
 				
 			}
 			
@@ -245,12 +211,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void componentShown(ComponentEvent e) {
 					if(eventAction.equals("componentShown")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -258,12 +221,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void componentResized(ComponentEvent e) {
 					if(eventAction.equals("componentResized")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -271,24 +231,18 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void componentMoved(ComponentEvent e) {
 					if(eventAction.equals("componentMoved")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 				}
 				
 				@Override
 				public void componentHidden(ComponentEvent e) {
 					if(eventAction.equals("componentHidden")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 			};
@@ -301,12 +255,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void ancestorRemoved(AncestorEvent e) {
 					if(eventAction.equals("ancestorRemoved")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -314,12 +265,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void ancestorMoved(AncestorEvent e) {
 					if(eventAction.equals("ancestorMoved")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -327,12 +275,9 @@ public class JComboBoxActionComponent extends ActionComponent{
 				public void ancestorAdded(AncestorEvent e) {
 					if(eventAction.equals("ancestorAdded")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 			};

@@ -26,7 +26,7 @@ public class JTableModelComponent extends ModelComponent {
 	private ModelBinding modelBinding;
 	private List<Object> initValues;
 	private DefaultTableModel tableModel;
-	private Map<Integer , String > customizedColumns;
+	private Map<String , String > customizedColumns;
 	private Logger logger = LoggerUtils.getLogger();
 
 	public JTableModelComponent(ModelBinding modelBinding) {
@@ -48,10 +48,6 @@ public class JTableModelComponent extends ModelComponent {
 
 	@Override
 	public void bind() {
-//		customizedColumns = new HashMap<Integer, String>();
-//		customizedColumns.put(0, "idModified");
-//		customizedColumns.put(3, "nodjeameModified");
-//		setCustomizedColumns(customizedColumns);
 		table.setModel((DefaultTableModel) initTableModel(getCustomizedColumns()));
 
 		mouseListener = new MouseListener() {
@@ -95,7 +91,7 @@ public class JTableModelComponent extends ModelComponent {
 		tableModel = null;
 
 	}
-	public Object initTableModel(Map<Integer , String > customizedColumns) {
+	public Object initTableModel(Map<String , String > customizedColumns) {
 		if (tableModel == null) {
 			tableModel = new DefaultTableModel();
 		
@@ -116,14 +112,14 @@ public class JTableModelComponent extends ModelComponent {
 		return tableModel;
 	}
 
-	public Map<Integer, String> getCustomizedColumns() {
+	public Map<String, String> getCustomizedColumns() {
   	if(customizedColumns ==null){
-		customizedColumns= new HashMap<Integer, String>();
+		customizedColumns= new HashMap<String, String>();
 		}
 		return customizedColumns;
 	}
 
-	public void setCustomizedColumns(Map<Integer, String> customizedColumns) {
+	public void setCustomizedColumns(Map<String, String> customizedColumns) {
 		this.customizedColumns = customizedColumns;
 	}
 

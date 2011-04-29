@@ -2,8 +2,10 @@ package org.mvp4j.impl.swing.utils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -13,7 +15,7 @@ public class JtableUtils {
 	static List<Field> fields;
 
 	public static List<Object> getColumns(Object initListObject,
-			Map<Integer, String> customizedColumns) {
+			Map<String, String> customizedColumns) {
 
 		List<Object> columns = new ArrayList();
 
@@ -60,7 +62,7 @@ public class JtableUtils {
 	}
 
 	public static void initFields(Object initListObject,
-			Map<Integer, String> customizedColumns) {
+			Map<String, String> customizedColumns) {
 
 		fields = new ArrayList<Field>();
 		List objectList = (List) initListObject;
@@ -80,11 +82,25 @@ public class JtableUtils {
 			}
 		} else {
 			Field[] allFields = objectClass.getDeclaredFields();
-			for (int i=0;i<allFields.length;i++) {
-				if(customizedColumns.containsKey(i)){
-					fields.add(allFields[i]);
+
+			Set<String> oldValues =  customizedColumns.keySet();
+			List<String> oldValuesList = new ArrayList<String>();
+			for (String string : oldValues) {
+				oldValuesList.add(string);
+			}
+			Collections.sort(oldValuesList);
+			for (String string : oldValues) {
+				System.out.println(" set "+ string);
+				for (Field field : allFields) {
+					System.out.println("fields dans le tableau : "+ field.getName());
+					if(field.getName()==string){
+						fields.add(field);
+					}
 				}
 			}
+
+					
+			
 		}
 	}
 

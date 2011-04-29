@@ -39,6 +39,7 @@ public interface ActionBinding {
 	 * <p>
 	 * Use this method to call the action, in the body event handler,
 	 * so when the event happened the action must be invoked.
+	 * @param tne eventObject represents the event object registered by the listener and passed to the action
 	 */	
 	public  void callAction(Object eventObject);
 }

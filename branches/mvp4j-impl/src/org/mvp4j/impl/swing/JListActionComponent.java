@@ -27,8 +27,7 @@ public class JListActionComponent extends ActionComponent{
 	private MouseListener mouseListener;
 	private KeyListener keyListener;
 	private ListSelectionListener listSelectionListener;
-	private boolean MethodIsInvoked=true;
-	private Logger logger = LoggerUtils.getLogger();
+		private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
 	public JListActionComponent(ActionBinding actionBinding) {
@@ -57,12 +56,9 @@ public class JListActionComponent extends ActionComponent{
 			public void valueChanged(ListSelectionEvent e) {
 				if(eventAction.equals("valueChanged")){
 					actionBinding.callAction(e);
-					MethodIsInvoked=true;
+					
 				}
-				if(MethodIsInvoked==false){
-					  
-					  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-				  }
+				
 				
 			}
 		};		
@@ -77,12 +73,9 @@ public class JListActionComponent extends ActionComponent{
 				public void mouseReleased(MouseEvent e) {
 					if(eventAction.equals("mouseReleased")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -90,12 +83,9 @@ public class JListActionComponent extends ActionComponent{
 				public void mousePressed(MouseEvent e) {
 					if(eventAction.equals("mousePressed")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 				
@@ -103,12 +93,8 @@ public class JListActionComponent extends ActionComponent{
 				public void mouseExited(MouseEvent e) {
 					if(eventAction.equals("mouseExited")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
 					
 				}
 				
@@ -116,12 +102,9 @@ public class JListActionComponent extends ActionComponent{
 				public void mouseEntered(MouseEvent e) {
 					if(eventAction.equals("mouseEntered")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 					
 				}
@@ -130,12 +113,9 @@ public class JListActionComponent extends ActionComponent{
 				public void mouseClicked(MouseEvent e) {
 					if(eventAction.equals("mouseClicked")){
 						actionBinding.callAction(e);
-						MethodIsInvoked=true;
+						
 					}
-					if(MethodIsInvoked==false){
-						  
-						  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-					  }
+					
 					
 				}
 			};
@@ -150,12 +130,9 @@ public class JListActionComponent extends ActionComponent{
 			public void keyTyped(KeyEvent e) {
 				if(eventAction.equals("keyTyped")){
 					actionBinding.callAction(e);
-					MethodIsInvoked=true;
+					
 				}
-				if(MethodIsInvoked==false){
-					  
-					  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-				  }
+				
 				
 			}
 			
@@ -163,12 +140,8 @@ public class JListActionComponent extends ActionComponent{
 			public void keyReleased(KeyEvent e) {
 				if(eventAction.equals("keyReleased")){
 					actionBinding.callAction(e);
-					MethodIsInvoked=true;
+					
 				}
-				if(MethodIsInvoked==false){
-					  
-					  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-				  }
 				
 			}
 			
@@ -176,12 +149,9 @@ public class JListActionComponent extends ActionComponent{
 			public void keyPressed(KeyEvent e) {
 				if(eventAction.equals("keyPressed")){
 					actionBinding.callAction(e);
-					MethodIsInvoked=true;
+					
 				}
-				if(MethodIsInvoked==false){
-					  
-					  logger.error("The event Action "+eventAction+" is not supported by this event type ");
-				  }
+				
 				
 			}
 			

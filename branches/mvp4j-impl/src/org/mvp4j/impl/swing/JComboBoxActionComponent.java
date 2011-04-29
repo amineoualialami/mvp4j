@@ -4,10 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
+import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.HierarchyBoundsListener;
+import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
+import java.awt.event.InputMethodEvent;
 import java.awt.event.InputMethodListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -16,7 +20,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.Action;
@@ -25,6 +31,7 @@ import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
 import org.apache.log4j.Logger;
@@ -282,6 +289,204 @@ public class JComboBoxActionComponent extends ActionComponent{
 				}
 			};
 			jcombobox.addAncestorListener(ancestorListener);
+		}
+		else if(eventType==ContainerListener.class){
+			containerListener=new ContainerListener() {
+				
+				@Override
+				public void componentRemoved(ContainerEvent e) {
+					if(eventAction.equals("componentRemoved")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+				
+				@Override
+				public void componentAdded(ContainerEvent e) {
+					if(eventAction.equals("componentAdded")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addContainerListener(containerListener);
+		}
+		else if(eventType==FocusListener.class){
+			focusListener=new FocusListener() {
+				
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(eventAction.equals("focusLost")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+				
+				@Override
+				public void focusGained(FocusEvent e) {
+					if(eventAction.equals("focusGained")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addFocusListener(focusListener);
+		}
+		else if(eventType==HierarchyBoundsListener.class){
+			hierarchyBoundsListener=new HierarchyBoundsListener() {
+				
+				@Override
+				public void ancestorResized(HierarchyEvent e) {
+					if(eventAction.equals("ancestorResized")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+				
+				@Override
+				public void ancestorMoved(HierarchyEvent e) {
+					if(eventAction.equals("ancestorMoved")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addHierarchyBoundsListener(hierarchyBoundsListener);
+		}
+		else if(eventType==HierarchyListener.class){
+			if(eventAction.equals("")){
+				eventAction="HierarchyListener";
+			}
+			hierarchyListener=new HierarchyListener() {
+				
+				@Override
+				public void hierarchyChanged(HierarchyEvent e) {
+					if(eventAction.equals("hierarchyChanged")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addHierarchyListener(hierarchyListener);
+		}
+		else if(eventType==InputMethodListener.class){
+			inputMethodListener=new InputMethodListener() {
+				
+				@Override
+				public void inputMethodTextChanged(InputMethodEvent e) {
+					if(eventAction.equals("inputMethodTextChanged")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+				
+				@Override
+				public void caretPositionChanged(InputMethodEvent e) {
+					if(eventAction.equals("caretPositionChanged")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addInputMethodListener(inputMethodListener);
+		}
+		else if(eventType==MouseMotionListener.class){
+			mouseMotionListener=new MouseMotionListener() {
+				
+				@Override
+				public void mouseMoved(MouseEvent e) {
+					if(eventAction.equals("mouseMoved")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+				
+				@Override
+				public void mouseDragged(MouseEvent e) {
+					if(eventAction.equals("mouseDragged")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addMouseMotionListener(mouseMotionListener);
+		}
+		else if(eventType==MouseWheelListener.class){
+			if(eventAction.equals("")){
+				eventAction="mouseWheelMoved";
+			}
+			mouseWheelListener=new MouseWheelListener() {
+				
+				@Override
+				public void mouseWheelMoved(MouseWheelEvent e) {
+					if(eventAction.equals("mouseWheelMoved")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addMouseWheelListener(mouseWheelListener);
+		}
+		else if(eventType==PopupMenuListener.class){
+			popupMenuListener=new PopupMenuListener() {
+				
+				@Override
+				public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+					if(eventAction.equals("popupMenuWillBecomeVisible")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+				
+				@Override
+				public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+					if(eventAction.equals("popupMenuWillBecomeInvisible")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+				
+				@Override
+				public void popupMenuCanceled(PopupMenuEvent e) {
+					if(eventAction.equals("popupMenuCanceled")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addPopupMenuListener(popupMenuListener);
+		}
+		else if(eventType==PropertyChangeListener.class){
+			if(eventAction.equals("")){
+				eventAction="propertyChange";
+			}
+			propertyChangeListener= new PropertyChangeListener() {
+				
+				@Override
+				public void propertyChange(PropertyChangeEvent e) {
+					if(eventAction.equals("propertyChange")){
+						actionBinding.callAction(e);
+						
+					}
+					
+				}
+			};
+			jcombobox.addPropertyChangeListener(propertyChangeListener);
 		}
 		else
 			logger.info("This event type "+eventType+" is not supported");

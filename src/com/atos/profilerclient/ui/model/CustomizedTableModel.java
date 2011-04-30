@@ -14,7 +14,6 @@ public class CustomizedTableModel extends JTableModelComponent {
 		getCustomizedColumns().put("idUser", "hjyh toto");
 		getCustomizedColumns().put("name", "name toto");
 		getCustomizedColumns().put("phone", "name toto");
-		//test Commit 
 		initTableModel(getCustomizedColumns());
 	}
 

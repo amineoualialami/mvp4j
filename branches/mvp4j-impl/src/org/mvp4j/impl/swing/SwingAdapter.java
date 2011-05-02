@@ -43,7 +43,31 @@ public class SwingAdapter implements MVPAdapter {
 		else if(componentKlass==JList.class){
 			return JListActionComponent.class;
 		}
-		else
+		else if(componentKlass==JTextField.class ){
+			return JTextActionComponent.class;
+		}
+		else if(componentKlass==JRadioButton.class){
+			return JRadioButtonActionComponent.class;
+		}
+		else if(componentKlass==JTable.class){
+			return JTableActionComponent.class;
+		}
+		else if(componentKlass==JPasswordField.class){
+			return JTextActionComponent.class;
+		}
+		else if(componentKlass==JCheckBox.class){
+			return JCheckBoxActionComponent.class;
+		}
+		else if(componentKlass == JFormattedTextField.class){
+			return JTextActionComponent.class;
+		}
+		else if (componentKlass == JTextArea.class) {
+			return JTextActionComponent.class;
+		}
+		else if (componentKlass == JSpinner.class){
+			return JSpinnerActionComponent.class;
+		}
+		
 			logger.error("Action Component " + componentKlass.getName()
 					+ "  is not supported");
 		throw new IllegalArgumentException();

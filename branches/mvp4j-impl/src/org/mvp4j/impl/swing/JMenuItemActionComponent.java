@@ -79,6 +79,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 			listener = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					if(eventAction.equals("actionPerformed") || eventAction.equals(""))
 					actionBinding.callAction(e);
 					
 				}
@@ -92,7 +93,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if(eventAction.equals("mouseReleased")){
+					if(eventAction.equals("mouseReleased") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -102,7 +103,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if(eventAction.equals("mousePressed")){
+					if(eventAction.equals("mousePressed") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -112,7 +113,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if(eventAction.equals("mouseExited")){
+					if(eventAction.equals("mouseExited") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -133,7 +134,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(eventAction.equals("mouseClicked")){
+					if(eventAction.equals("mouseClicked") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -151,7 +152,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(eventAction.equals("keyTyped")){
+				if(eventAction.equals("keyTyped") || eventAction.equals("")){
 					actionBinding.callAction(e);
 					
 				}
@@ -161,7 +162,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(eventAction.equals("keyReleased")){
+				if(eventAction.equals("keyReleased") || eventAction.equals("")){
 					actionBinding.callAction(e);
 					
 				}
@@ -171,7 +172,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(eventAction.equals("keyPressed")){
+				if(eventAction.equals("keyPressed") || eventAction.equals("")){
 					actionBinding.callAction(e);
 					
 				}
@@ -188,7 +189,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentShown(ComponentEvent e) {
-					if(eventAction.equals("componentShown")){
+					if(eventAction.equals("componentShown") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -198,7 +199,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentResized(ComponentEvent e) {
-					if(eventAction.equals("componentResized")){
+					if(eventAction.equals("componentResized") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -208,7 +209,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentMoved(ComponentEvent e) {
-					if(eventAction.equals("componentMoved")){
+					if(eventAction.equals("componentMoved") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -217,7 +218,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentHidden(ComponentEvent e) {
-					if(eventAction.equals("componentHidden")){
+					if(eventAction.equals("componentHidden") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -232,7 +233,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorRemoved(AncestorEvent e) {
-					if(eventAction.equals("ancestorRemoved")){
+					if(eventAction.equals("ancestorRemoved") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -242,7 +243,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorMoved(AncestorEvent e) {
-					if(eventAction.equals("ancestorMoved")){
+					if(eventAction.equals("ancestorMoved") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -252,7 +253,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorAdded(AncestorEvent e) {
-					if(eventAction.equals("ancestorAdded")){
+					if(eventAction.equals("ancestorAdded") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -267,7 +268,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentRemoved(ContainerEvent e) {
-					if(eventAction.equals("componentRemoved")){
+					if(eventAction.equals("componentRemoved") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -276,7 +277,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentAdded(ContainerEvent e) {
-					if(eventAction.equals("componentAdded")){
+					if(eventAction.equals("componentAdded") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -290,7 +291,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void focusLost(FocusEvent e) {
-					if(eventAction.equals("focusLost")){
+					if(eventAction.equals("focusLost") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -299,7 +300,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void focusGained(FocusEvent e) {
-					if(eventAction.equals("focusGained")){
+					if(eventAction.equals("focusGained") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -313,7 +314,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorResized(HierarchyEvent e) {
-					if(eventAction.equals("ancestorResized")){
+					if(eventAction.equals("ancestorResized") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -322,7 +323,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorMoved(HierarchyEvent e) {
-					if(eventAction.equals("ancestorMoved")){
+					if(eventAction.equals("ancestorMoved") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -332,14 +333,12 @@ public class JMenuItemActionComponent extends ActionComponent {
 			menuItem.addHierarchyBoundsListener(hierarchyBoundsListener);
 		}
 		else if(eventType==HierarchyListener.class){
-			if(eventAction.equals("")){
-				eventAction="HierarchyListener";
-			}
+			
 			hierarchyListener=new HierarchyListener() {
 				
 				@Override
 				public void hierarchyChanged(HierarchyEvent e) {
-					if(eventAction.equals("hierarchyChanged")){
+					if(eventAction.equals("hierarchyChanged") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -353,7 +352,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void inputMethodTextChanged(InputMethodEvent e) {
-					if(eventAction.equals("inputMethodTextChanged")){
+					if(eventAction.equals("inputMethodTextChanged") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -362,7 +361,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void caretPositionChanged(InputMethodEvent e) {
-					if(eventAction.equals("caretPositionChanged")){
+					if(eventAction.equals("caretPositionChanged") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -376,7 +375,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseMoved(MouseEvent e) {
-					if(eventAction.equals("mouseMoved")){
+					if(eventAction.equals("mouseMoved") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -385,7 +384,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseDragged(MouseEvent e) {
-					if(eventAction.equals("mouseDragged")){
+					if(eventAction.equals("mouseDragged") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -395,14 +394,12 @@ public class JMenuItemActionComponent extends ActionComponent {
 			menuItem.addMouseMotionListener(mouseMotionListener);
 		}
 		else if(eventType==MouseWheelListener.class){
-			if(eventAction.equals("")){
-				eventAction="mouseWheelMoved";
-			}
+			
 			mouseWheelListener=new MouseWheelListener() {
 				
 				@Override
 				public void mouseWheelMoved(MouseWheelEvent e) {
-					if(eventAction.equals("mouseWheelMoved")){
+					if(eventAction.equals("mouseWheelMoved") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}
@@ -413,14 +410,12 @@ public class JMenuItemActionComponent extends ActionComponent {
 		}
 
 		else if(eventType==PropertyChangeListener.class){
-			if(eventAction.equals("")){
-				eventAction="propertyChange";
-			}
+		
 			propertyChangeListener= new PropertyChangeListener() {
 				
 				@Override
 				public void propertyChange(PropertyChangeEvent e) {
-					if(eventAction.equals("propertyChange")){
+					if(eventAction.equals("propertyChange") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						
 					}

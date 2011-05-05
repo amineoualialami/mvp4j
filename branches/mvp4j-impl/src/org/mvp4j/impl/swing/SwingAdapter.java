@@ -179,6 +179,12 @@ public class SwingAdapter implements MVPAdapter {
 		customizedComponentsModels.put(componentKlass,customizedModelComponent);
 	}
 
+	@Override
+	public ModelComponent getComponentModel(Object component) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 	

@@ -48,5 +48,8 @@ public interface MVPAdapter {
 	
 	
 	public void setComponentModel(Class<?> componentKlass ,Class<? extends ModelComponent> customizedModelComponent );
-
+	
+	
+	
+	public ModelComponent getComponentModel(Object component);
 }

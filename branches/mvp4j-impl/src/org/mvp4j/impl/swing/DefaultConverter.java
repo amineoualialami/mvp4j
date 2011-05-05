@@ -1,5 +1,7 @@
 package org.mvp4j.impl.swing;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.mvp4j.Converter;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
@@ -13,12 +15,19 @@ public class DefaultConverter implements Converter {
 		if (value instanceof String) {
 			if (type == Integer.class)
 				return new Integer((String) value);
+			else if(type==int.class)
+				return new Integer((String) value);
+			else if(type==float.class)
+				return new Float((String) value);
 			else if (type == Float.class)
 				return new Float((String) value);
 			else if (type == String.class)
 				return value.toString();
+			else if(type==double.class)
+				return new Double((String) value);
 			else if (type == Double.class)
 				return new Double((String) value);
+			
 			logger.error("The type : " + type.getName()
 					+ " is not supported with the value of type String");
 			throw new IllegalArgumentException();

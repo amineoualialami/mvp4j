@@ -50,30 +50,66 @@ public class UserView extends JFrame {
 	JPanel panel1;
 	JPanel panel2;
 	JPanel buttonPanel;
-	JButton okButton, delButton, editButton, clearButton;
-	JTextField nameTextField, mailTextField, telTextField;
+	
+	@Action(name = "addUser")
+	JButton okButton;
+	
+	@Action(name = "removeUser")
+	JButton delButton;
+	
+	@Action(name = "editUser")
+	JButton editButton;
+	
+	@Actions( { @Action(name="clear"), @Action(name="toto"), @Action(name="tata") })
+	JButton clearButton;
+	
+	@Model(property = "name")
+	JTextField nameTextField;
+	
+	@Model(property = "mail")
+	JTextField mailTextField;
+	
+	@Model(property = "phone")
+	JTextField telTextField;
+	
 	JPasswordField namePasswordField;
 	JLabel nameLabel, mailLabel, telLabel, profilLabel;
+	
+	@Model(property = "profil", initProperty = "profils")
 	JComboBox profilComboBox;
+	
 	SpringLayout springLayout;
 
+	@Model(initProperty = "users", property = "user")
 	JTable table;
-	DefaultTableModel model;
+	
 	JScrollPane scrollPane;
 
-	JCheckBox profilCheckBox1, profilCheckBox2;
+	//@Model(property="profils2", initProperty="profil1")
+	JCheckBox profilCheckBox1;
+	
+	//@Model(property="profils2", initProperty="profil2")
+	JCheckBox profilCheckBox2;
 
 	DtoDismantler<UserModel, UserDTO> userDTODismantler;
 	DtoBuilder<UserModel> userDTOBuilder;
 
 	ButtonGroup buttonGroup;
-	JRadioButton profilRadioButton1, profilRadioButton2;
+	//@Model(property="profil", initProperty="profil1")
+	JRadioButton profilRadioButton1 ;
 	
+	//@Model(property="profil" , initProperty="profil2" )
+	JRadioButton profilRadioButton2 ;
+	
+	@Model(initProperty="users", property="user")
 	JList list;
 	
 	JMenuBar menuBar;
 	JMenu menu;
+	@Action(name = "actionMenu1")
 	JMenuItem menuItem1;
+	
+	@Action(name = "actionMenu2")
 	JMenuItem menuItem2;
 
 	public UserView() {
@@ -172,7 +208,7 @@ public class UserView extends JFrame {
 
 	// =========== GETTERS and SETTERS (JButton)============
 
-	@Action(name = "addUser")
+	
 	public JButton getOkButton() {
 		if (okButton == null) {
 			okButton = new JButton("OK");
@@ -186,7 +222,7 @@ public class UserView extends JFrame {
 		this.okButton = okButton;
 	}
 
-	@Action(name = "removeUser")
+
 	public JButton getDelButton() {
 		if (delButton == null) {
 			delButton = new JButton("Delete");
@@ -213,41 +249,11 @@ public class UserView extends JFrame {
 		this.delButton = delButton;
 	}
 
-	@Action(name = "editUser")
+	
 	public JButton getEditButton() {
 		if (editButton == null) {
 			editButton = new JButton("Edit");
 			editButton.setBounds(770, 10, 70, 40);
-
-			// editButton.addActionListener(new ActionListener() {
-			//
-			// @Override
-			// public void actionPerformed(ActionEvent e) {
-			// try {
-			// System.out.println("EditButton");
-			// table.getSelectedRow();
-			// String idString = (String) model.getValueAt(
-			// table.getSelectedRow(), 0);
-			//
-			// UserDTO userDTO = userSession.findUser(Long
-			// .parseLong(idString));
-			// UserModel userModel;
-			//
-			// userModel = getUserDTOBuilder().build(userDTO);
-			//
-			// getNameTextField().setText(userModel.getName());
-			// getTelTextField().setText(userModel.getPhone() + "");
-			// getMailTextField().setText(userModel.getMail());
-			// // getProfilComboBox().setSelectedIndex(
-			// // Integer.parseInt((userModel.getProfil().getId() - 1)
-			// // + ""));
-			//
-			// } catch (DtoConfigurationException e1) {
-			// e1.printStackTrace();
-			// }
-			// }
-			//
-			// });
 		}
 		return editButton;
 	}
@@ -255,9 +261,7 @@ public class UserView extends JFrame {
 	public void setEditButton(JButton editButton) {
 		this.editButton = editButton;
 	}
-
-//	@Action(name = "clear")
-	@Actions( { @Action(name="clear"), @Action(name="toto"), @Action(name="tata") })
+	
 	public JButton getClearButton() {
 		if (clearButton == null) {
 			clearButton = new JButton("Clear");
@@ -274,7 +278,7 @@ public class UserView extends JFrame {
 
 	// =========== GETTERS and SETTERS (JTextField)============
 
-	@Model(property = "name")
+	
 	public JTextField getNameTextField() {
 		if (nameTextField == null) {
 			nameTextField = new JTextField();
@@ -288,7 +292,7 @@ public class UserView extends JFrame {
 		this.nameTextField = nameTextField;
 	}
 
-	@Model(property = "mail")
+	
 	public JTextField getMailTextField() {
 		if (mailTextField == null) {
 			mailTextField = new JTextField();
@@ -301,7 +305,7 @@ public class UserView extends JFrame {
 		this.mailTextField = mailTextField;
 	}
 
-	@Model(property = "phone")
+	
 	public JTextField getTelTextField() {
 		if (telTextField == null) {
 			telTextField = new JTextField();
@@ -368,7 +372,7 @@ public class UserView extends JFrame {
 
 	// =========== GETTERS and SETTERS (JComboBox)============
 
-	@Model(property = "profil", initProperty = "profils")
+	
 	public JComboBox getProfilComboBox() {
 		if (profilComboBox == null) {
 			profilComboBox = new JComboBox();
@@ -394,11 +398,6 @@ public class UserView extends JFrame {
 		this.scrollPane = scrollPane;
 	}
 
-	public void refreshTable() {
-
-		// table.setModel(new DefaultTableModel());
-		// table.tableChanged(new TableModelEvent(model))
-	}
 
 	public DtoDismantler<UserModel, UserDTO> getUserDTODismantler() {
 		if (userDTODismantler == null) {
@@ -435,7 +434,6 @@ public class UserView extends JFrame {
 		this.buttonGroup = buttonGroup;
 	}
 
-//	 @Model(property="profil", initProperty="profil1")
 	public JRadioButton getProfilRadioButton1() {
 		if (profilRadioButton1 == null) {
 			profilRadioButton1 = new JRadioButton("profil 1");
@@ -444,7 +442,6 @@ public class UserView extends JFrame {
 		return profilRadioButton1;
 	}
 
-//	 @Model(property="profil" , initProperty="profil2" )
 	public JRadioButton getProfilRadioButton2() {
 		if (profilRadioButton2 == null) {
 			profilRadioButton2 = new JRadioButton("profil 2");
@@ -453,7 +450,7 @@ public class UserView extends JFrame {
 		return profilRadioButton2;
 	}
 
-	@Model(initProperty = "users", property = "user")
+	
 	public JTable getTable() {
 		if (table == null) {
 			table = new JTable();
@@ -461,7 +458,6 @@ public class UserView extends JFrame {
 		return table;
 	}
 
-	@Model(property="profils2", initProperty="profil1")
 	public JCheckBox getProfilCheckBox1() {
 		if(profilCheckBox1==null){
 			profilCheckBox1 = new JCheckBox("profil 1");
@@ -470,7 +466,6 @@ public class UserView extends JFrame {
 		return profilCheckBox1;
 	}
 
-	@Model(property="profils2", initProperty="profil2")
 	public JCheckBox getProfilCheckBox2() {
 		if(profilCheckBox2==null){
 			profilCheckBox2 = new JCheckBox("profil 2");
@@ -479,7 +474,7 @@ public class UserView extends JFrame {
 		return profilCheckBox2;
 	}
 
-	@Model(initProperty="users", property="user")
+	
 	public JList getList() {
 		if(list==null){
 			list = new JList();
@@ -487,7 +482,7 @@ public class UserView extends JFrame {
 		return list;
 	}
 
-	@Action(name = "actionMenu1")
+	
 	public JMenuItem getMenuItem1() {
 		if(menuItem1==null){
 			menuItem1 = new JMenuItem();
@@ -500,7 +495,7 @@ public class UserView extends JFrame {
 		this.menuItem1 = menuItem1;
 	}
 
-	@Action(name = "actionMenu2")
+	
 	public JMenuItem getMenuItem2() {
 		if(menuItem2==null){
 			menuItem2 = new JMenuItem();

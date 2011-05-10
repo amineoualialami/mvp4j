@@ -48,7 +48,8 @@ public class UserPresenter {
 //			System.out.println(model.getUser().getIdUser());
 //			System.out.println("match = "+getUserSession().findUser(model.getUser().getIdUser()).getName());
 //			if (getUserSession().findUser(model.getUser().getIdUser()) == null) {
-				getUserSession().addUser(userDTO1);
+				System.out.println(model.getProfil().getName());
+			    getUserSession().addUser(userDTO1);
 //			} else {
 //				getUserSession().updateUser(userDTO1);
 //			}

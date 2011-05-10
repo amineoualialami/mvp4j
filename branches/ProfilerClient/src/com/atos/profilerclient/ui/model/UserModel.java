@@ -79,8 +79,7 @@ public class UserModel implements Serializable {
 
 	@DtoProperty(sourceClass=UserDTO.class)
 	public ProfilDTO getProfil() {
-//		return profil;
-		return new ProfilDTO();
+		return profil;
 	}
 
 	public void setProfil(ProfilDTO profil) {

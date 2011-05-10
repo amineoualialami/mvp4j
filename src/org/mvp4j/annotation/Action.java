@@ -41,7 +41,7 @@ import org.mvp4j.AppController;
  */
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+
 @Documented
 public @interface Action {
 

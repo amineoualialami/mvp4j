@@ -65,13 +65,9 @@ public class AppControllerReflect implements AppController {
 			try {
 				Method method = modelInfo.getMethod();
 				Object object = method.invoke(view);
-				Class componentModelClass = currentAdapter
-						.getComponentModel(object.getClass());
-				Constructor constructor = componentModelClass
-						.getConstructor(ModelBinding.class);
-				ModelComponent componentModel = (ModelComponent) constructor
-						.newInstance(new ModelBindingImpl(view, model,
-								modelInfo, getConverter()));
+				Class<? extends ModelComponent> componentModelClass = currentAdapter.getComponentModel(object.getClass());
+				Constructor<? extends ModelComponent>  constructor = componentModelClass.getConstructor(ModelBinding.class);
+				ModelComponent componentModel = (ModelComponent) constructor.newInstance(new ModelBindingImpl(view, model,modelInfo, getConverter()));
 				modelInfo.setComponentModel(componentModel);
 				componentModel.bind();
 

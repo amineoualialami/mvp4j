@@ -1,6 +1,7 @@
 package org.mvp4j.impl.reflect;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -165,31 +166,74 @@ public class AppControllerReflect implements AppController {
 
 		List<ActionInfo> actionsInfo = new ArrayList<ActionInfo>();
 		List<ModelInfo> modelsInfo = new ArrayList<ModelInfo>();
+		
+		Field[] listFieldsView=viewClass.getDeclaredFields();
 		Method[] listMethodsView = viewClass.getMethods();
 		Class presenterClass = mvp.presenterClass();
 		Method[] listMethodsPresenter = presenterClass.getMethods();
 		Class modelClass = mvp.modelClass();
 
-		for (Method method : listMethodsView) {
-			if (method.isAnnotationPresent(Action.class)) {
-				Action action = method.getAnnotation(Action.class);
+		for (Field field : listFieldsView) {
+			field.setAccessible(true);
+			if(field.isAnnotationPresent(Action.class)){
+				Method method=findMethod(field, viewClass);
+				Action action=field.getAnnotation(Action.class);
 				actionsInfo.add(initActionInfo(method,action));
 			}
 		}
+		
+		
+		for (Method method : listMethodsView) {
+			if (method.isAnnotationPresent(Action.class)) {
+				if(!fieldIsAnnotated(method, viewClass)){
+				Action action = method.getAnnotation(Action.class);
+				actionsInfo.add(initActionInfo(method,action));
+				}
+			}
+		}
 
+		for (Field field : listFieldsView) {
+			field.setAccessible(true);
+			if(field.isAnnotationPresent(Model.class)){
+				Method method=findMethod(field, viewClass);
+				Model model=field.getAnnotation(Model.class);
+				modelsInfo.add(initModelInfo(method,model));
+			}
+		}
+		
 		for (Method method : listMethodsView) {
 			if (method.isAnnotationPresent(Model.class)) {
-				modelsInfo.add(initModelInfo(method));
+				Model model=method.getAnnotation(Model.class);
+				if(!fieldIsAnnotated(method, viewClass)){
+				modelsInfo.add(initModelInfo(method,model));
+				}
+				
+			}
+		}
+		
+		for (Field field : listFieldsView) {
+			field.setAccessible(true);
+			if(field.isAnnotationPresent(Actions.class)){
+				Method method=findMethod(field, viewClass);
+				Actions actions=field.getAnnotation(Actions.class);
+				Action[] listActions = actions.value();
+				
+				for (Action action : listActions) {
+					actionsInfo.add(initActionInfo(method,action));
+				}
 			}
 		}
 		
 		for (Method method : listMethodsView){
 			if(method.isAnnotationPresent(Actions.class)){
+				if(!fieldIsAnnotated(method, viewClass)){
 				Actions actions = method.getAnnotation(Actions.class);
 				Action[] listActions = actions.value();
+				
 				for (Action action : listActions) {
 					actionsInfo.add(initActionInfo(method,action));
 				}
+			}
 			}
 		}
 
@@ -300,8 +344,8 @@ public class AppControllerReflect implements AppController {
 		return actionInfo;
 	}
 
-	private ModelInfo initModelInfo(Method method){
-		Model model = method.getAnnotation(Model.class);
+	private ModelInfo initModelInfo(Method method,Model model){
+		
 		ModelInfo modelInfo = new ModelInfo();
 		modelInfo.setPropertyName(model.property());
 		modelInfo.setIniPropertyName(model.initProperty());
@@ -310,9 +354,46 @@ public class AppControllerReflect implements AppController {
 	}
 
 	
+	private Method findMethod(Field field,Class<?> viewClass){
+		Method method=null;
+		try {
+			
+			method = viewClass.getDeclaredMethod("get"+(field.getName().charAt(0)+"").toUpperCase()+field.getName().substring(1));
+			
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return method;
+	}
+	
 
+	private boolean fieldIsAnnotated(Method method,Class<?> viewClass){
+		boolean annotated=false;
+		try {
+			
+			Field field=viewClass.getDeclaredField((method.getName().charAt(3)+"").toLowerCase()+method.getName().substring(4));
+		    field.setAccessible(true);
+		    if(field.isAnnotationPresent(Action.class) || field.isAnnotationPresent(Model.class) || field.isAnnotationPresent(Actions.class)){
+		    	annotated=true;
+		    }
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return annotated;
+	}
 	public Map<String, ActionViewPresenterInfo> getActionInfoMap() {
-		return actionInfoMap;
+		return actionInfoMap;	
 	}
 
 	public void setActionInfoMap(

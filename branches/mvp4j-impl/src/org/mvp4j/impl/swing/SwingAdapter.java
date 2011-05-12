@@ -48,39 +48,30 @@ public class SwingAdapter implements MVPAdapter {
 			return AbstractButtonActionComponent.class;
 		} else if (componentKlass == JMenuItem.class)
 			return AbstractButtonActionComponent.class;
-		else if (componentKlass==JComboBox.class){
+		else if (componentKlass == JComboBox.class) {
 			return JComboBoxActionComponent.class;
-		}
-		else if(componentKlass==JList.class){
+		} else if (componentKlass == JList.class) {
 			return JListActionComponent.class;
-		}
-		else if(componentKlass==JTextField.class ){
+		} else if (componentKlass == JTextField.class) {
 			return JTextActionComponent.class;
-		}
-		else if(componentKlass==JRadioButton.class){
+		} else if (componentKlass == JRadioButton.class) {
 			return JRadioButtonActionComponent.class;
-		}
-		else if(componentKlass==JTable.class){
+		} else if (componentKlass == JTable.class) {
 			return JTableActionComponent.class;
-		}
-		else if(componentKlass==JPasswordField.class){
+		} else if (componentKlass == JPasswordField.class) {
 			return JTextActionComponent.class;
-		}
-		else if(componentKlass==JCheckBox.class){
+		} else if (componentKlass == JCheckBox.class) {
 			return JCheckBoxActionComponent.class;
-		}
-		else if(componentKlass == JFormattedTextField.class){
+		} else if (componentKlass == JFormattedTextField.class) {
 			return JTextActionComponent.class;
-		}
-		else if (componentKlass == JTextArea.class) {
+		} else if (componentKlass == JTextArea.class) {
 			return JTextActionComponent.class;
-		}
-		else if (componentKlass == JSpinner.class){
+		} else if (componentKlass == JSpinner.class) {
 			return JSpinnerActionComponent.class;
 		}
-		
-			logger.error("Action Component " + componentKlass.getName()
-					+ "  is not supported");
+
+		logger.error("Action Component " + componentKlass.getName()
+				+ "  is not supported");
 		throw new IllegalArgumentException();
 	}
 
@@ -183,31 +174,30 @@ public class SwingAdapter implements MVPAdapter {
 	public Converter getConverter() {
 		return currentConverter;
 	}
+
 	@Override
 	public void setConverter(Converter converter) {
 		this.currentConverter = converter;
 	}
-	
 
-//	@Override
-//	public void setComponentModel(ModelComponent modelComponent,
-//			Class<? extends ModelComponent> customizedModelComponent) {
-//		customizedComponentsModels.put(modelComponent,customizedModelComponent);
-//	}
-	
-	
-	
+	// @Override
+	// public void setComponentModel(ModelComponent modelComponent,
+	// Class<? extends ModelComponent> customizedModelComponent) {
+	// customizedComponentsModels.put(modelComponent,customizedModelComponent);
+	// }
 
 	@Override
-	public ModelComponent getComponentModel(Object view,Object component) {
+	public ModelComponent getComponentModel(Object view, Object component) {
 		AppControllerReflect appController = AppControllerReflectFactory
-		.getAppControllerInstance();
-		Map<String, ModelViewInfo> modelViewInfoMap = appController.getModelViewInfoMap();
-		ModelViewInfo modelViewInfo = modelViewInfoMap.get(view.getClass().toString());
+				.getAppControllerInstance();
+		Map<String, ModelViewInfo> modelViewInfoMap = appController
+				.getModelViewInfoMap();
+		ModelViewInfo modelViewInfo = modelViewInfoMap.get(view.getClass()
+				.toString());
 		List<ModelInfo> listModelInfo = modelViewInfo.getModelsInfo();
 		for (ModelInfo modelInfo : listModelInfo) {
 			try {
-				if(modelInfo.getMethod().invoke(view)==component){
+				if (modelInfo.getMethod().invoke(view) == component) {
 					return modelInfo.getComponentModel();
 				}
 			} catch (IllegalArgumentException e) {
@@ -224,50 +214,49 @@ public class SwingAdapter implements MVPAdapter {
 		return null;
 	}
 
-@Override
-public void setComponentModel(Object view,Object model, Object component,
-		Class<? extends ModelComponent> customizedModelComponent) {
-	AppControllerReflect appController = AppControllerReflectFactory
-	.getAppControllerInstance();
-	Map<String, ModelViewInfo> modelViewInfoMap = appController.getModelViewInfoMap();
-	ModelViewInfo modelViewInfo = modelViewInfoMap.get(view.getClass().toString());
-	List<ModelInfo> listModelInfo = modelViewInfo.getModelsInfo();
-	for (ModelInfo modelInfo : listModelInfo) {
-		try {
-			if(modelInfo.getMethod().invoke(view)==component){
-				Class<? extends ModelComponent> componentModelClass = customizedModelComponent;
-				Constructor<? extends ModelComponent>  constructor = componentModelClass.getConstructor(ModelBinding.class);
-				ModelComponent componentModel = (ModelComponent) constructor.newInstance(new ModelBindingImpl(view, model,modelInfo, this));
-				modelInfo.setComponentModel(componentModel);
+	@Override
+	public void setComponentModel(Object view, Object model, Object component,
+			Class<? extends ModelComponent> customizedModelComponent) {
+		AppControllerReflect appController = AppControllerReflectFactory
+				.getAppControllerInstance();
+		Map<String, ModelViewInfo> modelViewInfoMap = appController
+				.getModelViewInfoMap();
+		ModelViewInfo modelViewInfo = modelViewInfoMap.get(view.getClass()
+				.toString());
+		List<ModelInfo> listModelInfo = modelViewInfo.getModelsInfo();
+		for (ModelInfo modelInfo : listModelInfo) {
+			try {
+				if (modelInfo.getMethod().invoke(view) == component) {
+					Class<? extends ModelComponent> componentModelClass = customizedModelComponent;
+					Constructor<? extends ModelComponent> constructor = componentModelClass
+							.getConstructor(ModelBinding.class);
+					ModelComponent componentModel = (ModelComponent) constructor
+							.newInstance(new ModelBindingImpl(view, model,
+									modelInfo));
+					modelInfo.setComponentModel(componentModel);
+					appController.refreshView(view);
+				}
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+
 	}
-	
-	
-}
-
-	
-
-
-	
-	
 
 }

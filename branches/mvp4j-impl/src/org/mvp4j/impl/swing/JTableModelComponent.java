@@ -29,7 +29,7 @@ public class JTableModelComponent extends ModelComponent {
 	private ModelBinding modelBinding;
 	private List<Object> initValues;
 	private DefaultTableModel tableModel;
-	private Map<String , String > customizedColumns;
+	private Map<String, String> customizedColumns;
 	private Logger logger = LoggerUtils.getLogger();
 
 	public JTableModelComponent(ModelBinding modelBinding) {
@@ -38,40 +38,21 @@ public class JTableModelComponent extends ModelComponent {
 		table = (JTable) modelBinding.getComponent();
 		try {
 			initValues = (List<Object>) modelBinding.getInitPropertyValue();
-		}
-		catch (ClassCastException e) {
-			logger.error("initProperty '"+modelBinding.getInitPropertyName()+"' must be Collection");
-        	throw new PropertyNotBindableException(
+		} catch (ClassCastException e) {
+			logger.error("initProperty '" + modelBinding.getInitPropertyName()
+					+ "' must be Collection");
+			throw new PropertyNotBindableException(
 					modelBinding.getInitPropertyName(), modelBinding
-							.getInitPropertyName().getClass(),
-							table.getClass());
-        	
+							.getInitPropertyName().getClass(), table.getClass());
+
 		}
 	}
 
 	@Override
 	public void bind() {
-	   
-		final Runnable runInit=new Runnable(){
 
-			@Override
-			public void run() {
-				table.setModel((DefaultTableModel) initTableModel(getCustomizedColumns()));
-				
-			}
-			
-		};
-	
-		try {
-			SwingUtilities.invokeAndWait(runInit);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+		table.setModel((DefaultTableModel) initTableModel(getCustomizedColumns()));
+
 		mouseListener = new MouseListener() {
 
 			@Override
@@ -81,12 +62,10 @@ public class JTableModelComponent extends ModelComponent {
 			}
 
 			@Override
-			public  void mousePressed(MouseEvent e) {
-				
+			public void mousePressed(MouseEvent e) {
+
 				modelBinding.setPropertyValue(initValues.get(table
 						.getSelectedRow()));
-				
-				
 
 			}
 
@@ -117,30 +96,32 @@ public class JTableModelComponent extends ModelComponent {
 		tableModel = null;
 
 	}
-	public Object initTableModel(Map<String , String > customizedColumns) {
+
+	public Object initTableModel(Map<String, String> customizedColumns) {
 		if (tableModel == null) {
 			tableModel = new DefaultTableModel();
 			initValues = (List<Object>) modelBinding.getInitPropertyValue();
-				List<Object> listObject = JtableUtils.getColumns(initValues,getCustomizedColumns());
-				List columns = new ArrayList();
+			List<Object> listObject = JtableUtils.getColumns(initValues,
+					getCustomizedColumns());
+			List columns = new ArrayList();
 
-				for (Object field : listObject) {
-					columns.add(field.toString());
-				}
+			for (Object field : listObject) {
+				columns.add(field.toString());
+			}
 
-				tableModel.setColumnIdentifiers(columns.toArray());
-               
-				for (Object object2 : (List) initValues) {
-					tableModel.addRow(JtableUtils.getRow(object2).toArray());
-				}
+			tableModel.setColumnIdentifiers(columns.toArray());
+
+			for (Object object2 : (List) initValues) {
+				tableModel.addRow(JtableUtils.getRow(object2).toArray());
+			}
 
 		}
 		return tableModel;
 	}
 
 	public Map<String, String> getCustomizedColumns() {
-  	if(customizedColumns ==null){
-		customizedColumns= new HashMap<String, String>();
+		if (customizedColumns == null) {
+			customizedColumns = new HashMap<String, String>();
 		}
 		return customizedColumns;
 	}
@@ -152,7 +133,7 @@ public class JTableModelComponent extends ModelComponent {
 	@Override
 	public void setConverter(Converter converter) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -160,11 +141,5 @@ public class JTableModelComponent extends ModelComponent {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	
-	
-	
-	
 
 }

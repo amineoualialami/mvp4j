@@ -142,7 +142,7 @@ public class ModelBindingImpl implements ModelBinding {
 		if(modelInfo.getComponentModel().getConverter()==null){
 			AppControllerReflect appController = AppControllerReflectFactory
 			.getAppControllerInstance();
-			converter = appController.getCurrentAdapter().getConverter();	
+			converter = appController.getMvpBinding().getGlobalConverter();
 		}
 		else{
 			converter=modelInfo.getComponentModel().getConverter();

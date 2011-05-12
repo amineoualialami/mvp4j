@@ -4,18 +4,6 @@ import org.mvp4j.Converter;
 
 public interface MVPAdapter {
 	
-	/**
-	 * The adapter can define it's converter to customize the data conversion.
-	 * 
-	 * @return Get the current converter used to convert data in component to data in the model
-	 */
-	public Converter getConverter();
-	
-	
-	/**
-	 * Modify the current converter used to convert data in component in order to update the model
-	 */
-	public void setConverter(Converter converter);
 	
 	
 	
@@ -44,18 +32,4 @@ public interface MVPAdapter {
 	public Class<? extends ModelComponent> getComponentModel(Class<?> componentKlass);
 	
 	
-	/**
-	 * For each Component supported, this method must set an instance of customized ModelComponent
-	 * to define the binding rules between a component and it's property name in the associated model. 
-	 * if the component class is not supported than throw an {@link IllegalArgumentException}
-	 * @param componentKlass the component class
-	 * @param customizedModelComponent the model component class
-	 */
-	
-	
-	public void setComponentModel(Object view ,Object model , Object component ,Class<? extends ModelComponent> customizedModelComponent );
-	
-	
-	
-	public ModelComponent getComponentModel(Object view  , Object component);
 }

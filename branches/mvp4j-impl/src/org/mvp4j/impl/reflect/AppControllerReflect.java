@@ -14,6 +14,7 @@ import org.mvp4j.AppController;
 import org.mvp4j.adapter.ActionBinding;
 import org.mvp4j.adapter.ActionComponent;
 import org.mvp4j.adapter.MVPAdapter;
+import org.mvp4j.adapter.MVPBinding;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
 import org.mvp4j.annotation.Action;
@@ -34,11 +35,18 @@ public class AppControllerReflect implements AppController {
 	private Map<String, ActionViewPresenterInfo> actionInfoMap = new HashMap<String, ActionViewPresenterInfo>();
 	private Map<String, ModelViewInfo> modelViewInfoMap = new HashMap<String, ModelViewInfo>();
 	private Map<Object, Object> mapViewModel = new HashMap<Object , Object>();
+	private MVPBinding mvpBinding;
 
 	@Override
-	public void bind(Object view, Object model, Object presenter) {
+	public MVPBinding bind(Object view, Object model, Object presenter) {
+		mvpBinding = new MVPBindingImpl();
 		bindModel(view, model);
 		bindPresenter(view, presenter);
+		mvpBinding.setModel(model);
+		mvpBinding.setPresenter(presenter);
+		mvpBinding.setView(view);
+		return mvpBinding;
+		
 	}
 
 	@Override
@@ -397,6 +405,12 @@ public class AppControllerReflect implements AppController {
 	public void setModelViewInfoMap(Map<String, ModelViewInfo> modelViewInfoMap) {
 		this.modelViewInfoMap = modelViewInfoMap;
 	}
+
+	public MVPBinding getMvpBinding() {
+		return mvpBinding;
+	}
+
+
 	
 	
 

@@ -35,8 +35,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class SwingAdapter implements MVPAdapter {
 
-	public static final Converter DEFAULT_CONVERTER = new DefaultConverter();
-	private Converter currentConverter = DEFAULT_CONVERTER;
 	private Logger logger = LoggerUtils.getLogger();
 	private Map<Object, Object> customizedComponentsModels = new HashMap<Object, Object>();
 
@@ -170,93 +168,7 @@ public class SwingAdapter implements MVPAdapter {
 		throw new IllegalArgumentException();
 	}
 
-	@Override
-	public Converter getConverter() {
-		return currentConverter;
-	}
 
-	@Override
-	public void setConverter(Converter converter) {
-		this.currentConverter = converter;
-	}
 
-	// @Override
-	// public void setComponentModel(ModelComponent modelComponent,
-	// Class<? extends ModelComponent> customizedModelComponent) {
-	// customizedComponentsModels.put(modelComponent,customizedModelComponent);
-	// }
-
-	@Override
-	public ModelComponent getComponentModel(Object view, Object component) {
-		AppControllerReflect appController = AppControllerReflectFactory
-				.getAppControllerInstance();
-		Map<String, ModelViewInfo> modelViewInfoMap = appController
-				.getModelViewInfoMap();
-		ModelViewInfo modelViewInfo = modelViewInfoMap.get(view.getClass()
-				.toString());
-		List<ModelInfo> listModelInfo = modelViewInfo.getModelsInfo();
-		for (ModelInfo modelInfo : listModelInfo) {
-			try {
-				if (modelInfo.getMethod().invoke(view) == component) {
-					return modelInfo.getComponentModel();
-				}
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public void setComponentModel(Object view, Object model, Object component,
-			Class<? extends ModelComponent> customizedModelComponent) {
-		AppControllerReflect appController = AppControllerReflectFactory
-				.getAppControllerInstance();
-		Map<String, ModelViewInfo> modelViewInfoMap = appController
-				.getModelViewInfoMap();
-		ModelViewInfo modelViewInfo = modelViewInfoMap.get(view.getClass()
-				.toString());
-		List<ModelInfo> listModelInfo = modelViewInfo.getModelsInfo();
-		for (ModelInfo modelInfo : listModelInfo) {
-			try {
-				if (modelInfo.getMethod().invoke(view) == component) {
-					Class<? extends ModelComponent> componentModelClass = customizedModelComponent;
-					Constructor<? extends ModelComponent> constructor = componentModelClass
-							.getConstructor(ModelBinding.class);
-					ModelComponent componentModel = (ModelComponent) constructor
-							.newInstance(new ModelBindingImpl(view, model,
-									modelInfo));
-					modelInfo.setComponentModel(componentModel);
-					appController.refreshView(view);
-				}
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-	}
 
 }

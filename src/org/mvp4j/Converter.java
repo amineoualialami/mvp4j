@@ -26,6 +26,9 @@ public interface Converter {
 	 * @param value the object value to convert
 	 * @return the result of conversion
 	 */
-	public Object convertToType(Class<?> type, Object value);
+	public Object convertComponentToModel(Class<?> type, Object value);
+	
+	  // todo javaDoc
+	public Object convertModelToComponent(Object value);
 
 }

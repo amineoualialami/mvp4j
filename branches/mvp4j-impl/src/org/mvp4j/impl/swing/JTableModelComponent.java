@@ -2,12 +2,14 @@ package org.mvp4j.impl.swing;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -49,9 +51,27 @@ public class JTableModelComponent extends ModelComponent {
 
 	@Override
 	public void bind() {
-	
-		table.setModel((DefaultTableModel) initTableModel(getCustomizedColumns()));
+	   
+		final Runnable runInit=new Runnable(){
 
+			@Override
+			public void run() {
+				table.setModel((DefaultTableModel) initTableModel(getCustomizedColumns()));
+				
+			}
+			
+		};
+	
+		try {
+			SwingUtilities.invokeAndWait(runInit);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InvocationTargetException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		mouseListener = new MouseListener() {
 
 			@Override
@@ -62,8 +82,11 @@ public class JTableModelComponent extends ModelComponent {
 
 			@Override
 			public  void mousePressed(MouseEvent e) {
+				
 				modelBinding.setPropertyValue(initValues.get(table
 						.getSelectedRow()));
+				
+				
 
 			}
 

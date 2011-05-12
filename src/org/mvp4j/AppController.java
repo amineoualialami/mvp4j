@@ -87,15 +87,9 @@ public interface AppController {
 	 */	
 	public void setAdapter(MVPAdapter adapter);
 	
-	/**
-	 * @return Get the current converter used to convert data in component to data in the model
-	 */
-	public Converter getConverter();
 	
-	/**
-	 * Modify the current converter used to convert data in component in order to update the model
-	 */
-	public void setConverter(Converter converter);
+	
+	
 	
 	
 

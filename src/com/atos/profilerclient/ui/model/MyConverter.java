@@ -5,7 +5,7 @@ import org.mvp4j.Converter;
 public class MyConverter implements Converter {
 
 	@Override
-	public Object convertToType(Class<?> type, Object value) {
+	public Object convertComponentToModel(Class<?> type, Object value) {
 		System.out.println("----------------------MyConverter------------------");
 		if (value instanceof String) {
 			if (type == Integer.class)
@@ -31,7 +31,13 @@ public class MyConverter implements Converter {
 		else {
 			throw new IllegalArgumentException();
 		}
-		
 	}
+
+	@Override
+	public Object convertModelToComponent(Object value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

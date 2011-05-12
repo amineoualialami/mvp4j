@@ -82,7 +82,7 @@ public class UserView extends JFrame {
 	SpringLayout springLayout;
 
 	@Model(initProperty = "users", property = "user")
-	@Action(name="edit" , EventType=MouseListener.class , EventAction="mousePressed" )
+//	@Action(name="edit" , EventType=MouseListener.class , EventAction="mousePressed" )
 	JTable table;
 	
 	JScrollPane scrollPane;

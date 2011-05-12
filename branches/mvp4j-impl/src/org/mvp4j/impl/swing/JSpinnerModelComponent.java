@@ -8,6 +8,7 @@ import javax.swing.SpinnerListModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.mvp4j.Converter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
 
@@ -61,6 +62,20 @@ public class JSpinnerModelComponent extends ModelComponent {
 	public void unbind() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+	@Override
+	public void setConverter(Converter converter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Converter getConverter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

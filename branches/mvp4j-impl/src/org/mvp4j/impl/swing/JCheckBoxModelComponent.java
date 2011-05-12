@@ -8,6 +8,7 @@ import java.util.Collection;
 import javax.swing.JCheckBox;
 
 import org.apache.log4j.Logger;
+import org.mvp4j.Converter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
@@ -72,5 +73,19 @@ public class JCheckBoxModelComponent extends ModelComponent {
 		}
 		return list;
 	}
+
+	@Override
+	public void setConverter(Converter converter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Converter getConverter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

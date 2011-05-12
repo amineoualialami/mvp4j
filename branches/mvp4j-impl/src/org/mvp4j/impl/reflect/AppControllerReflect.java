@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.mvp4j.AppController;
-import org.mvp4j.Converter;
 import org.mvp4j.adapter.ActionBinding;
 import org.mvp4j.adapter.ActionComponent;
 import org.mvp4j.adapter.MVPAdapter;
@@ -22,7 +21,6 @@ import org.mvp4j.annotation.Actions;
 import org.mvp4j.annotation.MVP;
 import org.mvp4j.annotation.Model;
 import org.mvp4j.exception.ActionNotFoundException;
-import org.mvp4j.impl.swing.DefaultConverter;
 import org.mvp4j.impl.swing.SwingAdapter;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
 
@@ -31,19 +29,16 @@ public class AppControllerReflect implements AppController {
 	private Logger logger = LoggerUtils.getLogger();
 
 	public static final MVPAdapter DEFAULT_ADAPTER = new SwingAdapter();
-	public static final Converter DEFAULT_CONVERTER = new DefaultConverter();
 
 	private MVPAdapter currentAdapter = DEFAULT_ADAPTER;
-	private Converter currentConverter = DEFAULT_CONVERTER;
 	private Map<String, ActionViewPresenterInfo> actionInfoMap = new HashMap<String, ActionViewPresenterInfo>();
 	private Map<String, ModelViewInfo> modelViewInfoMap = new HashMap<String, ModelViewInfo>();
 	private Map<Object, Object> mapViewModel = new HashMap<Object , Object>();
 
 	@Override
 	public void bind(Object view, Object model, Object presenter) {
-		bindPresenter(view, presenter);
 		bindModel(view, model);
-
+		bindPresenter(view, presenter);
 	}
 
 	@Override
@@ -67,7 +62,7 @@ public class AppControllerReflect implements AppController {
 				Object object = method.invoke(view);
 				Class<? extends ModelComponent> componentModelClass = currentAdapter.getComponentModel(object.getClass());
 				Constructor<? extends ModelComponent>  constructor = componentModelClass.getConstructor(ModelBinding.class);
-				ModelComponent componentModel = (ModelComponent) constructor.newInstance(new ModelBindingImpl(view, model,modelInfo, getConverter()));
+				ModelComponent componentModel = (ModelComponent) constructor.newInstance(new ModelBindingImpl(view, model,modelInfo, getCurrentAdapter()));
 				modelInfo.setComponentModel(componentModel);
 				componentModel.bind();
 
@@ -320,16 +315,6 @@ public class AppControllerReflect implements AppController {
 
 	}
 
-	@Override
-	public Converter getConverter() {
-		return currentConverter;
-	}
-
-	@Override
-	public void setConverter(Converter converter) {
-		this.currentConverter = converter;
-
-	}
 	
 	private ActionInfo initActionInfo(Method method,Action action){
 		ActionInfo actionInfo = new ActionInfo();
@@ -404,5 +389,15 @@ public class AppControllerReflect implements AppController {
 	public void setCurrentAdapter(MVPAdapter currentAdapter) {
 		this.currentAdapter = currentAdapter;
 	}
+
+	public Map<String, ModelViewInfo> getModelViewInfoMap() {
+		return modelViewInfoMap;
+	}
+
+	public void setModelViewInfoMap(Map<String, ModelViewInfo> modelViewInfoMap) {
+		this.modelViewInfoMap = modelViewInfoMap;
+	}
+	
+	
 
 }

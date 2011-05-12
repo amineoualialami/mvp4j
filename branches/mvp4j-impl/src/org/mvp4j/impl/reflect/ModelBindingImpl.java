@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 import org.mvp4j.Converter;
+import org.mvp4j.adapter.MVPAdapter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.exception.PropertyNotFoundException;
 import org.mvp4j.exception.PropertyNotInitializedException;
@@ -14,18 +15,19 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 public class ModelBindingImpl implements ModelBinding {
 
 	private ModelInfo modelInfo;
-	public static Object model;
+	private Object model;
 	private Object view;
 	private Converter converter;
+	private MVPAdapter adapter;
 	private Logger logger = LoggerUtils.getLogger();
 
 	public ModelBindingImpl(Object view, Object model, ModelInfo modelInfo,
-			Converter converter) {
+			MVPAdapter adapter) {
 
 		this.model = model;
 		this.view = view;
 		this.modelInfo = modelInfo;
-		this.converter = converter;
+		this.adapter=adapter;
 
 	}
 
@@ -63,7 +65,7 @@ public class ModelBindingImpl implements ModelBinding {
 			Class modelClass = model.getClass();
 			Field field = modelClass.getDeclaredField(getPropertyName());
 			field.setAccessible(true);
-			field.set(model, converter.convertToType(field.getType(), value));
+			field.set(model, getConverter().convertToType(field.getType(), value));
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
@@ -137,6 +139,18 @@ public class ModelBindingImpl implements ModelBinding {
 		}
 		return object;
 	}
+
+	private Converter getConverter() {
+		if(modelInfo.getComponentModel().getConverter()==null){
+			converter = adapter.getConverter();	
+		}
+		else{
+			converter=modelInfo.getComponentModel().getConverter();
+		}
+		return converter;
+	}
+
+	
 
 	
 	

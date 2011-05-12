@@ -85,7 +85,7 @@ public class JTableActionComponent extends ActionComponent {
 				}
 				
 				@Override
-				public void mousePressed(MouseEvent e) {
+				public  void mousePressed(MouseEvent e) {
 					if(eventAction.equals("mousePressed") || eventAction.equals("")){
 						actionBinding.callAction(e);
 						

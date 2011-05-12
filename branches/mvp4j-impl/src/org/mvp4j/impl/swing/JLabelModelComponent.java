@@ -2,6 +2,7 @@ package org.mvp4j.impl.swing;
 
 import javax.swing.JLabel;
 
+import org.mvp4j.Converter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
 
@@ -34,5 +35,18 @@ public class JLabelModelComponent extends ModelComponent{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setConverter(Converter converter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Converter getConverter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

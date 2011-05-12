@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;
 
 import org.apache.log4j.Logger;
+import org.mvp4j.Converter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
@@ -49,6 +50,18 @@ public class JRadioButtonModelComponent extends ModelComponent {
 	public void unbind() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void setConverter(Converter converter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Converter getConverter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 
 import org.apache.log4j.Logger;
+import org.mvp4j.Converter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
 import org.mvp4j.exception.PropertyNotBindableException;
@@ -85,5 +86,18 @@ public class JComboBoxModelComponent extends ModelComponent {
 	public void unbind() {
 
 	}
+
+	@Override
+	public void setConverter(Converter converter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Converter getConverter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

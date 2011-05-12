@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.apache.log4j.Logger;
+import org.mvp4j.Converter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
 import org.mvp4j.exception.PropertyNotBindableException;
@@ -48,6 +49,7 @@ public class JTableModelComponent extends ModelComponent {
 
 	@Override
 	public void bind() {
+	
 		table.setModel((DefaultTableModel) initTableModel(getCustomizedColumns()));
 
 		mouseListener = new MouseListener() {
@@ -59,7 +61,7 @@ public class JTableModelComponent extends ModelComponent {
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public  void mousePressed(MouseEvent e) {
 				modelBinding.setPropertyValue(initValues.get(table
 						.getSelectedRow()));
 
@@ -88,13 +90,14 @@ public class JTableModelComponent extends ModelComponent {
 
 	@Override
 	public void unbind() {
+		System.out.println("unbind");
 		tableModel = null;
 
 	}
 	public Object initTableModel(Map<String , String > customizedColumns) {
 		if (tableModel == null) {
 			tableModel = new DefaultTableModel();
-		
+			initValues = (List<Object>) modelBinding.getInitPropertyValue();
 				List<Object> listObject = JtableUtils.getColumns(initValues,getCustomizedColumns());
 				List columns = new ArrayList();
 
@@ -103,7 +106,7 @@ public class JTableModelComponent extends ModelComponent {
 				}
 
 				tableModel.setColumnIdentifiers(columns.toArray());
-
+               
 				for (Object object2 : (List) initValues) {
 					tableModel.addRow(JtableUtils.getRow(object2).toArray());
 				}
@@ -122,6 +125,19 @@ public class JTableModelComponent extends ModelComponent {
 	public void setCustomizedColumns(Map<String, String> customizedColumns) {
 		this.customizedColumns = customizedColumns;
 	}
+
+	@Override
+	public void setConverter(Converter converter) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Converter getConverter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 	

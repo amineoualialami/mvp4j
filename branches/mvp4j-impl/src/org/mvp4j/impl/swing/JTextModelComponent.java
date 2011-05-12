@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import javax.swing.text.JTextComponent;
 
 import org.apache.log4j.Logger;
+import org.mvp4j.Converter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
@@ -17,6 +18,7 @@ public class JTextModelComponent extends ModelComponent {
 	private KeyListener keyListener;
 	private FocusListener focusListener;
 	private ModelBinding modelBinding;
+	private Converter converter;
 	private Logger logger = LoggerUtils.getLogger();
 
 	public JTextModelComponent(ModelBinding modelBinding) {
@@ -80,5 +82,21 @@ public class JTextModelComponent extends ModelComponent {
 		textField.removeKeyListener(keyListener);
 		textField.removeFocusListener(focusListener);
 	}
+
+	@Override
+	public Converter getConverter() {
+		return converter;
+	}
+
+	@Override
+	public void setConverter(Converter converter) {
+		this.converter = converter;
+	}
+
+
+	
+
+	
+	
 
 }

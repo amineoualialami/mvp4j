@@ -1,7 +1,5 @@
 package org.mvp4j.impl.swing;
 
-import java.util.Date;
-
 import org.apache.log4j.Logger;
 import org.mvp4j.Converter;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
@@ -10,8 +8,9 @@ public class DefaultConverter implements Converter {
 
 	private Logger logger = LoggerUtils.getLogger();
 	
+
 	@Override
-	public Object convertToType(Class<?> type, Object value) {
+	public Object convertComponentToModel(Class<?> type, Object value) {
 		if (value instanceof String) {
 			if (type == Integer.class)
 				return new Integer((String) value);
@@ -40,8 +39,11 @@ public class DefaultConverter implements Converter {
 			throw new IllegalArgumentException();
 		}
 	}
-	
 
-	
+
+	@Override
+	public Object convertModelToComponent(Object value) {
+		return value.toString();
+	}
 	
 }

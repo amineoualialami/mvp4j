@@ -18,16 +18,13 @@ public class ModelBindingImpl implements ModelBinding {
 	private Object model;
 	private Object view;
 	private Converter converter;
-	private MVPAdapter adapter;
 	private Logger logger = LoggerUtils.getLogger();
 
-	public ModelBindingImpl(Object view, Object model, ModelInfo modelInfo,
-			MVPAdapter adapter) {
+	public ModelBindingImpl(Object view, Object model, ModelInfo modelInfo) {
 
 		this.model = model;
 		this.view = view;
 		this.modelInfo = modelInfo;
-		this.adapter=adapter;
 
 	}
 
@@ -65,7 +62,7 @@ public class ModelBindingImpl implements ModelBinding {
 			Class modelClass = model.getClass();
 			Field field = modelClass.getDeclaredField(getPropertyName());
 			field.setAccessible(true);
-			field.set(model, getConverter().convertToType(field.getType(), value));
+			field.set(model, getConverter().convertComponentToModel(field.getType(), value));
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
@@ -88,6 +85,7 @@ public class ModelBindingImpl implements ModelBinding {
 			Field field = modelClass.getDeclaredField(getPropertyName());
 			field.setAccessible(true);
 			Object object = field.get(model);
+			
 			return object;
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
@@ -142,7 +140,9 @@ public class ModelBindingImpl implements ModelBinding {
 
 	private Converter getConverter() {
 		if(modelInfo.getComponentModel().getConverter()==null){
-			converter = adapter.getConverter();	
+			AppControllerReflect appController = AppControllerReflectFactory
+			.getAppControllerInstance();
+			converter = appController.getCurrentAdapter().getConverter();	
 		}
 		else{
 			converter=modelInfo.getComponentModel().getConverter();

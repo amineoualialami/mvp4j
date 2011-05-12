@@ -1,6 +1,7 @@
 package org.mvp4j;
 
 import org.mvp4j.adapter.MVPAdapter;
+import org.mvp4j.adapter.MVPBinding;
 
 
 /**
@@ -30,7 +31,7 @@ public interface AppController {
 	 * @param view display the data to the user
 	 * @param presenter manage the view
 	 */
-	public void bind(Object view, Object model,  Object presenter);
+	public MVPBinding bind(Object view, Object model,  Object presenter);
 	
 	/**
 	 * <p>

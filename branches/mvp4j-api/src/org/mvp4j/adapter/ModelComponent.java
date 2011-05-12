@@ -1,5 +1,7 @@
 package org.mvp4j.adapter;
 
+import org.mvp4j.Converter;
+
 
 /**
  * <p>
@@ -82,5 +84,18 @@ public abstract class  ModelComponent {
 	public ModelBinding getModelBinding() {
 		return modelBinding;
 	}
+	
+	/**
+	 * Modify the current specific converter of the modelComponent used to convert data in component in order to update the model
+	 */
+	public abstract void setConverter(Converter converter);
+	
+	
+	/**
+	 * The ModelComponent can define it's specific converter to customize the data conversion.
+	 * 
+	 * @return Get the current converter used to convert data in component to data in the model
+	 */
+	public abstract Converter getConverter();
 	
 }

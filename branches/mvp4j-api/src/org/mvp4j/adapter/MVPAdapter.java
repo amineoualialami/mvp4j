@@ -9,7 +9,13 @@ public interface MVPAdapter {
 	 * 
 	 * @return Get the current converter used to convert data in component to data in the model
 	 */
-	public Converter getConvertor();
+	public Converter getConverter();
+	
+	
+	/**
+	 * Modify the current converter used to convert data in component in order to update the model
+	 */
+	public void setConverter(Converter converter);
 	
 	
 	
@@ -47,9 +53,9 @@ public interface MVPAdapter {
 	 */
 	
 	
-	public void setComponentModel(Class<?> componentKlass ,Class<? extends ModelComponent> customizedModelComponent );
+	public void setComponentModel(Object view ,Object model , Object component ,Class<? extends ModelComponent> customizedModelComponent );
 	
 	
 	
-	public ModelComponent getComponentModel(Object component);
+	public ModelComponent getComponentModel(Object view  , Object component);
 }

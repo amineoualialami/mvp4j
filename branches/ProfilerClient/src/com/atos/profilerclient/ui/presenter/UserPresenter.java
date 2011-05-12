@@ -33,6 +33,17 @@ public class UserPresenter {
 	public void tata(){
 		System.out.println("tata");
 	}
+	public void edit(){
+		model.setName(model.getUser().getName());
+		model.setPhone(model.getUser().getPhone());
+		model.setMail(model.getUser().getMail());
+		model.setProfil(model.getUser().getProfil());
+		AppControllerReflect appController = AppControllerReflectFactory
+				.getAppControllerInstance();
+
+		appController.bindModel(view, model);
+		
+	}
 
 	public void addUser() {
 		System.out.println("Add Action");
@@ -56,13 +67,13 @@ public class UserPresenter {
 			AppControllerReflect appController = AppControllerReflectFactory
 					.getAppControllerInstance();
 
-			appController.bindModel(view, model);
+			appController.refreshView(view);
 		} catch (DtoConfigurationException e) {
 			e.printStackTrace();
 			AppControllerReflect appController = AppControllerReflectFactory
 					.getAppControllerInstance();
 
-			appController.bindModel(view, model);
+			appController.refreshView(view);
 		}
 
 	}
@@ -92,7 +103,7 @@ public class UserPresenter {
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
 
-		appController.bindModel(view, model);
+		appController.refreshView(view);
 		System.out.println("Remove Action");
 	}
 
@@ -105,6 +116,7 @@ public class UserPresenter {
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
 
+		
 		appController.refreshView(view);
 	}
 

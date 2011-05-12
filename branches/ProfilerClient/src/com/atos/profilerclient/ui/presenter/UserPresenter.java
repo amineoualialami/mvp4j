@@ -41,7 +41,7 @@ public class UserPresenter {
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
 
-		appController.bindModel(view, model);
+		appController.refreshView(view);
 		
 	}
 

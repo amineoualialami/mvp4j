@@ -39,20 +39,29 @@ public class AppControllerReflect implements AppController {
 
 	@Override
 	public MVPBinding bind(Object view, Object model, Object presenter) {
-		mvpBinding = new MVPBindingImpl();
+		
 		bindModel(view, model);
 		bindPresenter(view, presenter);
-		mvpBinding.setModel(model);
-		mvpBinding.setPresenter(presenter);
-		mvpBinding.setView(view);
+		
 		return mvpBinding;
 		
 	}
 
 	@Override
-	public void bindModel(Object view, Object model) {
+	public MVPBinding bindModel(Object view, Object model) {
+		
 		logger.info("Bind View :" + view.getClass().getName().toString()
 				+ " with model :" + model.getClass().getName().toString());
+		if(mvpBinding==null){
+			mvpBinding=new MVPBindingImpl();
+		}
+		if(mvpBinding.getView()==null){
+			mvpBinding.setView(view);
+			mvpBinding.setModel(model);
+		}
+		else{
+			mvpBinding.setModel(model);
+		}
 		if (modelViewInfoMap.get(view.getClass().toString()) == null) {
 			processView(view.getClass());
 		}
@@ -94,16 +103,28 @@ public class AppControllerReflect implements AppController {
 				e.printStackTrace();
 			}
 		}
+	
 		logger.info("Exit Bind View :" + view.getClass().getName().toString()
 				+ " with model :" + model.getClass().getName().toString());
+		return mvpBinding;
 
 	}
 
 	@Override
-	public void bindPresenter(Object view, Object presenter) {
+	public MVPBinding bindPresenter(Object view, Object presenter) {
 		logger.info("Bind View :" + view.getClass().getName().toString()
 				+ " with presenter :"
 				+ presenter.getClass().getName().toString());
+		if(mvpBinding==null){
+			mvpBinding=new MVPBindingImpl();
+		}
+		if(mvpBinding.getView()==null){
+			mvpBinding.setView(view);
+			mvpBinding.setPresenter(presenter);
+		}
+		else{
+			mvpBinding.setPresenter(presenter);
+		}
 		if (actionInfoMap.get(view.getClass().toString()) == null) {
 			processView(view.getClass());
 		}
@@ -150,7 +171,7 @@ public class AppControllerReflect implements AppController {
 		logger.info(" Exit Bind View :" + view.getClass().getName().toString()
 				+ " with presenter :"
 				+ presenter.getClass().getName().toString());
-
+         return mvpBinding;
 	}
 
 	private void processView(Class<?> viewClass) {

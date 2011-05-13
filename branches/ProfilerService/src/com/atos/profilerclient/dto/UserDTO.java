@@ -1,6 +1,7 @@
 package com.atos.profilerclient.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.kahvi.paketti.dtobuilder.annotations.DtoClass;
 import org.kahvi.paketti.dtobuilder.annotations.DtoProperty;
@@ -13,6 +14,7 @@ public class UserDTO implements Serializable {
 	
 	private Long idUser;
 	private String name;
+	private Date date;
 	private String mail;
 	private Integer phone;
 	private ProfilDTO profil;
@@ -66,6 +68,14 @@ public class UserDTO implements Serializable {
 	}
 
 	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
 		return this.getName();

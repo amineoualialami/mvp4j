@@ -55,7 +55,7 @@ public class JCheckBoxModelComponent extends ModelComponent {
 		checkBox.addActionListener(actionListerner);
 		if (modelBinding.getPropertyValue() != null) {
 			Collection list = (Collection) modelBinding.getPropertyValue();
-			System.out.println(modelBinding.getPropertyValue()+" ------"+modelBinding.getPropertyName());
+			
 			checkBox.setSelected(list.contains(modelBinding
 					.getInitPropertyValue()));
 		}

@@ -65,13 +65,13 @@ public class JTextModelComponent extends ModelComponent {
 
 			}
 		};
-		textField.addKeyListener(keyListener);
+		//textField.addKeyListener(keyListener);
 		textField.addFocusListener(focusListener);
       
 		if (modelBinding.getPropertyValue() == null || modelBinding.getPropertyValue().equals(0)) {
 			textField.setText("");
 		} else {
-			String string = (String)modelBinding.getPropertyValue();
+			String string = modelBinding.getPropertyValue()+"";
 			textField.setText(string);
 		}
 

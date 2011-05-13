@@ -71,6 +71,7 @@ public class UserSessionBean implements UserSession {
 		u.setMail(user.getMail());
 		u.setPhone(user.getPhone());
 		u.setProfil(user.getProfil());
+		u.setDate(user.getDate());
 
 		try {
 

@@ -50,7 +50,7 @@ public interface AppController {
 	 * @param model store the data 
 	 * @param view display the data to the user
 	 */	
-	public void bindModel(Object view, Object model);
+	public MVPBinding bindModel(Object view, Object model);
 	
 	/** 
 	 * <p>
@@ -68,7 +68,7 @@ public interface AppController {
 	 * @param view display the data to the user
 	 * @param presenter manage the view
 	 */	
-	public void bindPresenter(Object view, Object presenter);
+	public MVPBinding bindPresenter(Object view, Object presenter);
 	
 	/**
 	 * Refresh the view with data model associated, if data in model change, the call to this method will 

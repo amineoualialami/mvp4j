@@ -1,42 +1,42 @@
 package com.atos.profilerclient.ui.model;
 
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyEditor;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.util.logging.SimpleFormatter;
+
 import org.mvp4j.Converter;
 
 public class MyConverter implements Converter {
 
 	@Override
 	public Object convertComponentToModel(Class<?> type, Object value) {
-		System.out.println("----------------------MyConverter------------------");
-		if (value instanceof String) {
-			if (type == Integer.class)
-				return new Integer((String) value);
-			else if(type==int.class)
-				return new Integer((String) value);
-			else if(type==float.class)
-				return new Float((String) value);
-			else if (type == Float.class)
-				return new Float((String) value);
-			else if (type == String.class)
-				return value.toString();
-			else if(type==double.class)
-				return new Double((String) value);
-			else if (type == Double.class)
-				return new Double((String) value);
-			
-			
-			throw new IllegalArgumentException();
+		
+		DateFormat formater=new SimpleDateFormat("yyyy/mm/dd");
+		Date dateformat = null;
+		try {
+			 dateformat=formater.parse(""+value);
+			 dateformat=formater.parse(formater.format(dateformat));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else if (value instanceof Object)
-			return value;
-		else {
-			throw new IllegalArgumentException();
-		}
+		System.out.println(value);
+		return dateformat ;
 	}
 
 	@Override
 	public Object convertModelToComponent(Object value) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		DateFormat formater=new SimpleDateFormat("dd-mm-yyyy") ;
+		return formater.format(value);
 	}
 
 

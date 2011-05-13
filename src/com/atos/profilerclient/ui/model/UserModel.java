@@ -2,6 +2,7 @@ package com.atos.profilerclient.ui.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.kahvi.paketti.dtobuilder.annotations.DtoClass;
@@ -21,6 +22,8 @@ public class UserModel implements Serializable {
 
 	private Integer phone;
 
+	private Date date;
+	
 	private ProfilDTO profil;
 
 	//combo List
@@ -147,6 +150,15 @@ public class UserModel implements Serializable {
 
 	public void setProfils2(List<ProfilDTO> profils2) {
 		this.profils2 = profils2;
+	}
+
+	@DtoProperty(sourceClass=UserDTO.class)
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	

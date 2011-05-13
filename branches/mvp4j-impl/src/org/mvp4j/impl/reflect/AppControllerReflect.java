@@ -40,9 +40,13 @@ public class AppControllerReflect implements AppController {
 	@Override
 	public MVPBinding bind(Object view, Object model, Object presenter) {
 		
+		
 		bindModel(view, model);
 		bindPresenter(view, presenter);
-		
+		mvpBinding=new MVPBindingImpl();
+		mvpBinding.setModel(model);
+		mvpBinding.setPresenter(presenter);
+		mvpBinding.setView(view);
 		return mvpBinding;
 		
 	}
@@ -52,16 +56,12 @@ public class AppControllerReflect implements AppController {
 		
 		logger.info("Bind View :" + view.getClass().getName().toString()
 				+ " with model :" + model.getClass().getName().toString());
-		if(mvpBinding==null){
+		
 			mvpBinding=new MVPBindingImpl();
-		}
-		if(mvpBinding.getView()==null){
 			mvpBinding.setView(view);
 			mvpBinding.setModel(model);
-		}
-		else{
-			mvpBinding.setModel(model);
-		}
+	
+		
 		if (modelViewInfoMap.get(view.getClass().toString()) == null) {
 			processView(view.getClass());
 		}
@@ -115,16 +115,11 @@ public class AppControllerReflect implements AppController {
 		logger.info("Bind View :" + view.getClass().getName().toString()
 				+ " with presenter :"
 				+ presenter.getClass().getName().toString());
-		if(mvpBinding==null){
-			mvpBinding=new MVPBindingImpl();
-		}
-		if(mvpBinding.getView()==null){
+		
+		    mvpBinding=new MVPBindingImpl();
 			mvpBinding.setView(view);
 			mvpBinding.setPresenter(presenter);
-		}
-		else{
-			mvpBinding.setPresenter(presenter);
-		}
+		
 		if (actionInfoMap.get(view.getClass().toString()) == null) {
 			processView(view.getClass());
 		}

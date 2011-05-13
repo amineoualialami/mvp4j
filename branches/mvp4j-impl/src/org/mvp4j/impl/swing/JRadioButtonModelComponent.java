@@ -39,7 +39,7 @@ public class JRadioButtonModelComponent extends ModelComponent {
 		radionButton.addActionListener(actionListerner);
 
 		if (modelBinding.getPropertyValue() != null) {
-			if (modelBinding.getPropertyValue().toString()
+			if (modelBinding.getPropertyValue()
 					.equals(modelBinding.getInitPropertyValue().toString())) {
 				radionButton.setSelected(true);
 			}

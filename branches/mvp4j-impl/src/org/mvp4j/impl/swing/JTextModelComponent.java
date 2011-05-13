@@ -67,11 +67,11 @@ public class JTextModelComponent extends ModelComponent {
 		};
 		textField.addKeyListener(keyListener);
 		textField.addFocusListener(focusListener);
-
+      
 		if (modelBinding.getPropertyValue() == null || modelBinding.getPropertyValue().equals(0)) {
 			textField.setText("");
 		} else {
-			String string = modelBinding.getPropertyValue().toString();
+			String string = (String)modelBinding.getPropertyValue();
 			textField.setText(string);
 		}
 

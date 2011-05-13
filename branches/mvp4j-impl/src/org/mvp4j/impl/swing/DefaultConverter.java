@@ -1,5 +1,7 @@
 package org.mvp4j.impl.swing;
 
+import java.util.Collection;
+
 import org.apache.log4j.Logger;
 import org.mvp4j.Converter;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
@@ -43,6 +45,10 @@ public class DefaultConverter implements Converter {
 
 	@Override
 	public Object convertModelToComponent(Object value) {
+		if(value instanceof Collection){
+			
+			return value;
+		}
 		return value.toString();
 	}
 	

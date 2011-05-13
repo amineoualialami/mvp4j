@@ -50,7 +50,7 @@ public class JSpinnerModelComponent extends ModelComponent {
 	    if(modelBinding.getPropertyValue()!=null){
 	    	for(int i=0;i<initValues.size();i++){
 	    		
-	    		if(initValues.get(i).toString().equals(modelBinding.getPropertyValue().toString())){
+	    		if(initValues.get(i).toString().equals(modelBinding.getPropertyValue())){
 	    			spinnerModel.setValue(spinnerModel.getList().get(i));
 	    		}
 	    	}

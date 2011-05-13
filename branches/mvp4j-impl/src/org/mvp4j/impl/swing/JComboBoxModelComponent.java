@@ -45,7 +45,7 @@ public class JComboBoxModelComponent extends ModelComponent {
 		if(modelBinding.getPropertyValue()!=null){
 		
 			for(int i=0;i<initValues.size();i++){
-				if(initValues.get(i).toString().equals(modelBinding.getPropertyValue().toString()) & jcombobox.getItemCount()!=0){
+				if(initValues.get(i).toString().equals(modelBinding.getPropertyValue()) & jcombobox.getItemCount()!=0){
 					jcombobox.setSelectedIndex(i);
 				}
 			}

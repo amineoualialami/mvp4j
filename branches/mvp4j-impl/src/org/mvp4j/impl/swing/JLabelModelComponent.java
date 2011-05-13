@@ -25,7 +25,7 @@ public class JLabelModelComponent extends ModelComponent{
 		
 		jlabel.setText(modelBinding.getInitPropertyName().toString());
 		if(modelBinding.getPropertyValue()!=null){
-		jlabel.setText(modelBinding.getPropertyValue().toString());
+		jlabel.setText((String)modelBinding.getPropertyValue());
 		}
 		
 	}

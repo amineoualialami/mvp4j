@@ -85,8 +85,10 @@ public class ModelBindingImpl implements ModelBinding {
 			Field field = modelClass.getDeclaredField(getPropertyName());
 			field.setAccessible(true);
 			Object object = field.get(model);
-			
-			return object;
+			if(object!=null){
+			return getConverter().convertModelToComponent(object);
+			}
+		
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

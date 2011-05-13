@@ -84,6 +84,7 @@ public class UserSessionDAOImpl implements UserSessionDAO {
 				userDTO.setName(user.getName());
 				userDTO.setPhone(user.getPhone());
 				userDTO.setMail(user.getMail());
+				userDTO.setDate(user.getDate());
 				listUsersDTO.add(userDTO);
 			} catch (DtoConfigurationException e) {
 				e.printStackTrace();

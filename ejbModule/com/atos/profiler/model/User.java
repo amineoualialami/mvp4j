@@ -1,6 +1,7 @@
 package com.atos.profiler.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.jws.soap.SOAPBinding.Use;
 import javax.persistence.CascadeType;
@@ -27,6 +28,9 @@ public class User implements Serializable {
 	@Column(name = "name")
 	private String name;
 
+	@Column(name="date")
+	private Date date;
+	
 	@Column(name = "mail")
 	private String mail;
 
@@ -75,6 +79,14 @@ public class User implements Serializable {
 
 	public void setProfil(Profil profil) {
 		this.profil = profil;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	

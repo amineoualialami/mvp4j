@@ -68,6 +68,7 @@ public class UserDTO implements Serializable {
 	}
 
 	
+	@DtoProperty(sourceClass=User.class)
 	public Date getDate() {
 		return date;
 	}

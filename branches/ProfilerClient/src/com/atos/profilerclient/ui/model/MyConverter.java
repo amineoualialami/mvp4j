@@ -19,7 +19,7 @@ public class MyConverter implements Converter {
 	@Override
 	public Object convertComponentToModel(Class<?> type, Object value) {
 		
-		DateFormat formater=new SimpleDateFormat("yyyy/mm/dd");
+		DateFormat formater=new SimpleDateFormat("dd-mm-yyyy");
 		Date dateformat = null;
 		try {
 			 dateformat=formater.parse(""+value);

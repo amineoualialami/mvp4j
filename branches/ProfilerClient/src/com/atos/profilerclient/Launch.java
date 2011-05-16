@@ -15,6 +15,7 @@ import com.atos.profilerclient.ui.model.MyConverter;
 import com.atos.profilerclient.ui.model.MyConverter2;
 import com.atos.profilerclient.ui.model.UserModel;
 import com.atos.profilerclient.ui.presenter.UserPresenter;
+import com.atos.profilerclient.ui.view.ProfilsView;
 import com.atos.profilerclient.ui.view.UserView;
 
 public class Launch {
@@ -26,12 +27,16 @@ public class Launch {
 		UserPresenter presenter = new UserPresenter(view, model);
 		
 		
+		
+		
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
 		
 		MVPBinding mvpBinding = appController.bind(view, model, presenter);
-		mvpBinding.getComponentModel(view.getNameTextField()).setConverter(new MyConverter());
-		mvpBinding.setComponentModel(view.getTable(), CustomizedTableModel.class);
+		
+		mvpBinding.getComponentModel(view.getDateTextField()).setConverter(new MyConverter());
+//		mvpBinding.getComponentModel(view.getNameTextField()).setConverter(new MyConverter());
+//		mvpBinding.setComponentModel(view.getTable(), CustomizedTableModel.class);
 		
 		
 //		ModelComponent modelComponent = appController.getCurrentAdapter().getComponentModel(view, view.getNameTextField());
@@ -43,9 +48,11 @@ public class Launch {
 		
 //		appController.getCurrentAdapter().setComponentModel(view,model, view.getTable(), CustomizedTableModel.class);	
 		
-	
-		
 		view.setVisible(true);
+		
+		
+		
+	
 		
 
 	}

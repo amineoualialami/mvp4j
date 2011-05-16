@@ -11,9 +11,10 @@ public class CustomizedTableModel extends JTableModelComponent {
 	
 	public CustomizedTableModel(ModelBinding modelBinding) {
 		super(modelBinding);
-		getCustomizedColumns().put("idUser", "id toto");
-		getCustomizedColumns().put("name", "name toto");
-		getCustomizedColumns().put("phone", "phone toto");
+//		getCustomizedColumns().put("idUser", "id toto");
+//		getCustomizedColumns().put("name", "name toto");
+//		getCustomizedColumns().put("phone", "phone toto");
+		getCustomizedColumns().put("name","profil name");
 		initTableModel(getCustomizedColumns());
 	}
 

@@ -25,23 +25,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.DefaultTableModel;
 
 import org.kahvi.paketti.dtobuilder.DtoBuilder;
-import org.kahvi.paketti.dtobuilder.DtoConfigurationException;
 import org.kahvi.paketti.dtobuilder.DtoDismantler;
 import org.mvp4j.annotation.Action;
 import org.mvp4j.annotation.Actions;
 import org.mvp4j.annotation.MVP;
 import org.mvp4j.annotation.Model;
-import org.mvp4j.impl.reflect.AppControllerReflect;
-import org.mvp4j.impl.reflect.AppControllerReflectFactory;
 
-import com.atos.profilerclient.dao.UserSessionDAO;
-import com.atos.profilerclient.dao.UserSessionDAOImpl;
 import com.atos.profilerclient.dto.UserDTO;
-import com.atos.profilerclient.ui.MainFrame;
 import com.atos.profilerclient.ui.model.UserModel;
 import com.atos.profilerclient.ui.presenter.UserPresenter;
 
@@ -73,8 +65,11 @@ public class UserView extends JFrame {
 	@Model(property = "phone")
 	JTextField telTextField;
 	
+	@Model(property="date")
+	JTextField dateTextField;
+	
 	JPasswordField namePasswordField;
-	JLabel nameLabel, mailLabel, telLabel, profilLabel;
+	JLabel nameLabel, mailLabel, telLabel, profilLabel,dateLabel;
 	
 	@Model(property = "profil", initProperty = "profils")
 	JComboBox profilComboBox;
@@ -125,7 +120,7 @@ public class UserView extends JFrame {
 		add(getPanel1());
 		add(getPanel2());
 		add(getButtonPanel());
-		menu = new JMenu("oulalaw");
+		menu = new JMenu("Menu");
 		menu.add(getMenuItem1());
 		menu.add(getMenuItem2());
 		menuBar = new JMenuBar();
@@ -172,14 +167,17 @@ public class UserView extends JFrame {
 
 			panel2.add(getTelLabel());
 			panel2.add(getTelTextField());
+			
+			panel2.add(getDateLabel());
+			panel2.add(getDateTextField());
 
 			getButtonGroup();
 
-			panel2.add(getProfilRadioButton1());
-			panel2.add(getProfilRadioButton2());
-			
-			panel2.add(getProfilCheckBox1());
-			panel2.add(getProfilCheckBox2());
+//			panel2.add(getProfilRadioButton1());
+//			panel2.add(getProfilRadioButton2());
+//			
+//			panel2.add(getProfilCheckBox1());
+//			panel2.add(getProfilCheckBox2());
 
 		}
 
@@ -321,8 +319,27 @@ public class UserView extends JFrame {
 	public void setTelTextField(JTextField telTextField) {
 		this.telTextField = telTextField;
 	}
+	
+	public JTextField getDateTextField() {
+		if (dateTextField == null) {
+			dateTextField = new JTextField();
+			dateTextField.setName("date");
+			dateTextField.setBounds(70, 200, 150, 30);
+
+		}
+		return dateTextField;
+	}
+
+	public void setDateTextField(JTextField dateTextField) {
+		this.dateTextField = dateTextField;
+	}
+	
+	
+	
 
 	// =========== GETTERS and SETTERS (JLabel)============
+
+	
 
 	public JLabel getNameLabel() {
 		if (nameLabel == null) {
@@ -371,10 +388,27 @@ public class UserView extends JFrame {
 	public void setProfilLabel(JLabel profilLabel) {
 		this.profilLabel = profilLabel;
 	}
+	
+	
+	public JLabel getDateLabel() {
+		if (dateLabel == null) {
+			dateLabel = new JLabel("Profil :");
+			dateLabel.setBounds(10, 190, 50, 50);
+		}
+		return dateLabel;
+	}
+
+	public void setDateLabel(JLabel dateLabel) {
+		this.dateLabel = dateLabel;
+	}
+	
+	
 
 	// =========== GETTERS and SETTERS (JComboBox)============
 
 	
+	
+
 	public JComboBox getProfilComboBox() {
 		if (profilComboBox == null) {
 			profilComboBox = new JComboBox();
@@ -488,7 +522,7 @@ public class UserView extends JFrame {
 	public JMenuItem getMenuItem1() {
 		if(menuItem1==null){
 			menuItem1 = new JMenuItem();
-			menuItem1.setText("menu item 1");
+			menuItem1.setText("List Profils");
 		}
 		return menuItem1;
 	}

@@ -1,9 +1,9 @@
 package com.atos.profilerclient.ui.presenter;
 
-
 import org.kahvi.paketti.dtobuilder.DtoBuilder;
 import org.kahvi.paketti.dtobuilder.DtoConfigurationException;
 import org.kahvi.paketti.dtobuilder.DtoDismantler;
+import org.mvp4j.adapter.MVPBinding;
 import org.mvp4j.impl.reflect.AppControllerReflect;
 import org.mvp4j.impl.reflect.AppControllerReflectFactory;
 
@@ -11,7 +11,10 @@ import com.atos.profilerclient.dao.UserSessionDAO;
 import com.atos.profilerclient.dao.UserSessionDAOImpl;
 import com.atos.profilerclient.dto.ProfilDTO;
 import com.atos.profilerclient.dto.UserDTO;
+import com.atos.profilerclient.ui.model.CustomizedTableModel;
+import com.atos.profilerclient.ui.model.ProfilsModel;
 import com.atos.profilerclient.ui.model.UserModel;
+import com.atos.profilerclient.ui.view.ProfilsView;
 import com.atos.profilerclient.ui.view.UserView;
 
 public class UserPresenter {
@@ -26,23 +29,26 @@ public class UserPresenter {
 		this.view = view;
 		this.model = model;
 	}
-	
-	public void toto(){
+
+	public void toto() {
 		System.out.println("toto");
 	}
-	public void tata(){
+
+	public void tata() {
 		System.out.println("tata");
 	}
-	public void edit(){
+
+	public void edit() {
 		model.setName(model.getUser().getName());
 		model.setPhone(model.getUser().getPhone());
 		model.setMail(model.getUser().getMail());
 		model.setProfil(model.getUser().getProfil());
+		model.setDate(model.getUser().getDate());
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
 
 		appController.refreshView(view);
-		
+
 	}
 
 	public void addUser() {
@@ -55,15 +61,16 @@ public class UserPresenter {
 			// model.setName("ded");
 			// model.setPhone(645);
 			UserDTO userDTO1 = getUserDTODismantler().dismantle(model);
-//			System.out.println(userDTO1);
-//			System.out.println(model.getUser().getIdUser());
-//			System.out.println("match = "+getUserSession().findUser(model.getUser().getIdUser()).getName());
-//			if (getUserSession().findUser(model.getUser().getIdUser()) == null) {
-				System.out.println(model.getProfil().getName());
-			    getUserSession().addUser(userDTO1);
-//			} else {
-//				getUserSession().updateUser(userDTO1);
-//			}
+			// System.out.println(userDTO1);
+			// System.out.println(model.getUser().getIdUser());
+			// System.out.println("match = "+getUserSession().findUser(model.getUser().getIdUser()).getName());
+			// if (getUserSession().findUser(model.getUser().getIdUser()) ==
+			// null) {
+			System.out.println(model.getProfil().getName());
+			getUserSession().addUser(userDTO1);
+			// } else {
+			// getUserSession().updateUser(userDTO1);
+			// }
 			AppControllerReflect appController = AppControllerReflectFactory
 					.getAppControllerInstance();
 
@@ -83,8 +90,8 @@ public class UserPresenter {
 		model.setName("");
 		model.setPhone(null);
 		model.setMail("");
-//		model.getProfils2().add(model.getProfil2());
-//		model.getProfils2().add(model.getProfil1());
+		// model.getProfils2().add(model.getProfil2());
+		// model.getProfils2().add(model.getProfil1());
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
 
@@ -113,15 +120,27 @@ public class UserPresenter {
 		model.setPhone(model.getUser().getPhone());
 		model.setMail(model.getUser().getMail());
 		model.setProfil(model.getUser().getProfil());
+		model.setDate(model.getUser().getDate());
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
 
-		
 		appController.refreshView(view);
 	}
 
 	public void actionMenu1() {
 		System.out.println("Action menu 1");
+		ProfilsView profilsView = new ProfilsView();
+		
+		ProfilsModel profilsModel = new ProfilsModel();
+		ProfilsPresenter profilsPresenter = new ProfilsPresenter();
+
+		AppControllerReflect appController = AppControllerReflectFactory
+				.getAppControllerInstance();
+
+		MVPBinding mvpBinding = appController.bind(profilsView, profilsModel, profilsPresenter);
+		mvpBinding.setComponentModel(profilsView.getTable(), CustomizedTableModel.class);
+		profilsView.setVisible(true);
+
 	}
 
 	public void actionMenu2() {

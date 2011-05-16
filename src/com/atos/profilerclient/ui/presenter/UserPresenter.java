@@ -132,7 +132,7 @@ public class UserPresenter {
 		ProfilsView profilsView = new ProfilsView();
 		
 		ProfilsModel profilsModel = new ProfilsModel();
-		ProfilsPresenter profilsPresenter = new ProfilsPresenter();
+		ProfilsPresenter profilsPresenter = new ProfilsPresenter(profilsModel,profilsView);
 
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();

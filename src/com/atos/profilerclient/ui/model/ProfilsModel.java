@@ -7,7 +7,10 @@ import com.atos.profilerclient.dto.ProfilDTO;
 
 public class ProfilsModel {
 	
+	
+	private String name;
 	private List<ProfilDTO> profils;
+	private ProfilDTO profil;
 	
 	
 	public List<ProfilDTO> getProfils() {
@@ -21,6 +24,31 @@ public class ProfilsModel {
 	public void setProfils(List<ProfilDTO> profils) {
 		this.profils = profils;
 	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public ProfilDTO getProfil() {
+		return profil;
+	}
+
+
+	public void setProfil(ProfilDTO profil) {
+		this.profil = profil;
+	}
+	
+	
+	
+	
+	
 	
 	
 	

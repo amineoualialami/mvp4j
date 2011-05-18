@@ -1,0 +1,2 @@
+serviceClass: com.atos.profilerGWT.client.GreetingService
+path: B9570E880F323A8ADD2E319E09284E41.gwt.rpc

@@ -4,7 +4,15 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
+
+  <servlet>
+  <servlet-name>userListServiceImpl</servlet-name>
+  <servlet-class>com.atos.profilerGWT.server.UserListServiceImpl</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>userListServiceImpl</servlet-name>
+  <url-pattern>/profilergwt/user</url-pattern>
+</servlet-mapping>
   <!-- Servlets -->
   
   <!-- Default page to serve -->

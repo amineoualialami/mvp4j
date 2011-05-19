@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.atos.profilerGWT.client.model.UserModel;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -16,6 +17,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 
 import com.google.gwt.user.client.Window;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 
@@ -50,21 +53,28 @@ public class ProfilerGWT implements EntryPoint {
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
 
-
+	private ServiceDefTarget endpoint;
+	private UserListServiceAsync userService;
 	private AbsolutePanel formulairePanel;
 	private TextBox name,mail,phone;
 	private Label nameLabel,mailLabel,phoneLabel,listProfilsLabel;
     private ListBox listProfils;
 	private FlexTable tableRows;
 	private List<UserModel> listUsers;
-	
 	private Button ajouterButton;
+
+	
+	
 	
 	public void onModuleLoad() {
 		
 		Window.setMargin("300px");
 	
+		userService=(UserListServiceAsync)GWT.create(UserListService.class);
+		endpoint=(ServiceDefTarget)userService;
 		
+		String moduleRelativeURL = GWT.getModuleBaseURL() + "user";
+		endpoint.setServiceEntryPoint(moduleRelativeURL);
 		
 		RootPanel.get().add(getFormulairePanel());
 
@@ -155,13 +165,21 @@ public class ProfilerGWT implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 			UserModel userModel=new UserModel();
-			userModel.setNom(getName().getText());
+			userModel.setName(getName().getText());
 			userModel.setMail(getMail().getText());
 			userModel.setPhone(Integer.parseInt(getPhone().getText()));
-		    userModel.setProfil(getListProfils().getItemText(getListProfils().getSelectedIndex()));
+		   // userModel.setProfil(getListProfils().getItemText(getListProfils().getSelectedIndex()));
 		    getListUsers().add(userModel);
 		    initTableValues();
-		    
+		   /* AsyncCallback callback = new AsyncCallback() {
+		    	public void onSuccess(Object result) {
+		    	
+		    	}
+		    	public void onFailure(Throwable caught) {
+		    	// do some UI stuff to show failure
+		    	}
+		    	};
+		    userService.addUser(userModel, callback);*/
 				
 			}
 		});
@@ -189,9 +207,16 @@ public class ProfilerGWT implements EntryPoint {
 	public ListBox getListProfils() {
 		if(listProfils==null){
 			listProfils=new ListBox();
-			listProfils.addItem("Profil 1");
-			listProfils.addItem("Profil 2");
-			listProfils.setWidth("170px");
+			AsyncCallback callback = new AsyncCallback() {
+		    	public void onSuccess(Object result) {
+		    	Window.alert("Service is successfuly invoked");
+		    	}
+		    	public void onFailure(Throwable caught) {
+		    	System.out.println("connexion failure");
+		    	}
+		    	};
+		    	userService.initProfils(callback);
+		    	
 			listProfils.addChangeHandler(new ChangeHandler() {
 				
 				@Override
@@ -270,8 +295,8 @@ public class ProfilerGWT implements EntryPoint {
 	public void initTableValues(){
 		int i=1;
 		for (UserModel userModel :listUsers) {
-			getTableRows().setText(i,0,userModel.getNom());
-			getTableRows().setText(i, 1,userModel.getProfil());
+			getTableRows().setText(i,0,userModel.getName());
+			//getTableRows().setText(i, 1,userModel.getProfil());
 			getTableRows().setText(i, 2,userModel.getPhone()+"");
 			getTableRows().setText(i, 3, userModel.getMail());
 			i++;

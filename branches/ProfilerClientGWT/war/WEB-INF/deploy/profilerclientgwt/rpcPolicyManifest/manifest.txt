@@ -1,0 +1,3 @@
+# Module profilerclientgwt
+# RPC service class, partial path of RPC policy file
+com.atos.profilerclientgwt.model.UserModelService, B1404CFC40094A27187034E299B4B529.gwt.rpc

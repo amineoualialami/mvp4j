@@ -2,12 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="C:/jboss-4.2.2.GA/client/jbossall-client.jar"/>
-	<classpathentry kind="lib" path="C:/jboss-4.2.2.GA/client/jboss-aop-jdk50-client.jar"/>
-	<classpathentry kind="lib" path="C:/jboss-4.2.2.GA/client/jboss-aspect-jdk50-client.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ProfilerService"/>
-	<classpathentry kind="lib" path="E:/workspace/ProfilerClient/lib/DTOBuilder-0.1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mvp4j-api"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/mvp4j-impl"/>
+	<classpathentry kind="lib" path="lib/DTOBuilder-0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-aop-jdk50-client.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-aspect-jdk50-client.jar"/>
+	<classpathentry kind="lib" path="lib/jboss-client.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

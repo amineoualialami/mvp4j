@@ -392,7 +392,7 @@ public class UserView extends JFrame {
 	
 	public JLabel getDateLabel() {
 		if (dateLabel == null) {
-			dateLabel = new JLabel("Profil :");
+			dateLabel = new JLabel("Date :");
 			dateLabel.setBounds(10, 190, 50, 50);
 		}
 		return dateLabel;

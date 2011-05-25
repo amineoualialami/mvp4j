@@ -1,0 +1,2 @@
+serviceClass: com.atos.profilergwt.client.UserListService
+path: 7B3186B29A97BA492704ECDA133DF204.gwt.rpc

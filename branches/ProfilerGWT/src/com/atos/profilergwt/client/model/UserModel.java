@@ -2,6 +2,8 @@ package com.atos.profilergwt.client.model;
 
 import java.io.Serializable;
 
+import com.atos.profilergwt.shared.Profil;
+
 
 
 
@@ -16,7 +18,7 @@ public class UserModel implements Serializable {
 
 	private int phone;
 
-	private String profil;
+	private Profil profil;
 
 
 
@@ -57,15 +59,18 @@ public class UserModel implements Serializable {
 
 
 
-	public String getProfil() {
+	public Profil getProfil() {
 		return profil;
 	}
 
 
 
-	public void setProfil(String profil) {
+	public void setProfil(Profil profil) {
 		this.profil = profil;
 	}
+
+
+
 
 	
 

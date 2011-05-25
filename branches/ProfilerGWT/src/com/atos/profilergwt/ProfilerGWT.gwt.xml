@@ -17,7 +17,7 @@
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.atos.profilergwt.client.ProfilerGWT'/>
- <servlet path='/user' class='com.atos.profilergwt.server.UserListServiceImpl'/>
+ <servlet path='/user' class='com.atos.profilergwt.server.UserServicesImpl'/>
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
   <source path='shared'/>

@@ -5,12 +5,12 @@
 
 <web-app>
   
- <servlet>
-  <servlet-name>userListServiceImpl</servlet-name>
-  <servlet-class>com.atos.profilergwt.server.UserListServiceImpl</servlet-class>
+<servlet>
+  <servlet-name>userServicesImpl</servlet-name>
+  <servlet-class>com.atos.profilergwt.server.UserServicesImpl</servlet-class>
 </servlet>
 <servlet-mapping>
-  <servlet-name>userListServiceImpl</servlet-name>
+  <servlet-name>userServicesImpl</servlet-name>
   <url-pattern>/profilergwt/user</url-pattern>
 </servlet-mapping>
   

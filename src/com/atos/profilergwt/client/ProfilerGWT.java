@@ -1,16 +1,17 @@
 package com.atos.profilergwt.client;
 
+import org.mvp4j.AppController;
 import org.mvp4j.annotation.MVP;
+import org.mvp4j.impl.reflect.AppControllerReflectFactory;
 
 import com.atos.profilergwt.client.UserView;
+import com.atos.profilergwt.client.model.UserModel;
 import com.google.gwt.core.client.EntryPoint;
 
 import com.google.gwt.user.client.Window;
 
 import com.google.gwt.user.client.ui.RootPanel;
 
-import com.gwtent.reflection.client.ClassType;
-import com.gwtent.reflection.client.TypeOracle;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -21,10 +22,10 @@ public class ProfilerGWT implements EntryPoint {
 
 		Window.setMargin("300px");
 		UserView view = new UserView();
-		ClassType classType = TypeOracle.Instance.getClassType(UserView.class);
-		classType.invoke(view, "test", null);
-		System.out.println(classType.isAnnotationPresent(MVP.class));
-
+		UserModel model = new UserModel();
+        
+		AppController appController = AppControllerReflectFactory.getAppControllerReflect();
+		appController.bind(view, model, null);
 		RootPanel.get().add(view.getFormulairePanel());
 	}
 }

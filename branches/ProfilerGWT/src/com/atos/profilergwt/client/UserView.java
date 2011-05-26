@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtent.reflection.client.Reflection;
 
-@MVP(modelClass = UserView.class, presenterClass = UserView.class)
+@MVP(modelClass = UserModel.class, presenterClass = UserView.class)
 public class UserView implements Reflection {
 	private AbsolutePanel formulairePanel;
 	private TextBox name, mail, phone;

@@ -32,20 +32,7 @@ public class JTableModelComponent extends ModelComponent {
 	private Map<String, String> customizedColumns;
 	private Logger logger = LoggerUtils.getLogger();
 
-	public JTableModelComponent(ModelBinding modelBinding) {
-		super(modelBinding);
-		this.modelBinding = modelBinding;
-		table = (JTable) modelBinding.getComponent();
-		try {
-			initValues = (List<Object>) modelBinding.getInitPropertyValue();
-		} catch (ClassCastException e) {
-			logger.error("initProperty '" + modelBinding.getInitPropertyName()
-					+ "' must be Collection");
-			throw new PropertyNotBindableException(
-					modelBinding.getInitPropertyName(), modelBinding
-							.getInitPropertyName().getClass(), table.getClass());
-
-		}
+	public JTableModelComponent() {
 	}
 
 	@Override
@@ -92,7 +79,6 @@ public class JTableModelComponent extends ModelComponent {
 
 	@Override
 	public void unbind() {
-		System.out.println("unbind");
 		tableModel = null;
 
 	}
@@ -140,6 +126,23 @@ public class JTableModelComponent extends ModelComponent {
 	public Converter getConverter() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initModelComponent(ModelBinding modelBinding) {
+		this.modelBinding = modelBinding;
+		table = (JTable) modelBinding.getComponent();
+		try {
+			initValues = (List<Object>) modelBinding.getInitPropertyValue();
+		} catch (ClassCastException e) {
+			logger.error("initProperty '" + modelBinding.getInitPropertyName()
+					+ "' must be Collection");
+			throw new PropertyNotBindableException(
+					modelBinding.getInitPropertyName(), modelBinding
+							.getInitPropertyName().getClass(), table.getClass());
+
+		}
+		
 	}
 
 }

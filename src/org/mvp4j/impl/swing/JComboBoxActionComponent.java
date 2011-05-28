@@ -63,10 +63,7 @@ public class JComboBoxActionComponent extends ActionComponent{
 	private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
-	public JComboBoxActionComponent(ActionBinding actionBinding) {
-		super(actionBinding);
-		this.actionBinding=actionBinding;
-		jcombobox=(JComboBox)actionBinding.getComponent();
+	public JComboBoxActionComponent() {
 	}
 
 	@Override
@@ -484,6 +481,13 @@ public class JComboBoxActionComponent extends ActionComponent{
 	@Override
 	public void unbind() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initActionComponent(ActionBinding actionBinding) {
+		this.actionBinding=actionBinding;
+		jcombobox=(JComboBox)actionBinding.getComponent();
 		
 	}
 

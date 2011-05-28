@@ -59,13 +59,9 @@ public class JMenuItemActionComponent extends ActionComponent {
 	private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
-	
-	
-	public JMenuItemActionComponent(ActionBinding actionBinding) {
-		super(actionBinding);
-		this.menuItem =  (JMenuItem) actionBinding.getComponent();
-		this.actionBinding = actionBinding;
+	public JMenuItemActionComponent() {
 	}
+	
 
 	@Override
 	public void bind() {
@@ -432,6 +428,13 @@ public class JMenuItemActionComponent extends ActionComponent {
 	@Override
 	public void unbind() {
 		menuItem.removeActionListener(listener);
+		
+	}
+
+	@Override
+	public void initActionComponent(ActionBinding actionBinding) {
+		this.menuItem =  (JMenuItem) actionBinding.getComponent();
+		this.actionBinding = actionBinding;
 		
 	}
 

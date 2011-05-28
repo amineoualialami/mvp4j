@@ -90,9 +90,7 @@ public class JtableUtils {
 			}
 			Collections.sort(oldValuesList);
 			for (String string : oldValues) {
-				System.out.println(" set "+ string);
 				for (Field field : allFields) {
-					System.out.println("fields dans le tableau : "+ field.getName());
 					if(field.getName()==string){
 						fields.add(field);
 					}

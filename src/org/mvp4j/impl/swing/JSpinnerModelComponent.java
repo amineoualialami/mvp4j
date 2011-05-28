@@ -18,11 +18,8 @@ public class JSpinnerModelComponent extends ModelComponent {
 	private JSpinner jspinner;
 	private ChangeListener changeListener;
 	private List<Object> initValues;
-	
-	public JSpinnerModelComponent(ModelBinding modelBinding) {
-		super(modelBinding);
-		jspinner=(JSpinner)modelBinding.getComponent();
-		this.modelBinding=modelBinding;
+
+	public JSpinnerModelComponent() {
 	}
 
 	@Override
@@ -76,6 +73,13 @@ public class JSpinnerModelComponent extends ModelComponent {
 	public Converter getConverter() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initModelComponent(ModelBinding modelBinding) {
+		jspinner=(JSpinner)modelBinding.getComponent();
+		this.modelBinding=modelBinding;
+		
 	}
 
 }

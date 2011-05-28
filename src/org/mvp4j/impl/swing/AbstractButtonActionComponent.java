@@ -57,12 +57,10 @@ public class AbstractButtonActionComponent extends ActionComponent {
 	private ActionListener listener = null;
 	private Logger logger = LoggerUtils.getLogger();
 	
-	public AbstractButtonActionComponent(ActionBinding actionBinding) {
-		super(actionBinding);
-		this.abstractButton =  (AbstractButton) actionBinding.getComponent();
-		this.actionBinding = actionBinding;
-	}
 
+	public AbstractButtonActionComponent() {
+	}
+	
 	@Override
 	public void bind() {
 		Class<?> eventType = actionBinding.getEventType();
@@ -430,6 +428,12 @@ public class AbstractButtonActionComponent extends ActionComponent {
 	public void unbind() {
 		abstractButton.removeActionListener(listener);
 		
+	}
+
+	@Override
+	public void initActionComponent(ActionBinding actionBinding) {
+		this.abstractButton =  (AbstractButton) actionBinding.getComponent();
+		this.actionBinding = actionBinding;
 	}
 
 }

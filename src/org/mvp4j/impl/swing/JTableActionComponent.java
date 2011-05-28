@@ -56,11 +56,7 @@ public class JTableActionComponent extends ActionComponent {
 	private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
-	public JTableActionComponent(ActionBinding actionBinding) {
-		super(actionBinding);
-		this.actionBinding=actionBinding;
-		jtable=(JTable)actionBinding.getComponent();
-		
+	public JTableActionComponent() {
 	}
 
 	@Override
@@ -414,6 +410,13 @@ public class JTableActionComponent extends ActionComponent {
 	@Override
 	public void unbind() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initActionComponent(ActionBinding actionBinding) {
+		this.actionBinding=actionBinding;
+		jtable=(JTable)actionBinding.getComponent();
 		
 	}
 

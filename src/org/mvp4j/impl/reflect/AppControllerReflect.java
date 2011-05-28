@@ -77,10 +77,14 @@ public class AppControllerReflect implements AppController {
 				Class<? extends ModelComponent> componentModelClass = currentAdapter
 						.getComponentModel(object.getClass());
 				Constructor<? extends ModelComponent> constructor = componentModelClass
-						.getConstructor(ModelBinding.class);
+						.getConstructor();
+				// ModelComponent componentModel = (ModelComponent) constructor
+				// .newInstance(new ModelBindingImpl(view, model,
+				// modelInfo));
 				ModelComponent componentModel = (ModelComponent) constructor
-						.newInstance(new ModelBindingImpl(view, model,
-								modelInfo));
+						.newInstance();
+				componentModel.initModelComponent(new ModelBindingImpl(view,
+						model, modelInfo));
 				modelInfo.setComponentModel(componentModel);
 				componentModel.bind();
 
@@ -135,11 +139,16 @@ public class AppControllerReflect implements AppController {
 				Class componentActionClass = currentAdapter
 						.getComponentAction(component.getClass());
 				Constructor constructor = componentActionClass
-						.getConstructor(ActionBinding.class);
+						.getConstructor();
 
+				// ActionComponent componentAction = (ActionComponent)
+				// constructor
+				// .newInstance(new ActionBindingImpl(view, presenter,
+				// actionInfo));
 				ActionComponent componentAction = (ActionComponent) constructor
-						.newInstance(new ActionBindingImpl(view, presenter,
-								actionInfo));
+						.newInstance();
+				componentAction.initActionComponent(new ActionBindingImpl(view,
+						presenter, actionInfo));
 				componentAction.bind();
 
 			} catch (IllegalArgumentException e) {

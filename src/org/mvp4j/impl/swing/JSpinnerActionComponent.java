@@ -60,12 +60,7 @@ public class JSpinnerActionComponent extends ActionComponent{
 	private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
-	
-	public JSpinnerActionComponent(ActionBinding actionBinding) {
-		super(actionBinding);
-		this.actionBinding=actionBinding;
-		jspinner=(JSpinner)actionBinding.getComponent();
-		
+	public JSpinnerActionComponent() {
 	}
 
 	@Override
@@ -438,6 +433,13 @@ public class JSpinnerActionComponent extends ActionComponent{
 	@Override
 	public void unbind() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initActionComponent(ActionBinding actionBinding) {
+		this.actionBinding=actionBinding;
+		jspinner=(JSpinner)actionBinding.getComponent();
 		
 	}
 

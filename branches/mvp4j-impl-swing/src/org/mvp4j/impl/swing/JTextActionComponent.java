@@ -63,11 +63,7 @@ public class JTextActionComponent extends ActionComponent{
 	private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
-	public JTextActionComponent(ActionBinding actionBinding) {
-		super(actionBinding);
-		this.actionBinding=actionBinding;
-		jtext=(JTextComponent)actionBinding.getComponent();
-		
+	public JTextActionComponent() {
 	}
 
 	@Override
@@ -425,6 +421,13 @@ public class JTextActionComponent extends ActionComponent{
 	@Override
 	public void unbind() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void initActionComponent(ActionBinding actionBinding) {
+		this.actionBinding=actionBinding;
+		jtext=(JTextComponent)actionBinding.getComponent();
 		
 	}
 

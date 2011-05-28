@@ -59,11 +59,7 @@ public class JCheckBoxActionComponent extends ActionComponent{
 	private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
-	public JCheckBoxActionComponent(ActionBinding actionBinding) {
-		super(actionBinding);
-		this.actionBinding=actionBinding;
-		jcheckBox=(JCheckBox)actionBinding.getComponent();
-		
+	public JCheckBoxActionComponent() {
 	}
 
 	@Override
@@ -452,6 +448,12 @@ public class JCheckBoxActionComponent extends ActionComponent{
 	public void unbind() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void initActionComponent(ActionBinding actionBinding) {
+		this.actionBinding=actionBinding;
+		jcheckBox=(JCheckBox)actionBinding.getComponent();
 	}
 
 }

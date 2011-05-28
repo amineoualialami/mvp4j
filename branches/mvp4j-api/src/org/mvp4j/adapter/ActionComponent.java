@@ -57,10 +57,13 @@ public abstract class ActionComponent {
 	 */
 	private ActionBinding actionBinding;
 	
-	public ActionComponent(ActionBinding actionBinding) {
-		super();
-		this.actionBinding = actionBinding;
-	}
+	
+	/**
+	 * initialize the actionComponent with the necessary parameters  
+	 * @param actionBinding
+	 */
+	public abstract void initActionComponent(ActionBinding actionBinding);
+	
 	/**
 	 * Bind the current component with the current action in the presenter
 	 * Add the current type event(or the default event if is not specified) to the current view component 

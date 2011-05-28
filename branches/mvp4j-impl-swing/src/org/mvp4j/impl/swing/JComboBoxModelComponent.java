@@ -21,23 +21,10 @@ public class JComboBoxModelComponent extends ModelComponent {
 	private ItemListener itemlistener;
 	private List<Object> initValues;
 	private Logger logger = LoggerUtils.getLogger();
-
-	public JComboBoxModelComponent(ModelBinding modelBinding) {
-		super(modelBinding);
-		this.modelBinding = modelBinding;
-		jcombobox = (JComboBox) modelBinding.getComponent();
-		try {
-			initValues = (List<Object>) modelBinding.getInitPropertyValue();
-		}
-		catch (ClassCastException e) {
-			logger.error("initProperty '"+modelBinding.getInitPropertyName()+"' must be Collection");
-        	throw new PropertyNotBindableException(
-					modelBinding.getInitPropertyName(), modelBinding
-							.getInitPropertyName().getClass(),
-							jcombobox.getClass());
-		}
-			
+	
+	public JComboBoxModelComponent() {
 	}
+
 
 	@Override
 	public void bind() {
@@ -97,6 +84,23 @@ public class JComboBoxModelComponent extends ModelComponent {
 	public Converter getConverter() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initModelComponent(ModelBinding modelBinding) {
+		this.modelBinding = modelBinding;
+		jcombobox = (JComboBox) modelBinding.getComponent();
+		try {
+			initValues = (List<Object>) modelBinding.getInitPropertyValue();
+		}
+		catch (ClassCastException e) {
+			logger.error("initProperty '"+modelBinding.getInitPropertyName()+"' must be Collection");
+        	throw new PropertyNotBindableException(
+					modelBinding.getInitPropertyName(), modelBinding
+							.getInitPropertyName().getClass(),
+							jcombobox.getClass());
+		}
+		
 	}
 
 

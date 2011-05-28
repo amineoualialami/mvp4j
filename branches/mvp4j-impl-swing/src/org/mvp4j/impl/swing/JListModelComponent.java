@@ -24,10 +24,7 @@ public class JListModelComponent extends ModelComponent {
 	private List<Object> initValues;
 	private Logger logger = LoggerUtils.getLogger();
 
-	public JListModelComponent(ModelBinding modelBinding) {
-		super(modelBinding);
-		this.modelBinding = modelBinding;
-		list = (JList) modelBinding.getComponent();
+	public JListModelComponent() {
 	}
 
 	@Override
@@ -91,6 +88,13 @@ public class JListModelComponent extends ModelComponent {
 	public Converter getConverter() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initModelComponent(ModelBinding modelBinding) {
+		this.modelBinding = modelBinding;
+		list = (JList) modelBinding.getComponent();
+		
 	}
 
 }

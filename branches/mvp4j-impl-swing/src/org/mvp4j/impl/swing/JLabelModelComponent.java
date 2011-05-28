@@ -13,11 +13,7 @@ public class JLabelModelComponent extends ModelComponent{
 	private JLabel jlabel;
 
 	
-	
-	public JLabelModelComponent(ModelBinding modelBinding) {
-		super(modelBinding);
-		jlabel=(JLabel)modelBinding.getComponent();
-		this.modelBinding=modelBinding;
+	public JLabelModelComponent() {
 	}
 
 	@Override
@@ -46,6 +42,12 @@ public class JLabelModelComponent extends ModelComponent{
 	public Converter getConverter() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initModelComponent(ModelBinding modelBinding) {
+		jlabel=(JLabel)modelBinding.getComponent();
+		this.modelBinding=modelBinding;
 	}
 
 

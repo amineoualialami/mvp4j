@@ -18,11 +18,8 @@ public class JRadioButtonModelComponent extends ModelComponent {
 	private JRadioButton radionButton;
 	private Logger logger = LoggerUtils.getLogger();
 
-	public JRadioButtonModelComponent(ModelBinding modelBinding) {
-		super(modelBinding);
-		this.modelBinding = modelBinding;
-		radionButton = (JRadioButton) modelBinding.getComponent();
-
+	
+	public JRadioButtonModelComponent() {
 	}
 
 	@Override
@@ -62,6 +59,13 @@ public class JRadioButtonModelComponent extends ModelComponent {
 	public Converter getConverter() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initModelComponent(ModelBinding modelBinding) {
+		this.modelBinding = modelBinding;
+		radionButton = (JRadioButton) modelBinding.getComponent();
+		
 	}
 
 }

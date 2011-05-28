@@ -60,13 +60,10 @@ public class JRadioButtonActionComponent extends ActionComponent{
 	private Logger logger = LoggerUtils.getLogger();
 	private String eventAction;
 	
-	public JRadioButtonActionComponent(ActionBinding actionBinding) {
-		super(actionBinding);
-		this.actionBinding=actionBinding;
-		jradioButton=(JRadioButton)actionBinding.getComponent();
-		
-	}
 
+	public JRadioButtonActionComponent() {
+	}
+	
 	@Override
 	public void bind() {
 		Class<?> eventType = actionBinding.getEventType();
@@ -451,6 +448,12 @@ public class JRadioButtonActionComponent extends ActionComponent{
 	public void unbind() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void initActionComponent(ActionBinding actionBinding) {
+		this.actionBinding=actionBinding;
+		jradioButton=(JRadioButton)actionBinding.getComponent();
 	}
 
 }

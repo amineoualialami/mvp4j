@@ -21,10 +21,7 @@ public class JTextModelComponent extends ModelComponent {
 	private Converter converter;
 	private Logger logger = LoggerUtils.getLogger();
 
-	public JTextModelComponent(ModelBinding modelBinding) {
-		super(modelBinding);
-		textField = (JTextComponent) modelBinding.getComponent();
-		this.modelBinding = modelBinding;
+	public JTextModelComponent() {
 	}
 
 	@Override
@@ -91,6 +88,13 @@ public class JTextModelComponent extends ModelComponent {
 	@Override
 	public void setConverter(Converter converter) {
 		this.converter = converter;
+	}
+
+	@Override
+	public void initModelComponent(ModelBinding modelBinding) {
+		textField = (JTextComponent) modelBinding.getComponent();
+		this.modelBinding = modelBinding;
+		
 	}
 
 

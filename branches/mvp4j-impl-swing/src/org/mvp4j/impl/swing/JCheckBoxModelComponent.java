@@ -22,10 +22,7 @@ public class JCheckBoxModelComponent extends ModelComponent {
 
 	private static Collection list;
 
-	public JCheckBoxModelComponent(ModelBinding modelBinding) {
-		super(modelBinding);
-		this.modelBinding = modelBinding;
-		checkBox = (JCheckBox) modelBinding.getComponent();
+	public JCheckBoxModelComponent() {
 	}
 
 	@Override
@@ -85,6 +82,13 @@ public class JCheckBoxModelComponent extends ModelComponent {
 	public Converter getConverter() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initModelComponent(ModelBinding modelBinding) {
+		this.modelBinding = modelBinding;
+		checkBox = (JCheckBox) modelBinding.getComponent();
+		
 	}
 
 

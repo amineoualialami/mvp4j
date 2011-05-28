@@ -57,10 +57,12 @@ public abstract class  ModelComponent {
 	 */
 	private ModelBinding modelBinding;	
 	
-	public ModelComponent(ModelBinding modelBinding) {
-		super();
-		this.modelBinding = modelBinding;
-	}
+	
+	/**
+	 * initialize the modelComponent with the necessary parameters  
+	 * @param modelBinding
+	 */
+	public abstract void initModelComponent(ModelBinding modelBinding);
 
 	/**
 	 * Bind the current component with the current model

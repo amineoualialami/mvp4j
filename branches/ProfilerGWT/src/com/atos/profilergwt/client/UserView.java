@@ -1,22 +1,17 @@
 package com.atos.profilergwt.client;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mvp4j.annotation.Action;
-import org.mvp4j.annotation.Actions;
 import org.mvp4j.annotation.MVP;
 import org.mvp4j.annotation.Model;
 
 import com.atos.profilergwt.client.model.UserModel;
 import com.atos.profilergwt.client.presenter.UserPresenter;
 import com.atos.profilergwt.shared.Profil;
-import com.atos.profilergwt.shared.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -35,16 +30,19 @@ public class UserView implements Reflection {
 	private AbsolutePanel formulairePanel;
 
 	@Model(property = "name")
-	private TextBox name;
+	private TextBox nameTextBox;
 
 	@Model(property = "mail")
-	private TextBox mail;
+	private TextBox mailTextBox;
 
 	@Model(property = "phone")
-	private TextBox phone;
+	private TextBox phoneTextBox;
+	
 	private Label nameLabel, mailLabel, phoneLabel, listBoxProfilsLabel;
-	private ListBox listBoxProfils;
-	private FlexTable tableRows;
+	
+	private ListBox profilsListBox;
+	
+	private FlexTable flexTable;
 
 	@Action(name = "action1")
 	private Button ajouterButton;
@@ -54,39 +52,89 @@ public class UserView implements Reflection {
 		formulairePanel = new AbsolutePanel();
 		formulairePanel.setSize("700px", "700px");
 		formulairePanel.add(getNameLabel(), 0, 0);
-		formulairePanel.add(getName(), 50, 0);
+		formulairePanel.add(getNameTextBox(), 50, 0);
 		formulairePanel.add(getlistBoxProfilsLabel(), 0, 50);
-		formulairePanel.add(getlistBoxProfils(), 50, 50);
+		formulairePanel.add(getProfilsListBox(), 50, 50);
 		formulairePanel.add(getPhoneLabel(), 0, 100);
-		formulairePanel.add(getPhone(), 50, 100);
+		formulairePanel.add(getPhoneTextBox(), 50, 100);
 		formulairePanel.add(getMailLabel(), 0, 150);
-		formulairePanel.add(getMail(), 50, 150);
+		formulairePanel.add(getMailTextBox(), 50, 150);
 		formulairePanel.add(getAjouterButton(), 50, 200);
 		formulairePanel.add(getVerticalPanel(), 300, 0);
 
 	}
-
-	public TextBox getName() {
-		if (name == null) {
-			name = new TextBox();
+	
+	public TextBox getNameTextBox() {
+		if (nameTextBox == null) {
+			nameTextBox = new TextBox();
 		}
-		return name;
+		return nameTextBox;
 	}
 
-	public TextBox getMail() {
-		if (mail == null) {
-			mail = new TextBox();
+	public TextBox getMailTextBox() {
+		if (mailTextBox == null) {
+			mailTextBox = new TextBox();
 			formulairePanel.add(nameLabel, 0, 0);
 		}
-		return mail;
+		return mailTextBox;
 	}
 
-	public TextBox getPhone() {
-		if (phone == null) {
-			phone = new TextBox();
+	public TextBox getPhoneTextBox() {
+		if (phoneTextBox == null) {
+			phoneTextBox = new TextBox();
 		}
-		return phone;
+		return phoneTextBox;
 	}
+
+
+	public ListBox getProfilsListBox() {
+		if (profilsListBox == null) {
+			profilsListBox = new ListBox();
+			profilsListBox.setWidth("170px");
+			AsyncCallback callback = new AsyncCallback() {
+				public void onSuccess(Object result) {
+					List<Profil> listProfils = (List<Profil>) result;
+					for (Profil profil : listProfils) {
+						profilsListBox.addItem(profil.toString());
+					}
+				}
+
+				public void onFailure(Throwable caught) {
+					// do some UI stuff to show failure
+				}
+			};
+
+			getService().getProfils(callback);
+
+			profilsListBox.addChangeHandler(new ChangeHandler() {
+
+				@Override
+				public void onChange(ChangeEvent event) {
+					Window.alert("Vous avez choisis : "
+							+ profilsListBox.getItemText(profilsListBox
+									.getSelectedIndex()));
+
+				}
+			});
+		}
+		return profilsListBox;
+	}
+
+	public FlexTable getFlexTable() {
+		if (flexTable == null) {
+			flexTable = new FlexTable();
+			flexTable.setWidth("400px");
+			flexTable.setBorderWidth(2);
+			flexTable.getColumnFormatter().setWidth(0, "100px");
+			flexTable.getColumnFormatter().setWidth(1, "100px");
+			flexTable.getColumnFormatter().setWidth(2, "100px");
+			flexTable.getColumnFormatter().setWidth(3, "100px");
+
+		}
+		return flexTable;
+	}
+
+
 
 	public Label getNameLabel() {
 		if (nameLabel == null) {
@@ -119,44 +167,6 @@ public class UserView implements Reflection {
 			ajouterButton.setText("Ajouter");
 			ajouterButton.setSize("100px", "30px");
 		}
-//		ajouterButton.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//
-//				final User user = new User();
-//
-//				AsyncCallback callback = new AsyncCallback() {
-//					public void onSuccess(Object result) {
-//						initTableValues();
-//					}
-//
-//					public void onFailure(Throwable caught) {
-//					}
-//				};
-//
-//				AsyncCallback callback2 = new AsyncCallback() {
-//					public void onSuccess(Object result) {
-//						user.setProfil((Profil) result);
-//					}
-//
-//					public void onFailure(Throwable caught) {
-//					}
-//				};
-//
-//				user.setName(getName().getText());
-//				user.setPhone(Integer.parseInt(getPhone().getText()));
-//				user.setMail(getMail().getText());
-//
-//				getService().getProfilByName(
-//						getlistBoxProfils().getItemText(
-//								getlistBoxProfils().getSelectedIndex()),
-//						callback2);
-//
-//				getService().addUser(user, callback);
-//
-//			}
-//		});
 		return ajouterButton;
 	}
 
@@ -168,52 +178,7 @@ public class UserView implements Reflection {
 		return listBoxProfilsLabel;
 	}
 
-	public ListBox getlistBoxProfils() {
-		if (listBoxProfils == null) {
-			listBoxProfils = new ListBox();
-			listBoxProfils.setWidth("170px");
-			AsyncCallback callback = new AsyncCallback() {
-				public void onSuccess(Object result) {
-					List<Profil> listProfils = (List<Profil>) result;
-					for (Profil profil : listProfils) {
-						listBoxProfils.addItem(profil.toString());
-					}
-				}
 
-				public void onFailure(Throwable caught) {
-					// do some UI stuff to show failure
-				}
-			};
-
-			getService().getProfils(callback);
-
-			listBoxProfils.addChangeHandler(new ChangeHandler() {
-
-				@Override
-				public void onChange(ChangeEvent event) {
-					Window.alert("Vous avez choisis : "
-							+ listBoxProfils.getItemText(listBoxProfils
-									.getSelectedIndex()));
-
-				}
-			});
-		}
-		return listBoxProfils;
-	}
-
-	public FlexTable getTableRows() {
-		if (tableRows == null) {
-			tableRows = new FlexTable();
-			tableRows.setWidth("400px");
-			tableRows.setBorderWidth(2);
-			tableRows.getColumnFormatter().setWidth(0, "100px");
-			tableRows.getColumnFormatter().setWidth(1, "100px");
-			tableRows.getColumnFormatter().setWidth(2, "100px");
-			tableRows.getColumnFormatter().setWidth(3, "100px");
-
-		}
-		return tableRows;
-	}
 
 	public FlexTable getTableColumns() {
 		FlexTable tableColumns = new FlexTable();
@@ -234,7 +199,7 @@ public class UserView implements Reflection {
 	}
 
 	public ScrollPanel getScrollPane() {
-		ScrollPanel scrollPanel = new ScrollPanel(getTableRows());
+		ScrollPanel scrollPanel = new ScrollPanel(getFlexTable());
 		scrollPanel.setWidth("400px");
 		scrollPanel.setHeight("400px");
 		return scrollPanel;
@@ -249,32 +214,10 @@ public class UserView implements Reflection {
 		return verticalPanel;
 	}
 
-	public void initTableValues() {
-
-		AsyncCallback callback = new AsyncCallback() {
-			public void onSuccess(Object result) {
-				List<User> listUsers = (List<User>) result;
-				int i = 1;
-				for (User user : listUsers) {
-					getTableRows().setText(i, 0, user.getName());
-					// getTableRows().setText(i, 1,
-					// user.getProfil().toString());
-					getTableRows().setText(i, 2, user.getPhone() + "");
-					getTableRows().setText(i, 3, user.getMail());
-					i++;
-				}
-			}
-
-			public void onFailure(Throwable caught) {
-				// do some UI stuff to show failure
-			}
-		};
-		getService().getUsers(callback);
-
-	}
+	
+	
 
 	public AbsolutePanel getFormulairePanel() {
-
 		return formulairePanel;
 	}
 
@@ -282,25 +225,17 @@ public class UserView implements Reflection {
 		this.formulairePanel = formulairePanel;
 	}
 
-	public void test() {
-		System.out.println("Decollage reussit");
-	}
 
 	public static UserServicesAsync getService() {
-		// Create the client proxy. Note that although you are creating the
-		// service interface proper, you cast the result to the asynchronous
-		// version of
-		// the interface. The cast is always safe because the generated proxy
-		// implements the asynchronous interface automatically.
 		UserServicesAsync service = (UserServicesAsync) GWT
 				.create(UserServices.class);
-		// Specify the URL at which our service implementation is running.
-		// Note that the target URL must reside on the same domain and port from
-		// which the host page was served.
-		//
 		ServiceDefTarget endpoint = (ServiceDefTarget) service;
 		String moduleRelativeURL = GWT.getModuleBaseURL() + "user";
 		endpoint.setServiceEntryPoint(moduleRelativeURL);
 		return service;
 	}
+
+	
+	
+	
 }

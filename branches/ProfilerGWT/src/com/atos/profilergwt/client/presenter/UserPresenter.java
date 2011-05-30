@@ -46,13 +46,13 @@ public class UserPresenter implements Reflection{
 			}
 		};
 
-		user.setName(userView.getName().getText());
-		user.setPhone(Integer.parseInt(userView.getPhone().getText()));
-		user.setMail(userView.getMail().getText());
+		user.setName(userView.getNameTextBox().getText());
+		user.setPhone(Integer.parseInt(userView.getPhoneTextBox().getText()));
+		user.setMail(userView.getMailTextBox().getText());
 
 		getService().getProfilByName(
-				userView.getlistBoxProfils().getItemText(
-						userView.getlistBoxProfils().getSelectedIndex()),
+				userView.getProfilsListBox().getItemText(
+						userView.getProfilsListBox().getSelectedIndex()),
 				callback2);
 
 		getService().addUser(user, callback);
@@ -77,11 +77,11 @@ public class UserPresenter implements Reflection{
 				List<User> listUsers = (List<User>) result;
 				int i = 1;
 				for (User user : listUsers) {
-					userView.getTableRows().setText(i, 0, user.getName());
+					userView.getFlexTable().setText(i, 0, user.getName());
 					// getTableRows().setText(i, 1,
 					// user.getProfil().toString());
-					userView.getTableRows().setText(i, 2, user.getPhone() + "");
-					userView.getTableRows().setText(i, 3, user.getMail());
+					userView.getFlexTable().setText(i, 2, user.getPhone() + "");
+					userView.getFlexTable().setText(i, 3, user.getMail());
 					i++;
 				}
 			}

@@ -1,14 +1,22 @@
 package org.mvp4j.impl.reflect;
 
-import org.apache.tools.ant.types.CommandlineJava.SysProperties;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.mvp4j.AppController;
+import org.mvp4j.adapter.ActionComponent;
 import org.mvp4j.adapter.MVPAdapter;
 import org.mvp4j.adapter.MVPBinding;
+import org.mvp4j.annotation.Action;
+import org.mvp4j.annotation.Actions;
 import org.mvp4j.annotation.MVP;
 import org.mvp4j.annotation.Model;
+import org.mvp4j.exception.ActionNotFoundException;
+import org.mvp4j.impl.gwt.GwtAdapter;
 
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.core.client.GWT;
 import com.gwtent.reflection.client.ClassType;
 import com.gwtent.reflection.client.Constructor;
 import com.gwtent.reflection.client.Field;
@@ -17,24 +25,18 @@ import com.gwtent.reflection.client.TypeOracle;
 
 public class AppControllerReflect implements AppController {
 
+	public static final MVPAdapter DEFAULT_ADAPTER = new GwtAdapter();
+
+	private MVPAdapter currentAdapter = DEFAULT_ADAPTER;
+
+	private Map<String, ActionViewPresenterInfo> actionInfoMap = new HashMap<String, ActionViewPresenterInfo>();
+	private Map<String, ModelViewInfo> modelViewInfoMap = new HashMap<String, ModelViewInfo>();
+	private Map<Object, Object> mapViewModel = new HashMap<Object, Object>();
+
 	@Override
 	public MVPBinding bind(Object view, Object model, Object presenter) {
-		processView(view.getClass());
-		ClassType classType = TypeOracle.Instance.getClassType(model.getClass());
-		Field field = classType.getField("name");
-		field.setFieldValue(model, "TestValue");
-		System.out.println("field value  : "+field.getFieldValue(model));
-		System.out.println("***field.set & field.get  OK***");
-		
-		ClassType classType2 = TypeOracle.Instance.getClassType(view.getClass());
-		Method method2 = classType2.getMethod("getName", null);
-		Boolean boolean2= method2.isAnnotationPresent(Model.class);
-		System.out.println(boolean2);
-		System.out.println("***method.isAnnotationPresent  OK***");
-		
-		TextBox textBox = (TextBox) method2.invoke(view, null);
-		textBox.setText("test value");
-		System.out.println("***method.invoke()  OK***");
+		currentAdapter = new GwtAdapter();
+		bindPresenter(view, presenter);
 		return null;
 	}
 
@@ -46,69 +48,297 @@ public class AppControllerReflect implements AppController {
 
 	@Override
 	public MVPBinding bindPresenter(Object view, Object presenter) {
-		// TODO Auto-generated method stub
+		// logger.info("Bind View :" + view.getClass().getName().toString()
+		// + " with presenter :"
+		// + presenter.getClass().getName().toString());
+
+		GWT.log("Bind View :" + view.getClass().getName().toString()
+				+ " with presenter :"
+				+ presenter.getClass().getName().toString());
+
+		// mvpBinding = new MVPBindingImpl();
+		// mvpBinding.setView(view);
+		// mvpBinding.setPresenter(presenter);
+
+		if (actionInfoMap.get(view.getClass().toString()) == null) {
+			processView(view.getClass());
+		}
+		ActionViewPresenterInfo actionViewPresenterInfo = actionInfoMap
+				.get(view.getClass().toString());
+
+		List<ActionInfo> actionsInfo = actionViewPresenterInfo.getActionsInfo();
+		for (ActionInfo actionInfo : actionsInfo) {
+
+			Object component = actionInfo.getMethod().invoke(view);
+            GWT.log(component.getClass().toString());
+            if(currentAdapter==null){
+            	System.out.println("current adapter null");
+            }
+            	
+            GWT.log(currentAdapter.getComponentAction(component
+							.getClass()).toString());
+			ClassType componentActionClassType = TypeOracle.Instance
+					.getClassType(currentAdapter.getComponentAction(component
+							.getClass()));
+			Constructor constructor = componentActionClassType
+					.findConstructor();
+
+			// ActionComponent componentAction = (ActionComponent)
+			// constructor
+			// .newInstance(new ActionBindingImpl(view, presenter,
+			// actionInfo));
+			ActionComponent componentAction = (ActionComponent) constructor
+					.newInstance();
+			componentAction.initActionComponent(new ActionBindingImpl(view,
+					presenter, actionInfo));
+			componentAction.bind();
+
+		}
+
+		// logger.info(" Exit Bind View :" +
+		// view.getClass().getName().toString()
+		// + " with presenter :"
+		// + presenter.getClass().getName().toString());
+		GWT.log(" Exit Bind View :" + view.getClass().getName().toString()
+				+ " with presenter :"
+				+ presenter.getClass().getName().toString());
 		return null;
 	}
 
 	@Override
 	public void refreshView(Object view) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setAdapter(MVPAdapter adapter) {
-		// TODO Auto-generated method stub
-		
+		currentAdapter = adapter;
+
 	}
-	
-	private void processView(Class<?> viewClass){
-		
-		
-		ClassType classType = TypeOracle.Instance.getClassType(viewClass);
-		
-		
-		
-		MVP mvp = classType.getAnnotation(MVP.class);
-		System.out.println("The model Class : "+mvp.modelClass());
-		System.out.println("***Class.getAnnotation OK***");
-		
-		
-		
-		
-		Field[] fields = classType.getFields();
-		for (Field field : fields) {
-			System.out.println(field.getName());
+
+	public MVPAdapter getCurrentAdapter() {
+		return currentAdapter;
+	}
+
+	private void processView(Class<?> viewClass) {
+
+		// logger.info("Parsing View");
+		GWT.log("Parsing View");
+		ClassType viewClassType = TypeOracle.Instance.getClassType(viewClass);
+
+		if (viewClassType.getAnnotation(MVP.class) == null) {
+			// logger.severe("MVP annotation is missed " + viewClass.getName());
+			GWT.log("MVP annotation is missed " + viewClass.getName());
+			throw new IllegalArgumentException();
 		}
-		System.out.println("***Class.getDeclaredFields OK***");
-		
-		
-		
-		Method[] methods = classType.getMethods();
-		for (Method method : methods) {
-			System.out.println(method.getName());
+		MVP mvp = viewClassType.getAnnotation(MVP.class);
+
+		List<ActionInfo> actionsInfo = new ArrayList<ActionInfo>();
+		List<ModelInfo> modelsInfo = new ArrayList<ModelInfo>();
+
+		Field[] listFieldsView = viewClassType.getFields();
+		Method[] listMethodsView = viewClassType.getMethods();
+		Class<?> presenterClass = mvp.presenterClass();
+		ClassType presenterClassType = TypeOracle.Instance
+				.getClassType(presenterClass);
+		Method[] listMethodsPresenter = presenterClassType.getMethods();
+		Class<?> modelClass = mvp.modelClass();
+
+		for (Field field : listFieldsView) {
+			if (field.isAnnotationPresent(Action.class)) {
+				Method method = findMethod(field, viewClass);
+				Action action = field.getAnnotation(Action.class);
+				actionsInfo.add(initActionInfo(method, action));
+			}
 		}
-		System.out.println("***Class.getDeclaredMethods  OK***");
-		Method method = classType.getMethod("getTableRows", null);
-		System.out.println(method.getName());
-		System.out.println("***Class.getDeclaredMethod***");
-		
-		Constructor constructor = classType.findConstructor();
-		Object object = constructor.newInstance();
-		System.out.println(object.getClass());
-		System.out.println("***class.getConstructor***");
-		
-		Field field = classType.getField("name");
-		Boolean boolean1 =field.isAnnotationPresent(Model.class);
-		System.out.println(boolean1);
-		System.out.println("***field.isAnnotationPresent OK***");
-		
-		Model model = field.getAnnotation(Model.class);
-		System.out.println("initProperty : "+model.initProperty()+" property = "+model.property());
-		System.out.println("***field.getAnnotation   OK***");
-		
-		
-		
+
+		for (Method method : listMethodsView) {
+			if (method.isAnnotationPresent(Action.class)) {
+				if (!fieldIsAnnotated(method, viewClass)) {
+					Action action = method.getAnnotation(Action.class);
+					actionsInfo.add(initActionInfo(method, action));
+				}
+			}
+		}
+
+		for (Field field : listFieldsView) {
+			if (field.isAnnotationPresent(Model.class)) {
+				Method method = findMethod(field, viewClass);
+				Model model = field.getAnnotation(Model.class);
+				modelsInfo.add(initModelInfo(method, model));
+			}
+		}
+
+		for (Method method : listMethodsView) {
+			if (method.isAnnotationPresent(Model.class)) {
+				Model model = method.getAnnotation(Model.class);
+				if (!fieldIsAnnotated(method, viewClass)) {
+					modelsInfo.add(initModelInfo(method, model));
+				}
+
+			}
+		}
+
+		for (Field field : listFieldsView) {
+			if (field.isAnnotationPresent(Actions.class)) {
+				Method method = findMethod(field, viewClass);
+				Actions actions = field.getAnnotation(Actions.class);
+				Action[] listActions = actions.value();
+
+				for (Action action : listActions) {
+					actionsInfo.add(initActionInfo(method, action));
+				}
+			}
+		}
+
+		for (Method method : listMethodsView) {
+			if (method.isAnnotationPresent(Actions.class)) {
+				if (!fieldIsAnnotated(method, viewClass)) {
+					Actions actions = method.getAnnotation(Actions.class);
+					Action[] listActions = actions.value();
+					for (Action action : listActions) {
+						actionsInfo.add(initActionInfo(method, action));
+					}
+				}
+			}
+		}
+
+		for (ActionInfo actionInfo : actionsInfo) {
+			for (Method method : listMethodsPresenter) {
+				if (method.getName().equals(actionInfo.getAction())) {
+					// logger.info("Action in Presenter Match ===> Action name: "
+					// + actionInfo.getAction() + "  Method name: "
+					// + method.getName());
+
+					GWT.log("Action in Presenter Match ===> Action name: "
+							+ actionInfo.getAction() + "  Method name: "
+							+ method.getName());
+					actionInfo.setActionMethod(method);
+				}
+			}
+			if (actionInfo.getActionMethod() == null) {
+				// logger.severe("Action " + actionInfo.getAction() +
+				// " not match ");
+				GWT.log("Action " + actionInfo.getAction() + " not match ");
+				throw new ActionNotFoundException(actionInfo.getAction(),
+						presenterClass);
+			}
+		}
+
+		ActionViewPresenterInfo actionViewPresenterInfo = processViewPresenter(
+				viewClass, presenterClass, actionsInfo);
+
+		actionInfoMap.put(viewClass.toString(), actionViewPresenterInfo);
+
+		ModelViewInfo modelViewInfo = processViewModel(viewClass, modelClass,
+				modelsInfo);
+
+		modelViewInfoMap.put(viewClass.toString(), modelViewInfo);
+		// logger.info("Exit Parsing View");
+		GWT.log("Exit Parsing View");
+
+	}
+
+	private ActionViewPresenterInfo processViewPresenter(Class<?> viewClass,
+			Class<?> presenterClass, List<ActionInfo> actionsInfo) {
+		for (ActionInfo actionInfo : actionsInfo) {
+			// logger.info("----- Action Name: " + actionInfo.getAction()
+			// + " Method: " + actionInfo.getMethod().getName()
+			// + " Action Method: "
+			// + actionInfo.getActionMethod().getName()
+			// + " Action EventType: "
+			// + actionInfo.getEventType().getName());
+			GWT.log("----- Action Name: " + actionInfo.getAction()
+					+ " Method: " + actionInfo.getMethod().getName()
+					+ " Action Method: "
+					+ actionInfo.getActionMethod().getName()
+					+ " Action EventType: "
+					+ actionInfo.getEventType().getName());
+		}
+		ActionViewPresenterInfo actionViewPresenterInfo = new ActionViewPresenterInfo();
+		actionViewPresenterInfo.setViewClass(viewClass);
+		actionViewPresenterInfo.setPresenterClass(presenterClass);
+		actionViewPresenterInfo.setActionsInfo(actionsInfo);
+		return actionViewPresenterInfo;
+	}
+
+	private ModelViewInfo processViewModel(Class<?> viewClass,
+			Class<?> modelClass, List<ModelInfo> modelsInfo) {
+		for (ModelInfo modelInfo : modelsInfo) {
+			// logger.info("----- Property Name: " + modelInfo.getPropertyName()
+			// + " Init Property Name: " + modelInfo.getIniPropertyName()
+			// + " Method: " + modelInfo.getMethod().getName());
+			GWT.log("----- Property Name: " + modelInfo.getPropertyName()
+					+ " Init Property Name: " + modelInfo.getIniPropertyName()
+					+ " Method: " + modelInfo.getMethod().getName());
+		}
+		ModelViewInfo modelViewInfo = new ModelViewInfo();
+		modelViewInfo.setViewClass(viewClass);
+		modelViewInfo.setModelClass(modelClass);
+		modelViewInfo.setModelsInfo(modelsInfo);
+		return modelViewInfo;
+	}
+
+	private ActionInfo initActionInfo(Method method, Action action) {
+		ActionInfo actionInfo = new ActionInfo();
+		actionInfo.setAction(action.name());
+		actionInfo.setMethod(method);
+		actionInfo.setEventType(action.EventType());
+		actionInfo.setEventAction(action.EventAction());
+		return actionInfo;
+	}
+
+	private ModelInfo initModelInfo(Method method, Model model) {
+
+		ModelInfo modelInfo = new ModelInfo();
+		modelInfo.setPropertyName(model.property());
+		modelInfo.setIniPropertyName(model.initProperty());
+		modelInfo.setMethod(method);
+		return modelInfo;
+	}
+
+	private Method findMethod(Field field, Class<?> viewClass) {
+
+		ClassType viewClassType = TypeOracle.Instance.getClassType(viewClass);
+		Method method = viewClassType.getMethod("get"
+				+ (field.getName().charAt(0) + "").toUpperCase()
+				+ field.getName().substring(1), null);
+
+		return method;
+	}
+
+	private boolean fieldIsAnnotated(Method method, Class<?> viewClass) {
+		boolean annotated = false;
+
+		ClassType viewClassType = TypeOracle.Instance.getClassType(viewClass);
+		Field field = viewClassType.getField((method.getName().charAt(3) + "")
+				.toLowerCase() + method.getName().substring(4));
+
+		if (field.isAnnotationPresent(Action.class)
+				|| field.isAnnotationPresent(Model.class)
+				|| field.isAnnotationPresent(Actions.class)) {
+			annotated = true;
+		}
+
+		return annotated;
+	}
+
+	public Map<String, ActionViewPresenterInfo> getActionInfoMap() {
+		return actionInfoMap;
+	}
+
+	public void setActionInfoMap(
+			Map<String, ActionViewPresenterInfo> actionInfoMap) {
+		this.actionInfoMap = actionInfoMap;
+	}
+
+	public Map<String, ModelViewInfo> getModelViewInfoMap() {
+		return modelViewInfoMap;
+	}
+
+	public void setModelViewInfoMap(Map<String, ModelViewInfo> modelViewInfoMap) {
+		this.modelViewInfoMap = modelViewInfoMap;
 	}
 
 }

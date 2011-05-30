@@ -3,12 +3,13 @@ package com.atos.profilergwt.client.model;
 import java.io.Serializable;
 
 import com.atos.profilergwt.shared.Profil;
+import com.gwtent.reflection.client.Reflection;
 
 
 
 
 
-public class UserModel implements Serializable {
+public class UserModel implements Serializable ,Reflection{
 
 
 

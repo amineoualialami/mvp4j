@@ -3,9 +3,13 @@ package com.atos.profilergwt.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mvp4j.annotation.Action;
+import org.mvp4j.annotation.Actions;
 import org.mvp4j.annotation.MVP;
+import org.mvp4j.annotation.Model;
 
 import com.atos.profilergwt.client.model.UserModel;
+import com.atos.profilergwt.client.presenter.UserPresenter;
 import com.atos.profilergwt.shared.Profil;
 import com.atos.profilergwt.shared.User;
 import com.google.gwt.core.client.GWT;
@@ -26,13 +30,23 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtent.reflection.client.Reflection;
 
-@MVP(modelClass = UserModel.class, presenterClass = UserView.class)
+@MVP(modelClass = UserModel.class, presenterClass = UserPresenter.class)
 public class UserView implements Reflection {
 	private AbsolutePanel formulairePanel;
-	private TextBox name, mail, phone;
+
+	@Model(property = "name")
+	private TextBox name;
+
+	@Model(property = "mail")
+	private TextBox mail;
+
+	@Model(property = "phone")
+	private TextBox phone;
 	private Label nameLabel, mailLabel, phoneLabel, listBoxProfilsLabel;
 	private ListBox listBoxProfils;
 	private FlexTable tableRows;
+
+	@Action(name = "action1")
 	private Button ajouterButton;
 
 	public UserView() {
@@ -105,52 +119,44 @@ public class UserView implements Reflection {
 			ajouterButton.setText("Ajouter");
 			ajouterButton.setSize("100px", "30px");
 		}
-		ajouterButton.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-
-				final User user = new User();
-				
-				AsyncCallback callback = new AsyncCallback() {
-					public void onSuccess(Object result) {
-						initTableValues();
-					}
-
-					public void onFailure(Throwable caught) {
-					}
-				};
-				
-				AsyncCallback callback2 = new AsyncCallback() {
-					public void onSuccess(Object result) {
-						user.setProfil((Profil) result);
-					}
-
-					public void onFailure(Throwable caught) {
-					}
-				};
-				
-				
-				user.setName(getName().getText());
-				user.setPhone(Integer.parseInt(getPhone().getText()));
-				user.setMail(getMail().getText());
-				
-				getService().getProfilByName(
-						getlistBoxProfils().getItemText(
-								getlistBoxProfils().getSelectedIndex()),
-						callback2);
-				
-				getService().addUser(user, callback);
-
-
-				
-
-				
-
-				
-
-			}
-		});
+//		ajouterButton.addClickHandler(new ClickHandler() {
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//
+//				final User user = new User();
+//
+//				AsyncCallback callback = new AsyncCallback() {
+//					public void onSuccess(Object result) {
+//						initTableValues();
+//					}
+//
+//					public void onFailure(Throwable caught) {
+//					}
+//				};
+//
+//				AsyncCallback callback2 = new AsyncCallback() {
+//					public void onSuccess(Object result) {
+//						user.setProfil((Profil) result);
+//					}
+//
+//					public void onFailure(Throwable caught) {
+//					}
+//				};
+//
+//				user.setName(getName().getText());
+//				user.setPhone(Integer.parseInt(getPhone().getText()));
+//				user.setMail(getMail().getText());
+//
+//				getService().getProfilByName(
+//						getlistBoxProfils().getItemText(
+//								getlistBoxProfils().getSelectedIndex()),
+//						callback2);
+//
+//				getService().addUser(user, callback);
+//
+//			}
+//		});
 		return ajouterButton;
 	}
 
@@ -251,7 +257,8 @@ public class UserView implements Reflection {
 				int i = 1;
 				for (User user : listUsers) {
 					getTableRows().setText(i, 0, user.getName());
-//					getTableRows().setText(i, 1, user.getProfil().toString());
+					// getTableRows().setText(i, 1,
+					// user.getProfil().toString());
 					getTableRows().setText(i, 2, user.getPhone() + "");
 					getTableRows().setText(i, 3, user.getMail());
 					i++;

@@ -1,11 +1,10 @@
 package org.mvp4j.impl.reflect;
 
 
-import org.apache.log4j.Logger;
 import org.mvp4j.adapter.ActionBinding;
 import org.mvp4j.annotation.Action;
-import org.mvp4j.impl.gwt.utils.LoggerUtils;
 
+import com.google.gwt.core.client.GWT;
 import com.gwtent.reflection.client.Method;
 
 public class ActionBindingImpl implements ActionBinding {
@@ -13,7 +12,6 @@ public class ActionBindingImpl implements ActionBinding {
 	private ActionInfo actionInfo;
 	private Object presenter;
 	private Object view;
-	private Logger logger = LoggerUtils.getLogger();
 
 	public ActionBindingImpl(Object view, Object presenter,
 			ActionInfo actionInfo) {
@@ -44,7 +42,6 @@ public class ActionBindingImpl implements ActionBinding {
 		try {
 			object = actionInfo.getMethod().invoke(view);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		return object;
@@ -52,7 +49,6 @@ public class ActionBindingImpl implements ActionBinding {
 
 	@Override
 	public void callAction(Object eventObject) {
-		try {
 			
 			Method method = actionInfo.getActionMethod();
 			if(method.getParameters().length==0){
@@ -63,24 +59,21 @@ public class ActionBindingImpl implements ActionBinding {
 				method.invoke(presenter,eventObject);
 				}
 				else
-					logger.error("The event object "+method.getParameters()[0].getTypeName()+" is not supported "+
-							" try this event object:  "+eventObject.getClass().toString());
+//					logger.severe("The event object "+method.getParameters()[0].getTypeName()+" is not supported "+
+//							" try this event object:  "+eventObject.getClass().toString());
+				
+				GWT.log("The event object "+method.getParameters()[0].getTypeName()+" is not supported "+
+						" try this event object:  "+eventObject.getClass().toString());
 			}
 			else{
-				logger.error("The action must have one parameter ");
+//				logger.severe("The action must have one parameter ");
+				GWT.log("The action must have one parameter ");
 			}
 			
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} 
 	}
 
 	@Override
 	public String getEventAction() {
-		// TODO Auto-generated method stub
 		return actionInfo.getEventAction();
 	}
 

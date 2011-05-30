@@ -18,17 +18,18 @@ public class MVPBindingImpl implements MVPBinding {
 	private Object presenter;
 	private Object view;
 
-	public static final Converter DEFAULT_CONVERTER = new DefaultConverter();
-	private Converter globalConverter = DEFAULT_CONVERTER;
+//	public static final Converter DEFAULT_CONVERTER = new DefaultConverter();
+//	private Converter globalConverter = DEFAULT_CONVERTER;
 
 	@Override
 	public Converter getGlobalConverter() {
-		return globalConverter;
+//		return globalConverter;
+		return null;
 	}
 
 	@Override
 	public void setGlobalConverter(Converter converter) {
-		this.globalConverter = converter;
+//		this.globalConverter = converter;
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class MVPBindingImpl implements MVPBinding {
 				.toString());
 		List<ModelInfo> listModelInfo = modelViewInfo.getModelsInfo();
 		for (ModelInfo modelInfo : listModelInfo) {
-			try {
+			
 				if (modelInfo.getMethod().invoke(getView()) == component) {
 					
 					ClassType<? extends ModelComponent> componentModelClass = TypeOracle.Instance.getClassType(customizedModelComponent);
@@ -56,22 +57,7 @@ public class MVPBindingImpl implements MVPBinding {
 					modelInfo.setComponentModel(componentModel);
 					appController.refreshView(getView());
 				}
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}  catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 
 	}
@@ -86,17 +72,11 @@ public class MVPBindingImpl implements MVPBinding {
 				.toString());
 		List<ModelInfo> listModelInfo = modelViewInfo.getModelsInfo();
 		for (ModelInfo modelInfo : listModelInfo) {
-			try {
+			
 				if (modelInfo.getMethod().invoke(getView()) == component) {
 					return modelInfo.getComponentModel();
 				}
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 		return null;
 	}

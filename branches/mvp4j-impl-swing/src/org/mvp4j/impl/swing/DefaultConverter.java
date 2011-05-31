@@ -12,7 +12,7 @@ public class DefaultConverter implements Converter {
 	
 
 	@Override
-	public Object convertComponentToModel(Class<?> type, Object value) {
+	public Object convertComponentToModel(Object type, Object value) {
 		if (value instanceof String) {
 			if (type == Integer.class)
 				return new Integer((String) value);
@@ -29,7 +29,7 @@ public class DefaultConverter implements Converter {
 			else if (type == Double.class)
 				return new Double((String) value);
 			
-			logger.error("The type : " + type.getName()
+			logger.error("The type : " + type.toString()
 					+ " is not supported with the value of type String");
 			throw new IllegalArgumentException();
 		}

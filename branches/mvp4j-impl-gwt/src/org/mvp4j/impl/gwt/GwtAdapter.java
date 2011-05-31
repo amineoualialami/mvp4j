@@ -5,6 +5,7 @@ import org.mvp4j.adapter.MVPAdapter;
 import org.mvp4j.adapter.ModelComponent;
 
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.TextBox;
 
 public class GwtAdapter implements MVPAdapter{
 
@@ -12,17 +13,17 @@ public class GwtAdapter implements MVPAdapter{
 	public Class<? extends ActionComponent> getComponentAction(
 			Class<?> componentKlass) {
 		if(componentKlass.equals(Button.class)){
-			System.out.println("Button");
 			return ButtonActionComponent.class;
 		}
-		System.out.println("machi button");
 		return null;
 	}
 
 	@Override
 	public Class<? extends ModelComponent> getComponentModel(
 			Class<?> componentKlass) {
-		// TODO Auto-generated method stub
+		if(componentKlass==TextBox.class){
+			return TextBoxModelComponent.class;
+		}
 		return null;
 	}
 

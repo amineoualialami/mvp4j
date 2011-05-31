@@ -387,7 +387,7 @@ public class AppControllerReflect implements AppController {
 	}
 
 	public MVPBinding getMvpBinding() {
-		return mvpBinding;
+		return new MVPBindingImpl();
 	}
 	
 	

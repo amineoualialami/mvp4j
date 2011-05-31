@@ -3,7 +3,6 @@ package org.mvp4j.impl.reflect;
 
 
 import org.mvp4j.Converter;
-import org.mvp4j.adapter.MVPAdapter;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.exception.PropertyNotFoundException;
 import org.mvp4j.exception.PropertyNotInitializedException;
@@ -11,7 +10,9 @@ import org.mvp4j.exception.PropertyNotInitializedException;
 import com.gwtent.reflection.client.ClassType;
 import com.gwtent.reflection.client.Field;
 import com.gwtent.reflection.client.Method;
+import com.gwtent.reflection.client.Type;
 import com.gwtent.reflection.client.TypeOracle;
+
 
 public class ModelBindingImpl implements ModelBinding {
 
@@ -53,9 +54,9 @@ public class ModelBindingImpl implements ModelBinding {
 	@Override
 	public void setPropertyValue(Object value) {
 		
-			ClassType modelClass = TypeOracle.Instance.getClassType(model.getClass());
-			Field field = modelClass.getField(getPropertyName());
-//			field.set(model, getConverter().convertComponentToModel(field.getType(), value));
+			ClassType modelClassType = TypeOracle.Instance.getClassType(model.getClass());
+			Field field = modelClassType.getField(getPropertyName());
+			field.setFieldValue(model, getConverter().convertComponentToModel(field.getType(),value));
 		
 
 	}
@@ -95,8 +96,7 @@ public class ModelBindingImpl implements ModelBinding {
 
 	private Converter getConverter() {
 		if(modelInfo.getComponentModel().getConverter()==null){
-			AppControllerReflect appController = AppControllerReflectFactory
-			.getAppControllerInstance();
+			AppControllerReflect appController = AppControllerReflectFactory.getAppControllerInstance();
 			converter = appController.getMvpBinding().getGlobalConverter();
 		}
 		else{
@@ -108,7 +108,15 @@ public class ModelBindingImpl implements ModelBinding {
 	
 
 	
-	
+	private Method findMethod(Field field, Class<?> klass) {
+
+		    ClassType viewClassType = TypeOracle.Instance.getClassType(klass);
+			Method method = viewClassType.getMethod("get"
+					+ (field.getName().charAt(0) + "").toUpperCase()
+					+ field.getName().substring(1),null);
+
+		return method;
+	}
 	
 	
 	

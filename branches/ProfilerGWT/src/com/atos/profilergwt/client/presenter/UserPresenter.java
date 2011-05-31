@@ -46,9 +46,14 @@ public class UserPresenter implements Reflection{
 			}
 		};
 
-		user.setName(userView.getNameTextBox().getText());
-		user.setPhone(Integer.parseInt(userView.getPhoneTextBox().getText()));
-		user.setMail(userView.getMailTextBox().getText());
+//		user.setName(userView.getNameTextBox().getText());
+//		user.setPhone(Integer.parseInt(userView.getPhoneTextBox().getText()));
+//		user.setMail(userView.getMailTextBox().getText());
+		
+		user.setName(userModel.getName());
+		user.setPhone(userModel.getPhone());
+		user.setMail(userModel.getMail());
+		
 
 		getService().getProfilByName(
 				userView.getProfilsListBox().getItemText(

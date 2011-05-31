@@ -9,6 +9,7 @@ import org.mvp4j.AppController;
 import org.mvp4j.adapter.ActionComponent;
 import org.mvp4j.adapter.MVPAdapter;
 import org.mvp4j.adapter.MVPBinding;
+import org.mvp4j.adapter.ModelComponent;
 import org.mvp4j.annotation.Action;
 import org.mvp4j.annotation.Actions;
 import org.mvp4j.annotation.MVP;
@@ -35,14 +36,58 @@ public class AppControllerReflect implements AppController {
 
 	@Override
 	public MVPBinding bind(Object view, Object model, Object presenter) {
-		currentAdapter = new GwtAdapter();
+//		bindModel(view,model);
 		bindPresenter(view, presenter);
 		return null;
 	}
 
 	@Override
 	public MVPBinding bindModel(Object view, Object model) {
-		// TODO Auto-generated method stub
+
+//		logger.info("Bind View :" + view.getClass().getName().toString()
+//				+ " with model :" + model.getClass().getName().toString());
+		GWT.log("Bind View :" + view.getClass().getName().toString()
+				+ " with model :" + model.getClass().getName().toString());
+
+//		mvpBinding = new MVPBindingImpl();
+//		mvpBinding.setView(view);
+//		mvpBinding.setModel(model);
+
+		if (modelViewInfoMap.get(view.getClass().toString()) == null) {
+			processView(view.getClass());
+		}
+		ModelViewInfo modelViewInfo = modelViewInfoMap.get(view.getClass()
+				.toString());
+		if (mapViewModel.get(view) == null) {
+			mapViewModel.put(view, model);
+		}
+
+		List<ModelInfo> modelsInfo = modelViewInfo.getModelsInfo();
+		for (ModelInfo modelInfo : modelsInfo) {
+				Method method = modelInfo.getMethod();
+				Object object = method.invoke(view);
+				
+				ClassType<? extends ModelComponent> componentModelClass = TypeOracle.Instance.getClassType(currentAdapter
+						.getComponentModel(object.getClass()));
+				
+				
+				Constructor<? extends ModelComponent> constructor = componentModelClass.findConstructor();
+				
+				ModelComponent componentModel = (ModelComponent) constructor
+						.newInstance();
+				componentModel.initModelComponent(new ModelBindingImpl(view,
+						model, modelInfo));
+				modelInfo.setComponentModel(componentModel);
+				componentModel.bind();
+
+		
+		}
+
+//		logger.info("Exit Bind View :" + view.getClass().getName().toString()
+//				+ " with model :" + model.getClass().getName().toString());
+		
+		GWT.log("Exit Bind View :" + view.getClass().getName().toString()
+				+ " with model :" + model.getClass().getName().toString());
 		return null;
 	}
 
@@ -70,17 +115,10 @@ public class AppControllerReflect implements AppController {
 		for (ActionInfo actionInfo : actionsInfo) {
 
 			Object component = actionInfo.getMethod().invoke(view);
-            GWT.log(component.getClass().toString());
-            if(currentAdapter==null){
-            	System.out.println("current adapter null");
-            }
-            	
-            GWT.log(currentAdapter.getComponentAction(component
-							.getClass()).toString());
-			ClassType componentActionClassType = TypeOracle.Instance
+			ClassType<? extends ActionComponent> componentActionClassType = TypeOracle.Instance
 					.getClassType(currentAdapter.getComponentAction(component
 							.getClass()));
-			Constructor constructor = componentActionClassType
+			Constructor<? extends ActionComponent> constructor = componentActionClassType
 					.findConstructor();
 
 			// ActionComponent componentAction = (ActionComponent)

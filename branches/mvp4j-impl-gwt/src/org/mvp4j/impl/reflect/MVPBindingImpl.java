@@ -7,6 +7,7 @@ import org.mvp4j.Converter;
 import org.mvp4j.adapter.MVPBinding;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.adapter.ModelComponent;
+import org.mvp4j.impl.gwt.DefaultConverter;
 
 import com.gwtent.reflection.client.ClassType;
 import com.gwtent.reflection.client.Constructor;
@@ -18,18 +19,17 @@ public class MVPBindingImpl implements MVPBinding {
 	private Object presenter;
 	private Object view;
 
-//	public static final Converter DEFAULT_CONVERTER = new DefaultConverter();
-//	private Converter globalConverter = DEFAULT_CONVERTER;
+	public static final Converter DEFAULT_CONVERTER = new DefaultConverter();
+	private Converter globalConverter = DEFAULT_CONVERTER;
 
 	@Override
 	public Converter getGlobalConverter() {
-//		return globalConverter;
-		return null;
+		return globalConverter;
 	}
 
 	@Override
 	public void setGlobalConverter(Converter converter) {
-//		this.globalConverter = converter;
+		this.globalConverter = converter;
 	}
 
 	@Override

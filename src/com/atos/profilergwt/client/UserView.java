@@ -32,10 +32,10 @@ public class UserView implements Reflection {
 	@Model(property = "name")
 	private TextBox nameTextBox;
 
-	@Model(property = "mail")
+//	@Model(property = "mail")
 	private TextBox mailTextBox;
 
-	@Model(property = "phone")
+//	@Model(property = "phone")
 	private TextBox phoneTextBox;
 	
 	private Label nameLabel, mailLabel, phoneLabel, listBoxProfilsLabel;

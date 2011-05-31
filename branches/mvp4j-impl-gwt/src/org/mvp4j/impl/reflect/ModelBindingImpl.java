@@ -7,6 +7,7 @@ import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.exception.PropertyNotFoundException;
 import org.mvp4j.exception.PropertyNotInitializedException;
 
+import com.google.gwt.core.client.GWT;
 import com.gwtent.reflection.client.ClassType;
 import com.gwtent.reflection.client.Field;
 import com.gwtent.reflection.client.Method;
@@ -56,9 +57,8 @@ public class ModelBindingImpl implements ModelBinding {
 		
 			ClassType modelClassType = TypeOracle.Instance.getClassType(model.getClass());
 			Field field = modelClassType.getField(getPropertyName());
+//			Type type =  field.getType();
 			field.setFieldValue(model, getConverter().convertComponentToModel(field.getType(),value));
-		
-
 	}
 
 	@Override

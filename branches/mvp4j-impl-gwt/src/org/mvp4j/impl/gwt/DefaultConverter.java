@@ -14,18 +14,11 @@ public class DefaultConverter implements Converter {
 		if (value instanceof String) {
 			if (type == TypeOracle.Instance.getClassType(Integer.class))
 				return new Integer((String) value);
-			else if (type == TypeOracle.Instance.getClassType(int.class))
-				return new Integer((String) value);
-			else if (type == TypeOracle.Instance.getClassType(float.class))
-				return new Float((String) value);
-			else if (type == TypeOracle.Instance.getClassType(Float.class))
-				return new Float((String) value);
 			else if (type == TypeOracle.Instance.getClassType(String.class))
 				return value.toString();
-			else if (type == TypeOracle.Instance.getClassType(double.class))
-				return new Double((String) value);
-			else if (type == TypeOracle.Instance.getClassType(Double.class))
-				return new Double((String) value);
+			else if(type==TypeOracle.Instance.getType("int")){
+				return new Integer((String) value);
+			}
 
 //			logger.error("The type : " + type.getName()
 //					+ " is not supported with the value of type String");

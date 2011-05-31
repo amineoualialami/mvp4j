@@ -33,12 +33,19 @@ public class AppControllerReflect implements AppController {
 	private Map<String, ActionViewPresenterInfo> actionInfoMap = new HashMap<String, ActionViewPresenterInfo>();
 	private Map<String, ModelViewInfo> modelViewInfoMap = new HashMap<String, ModelViewInfo>();
 	private Map<Object, Object> mapViewModel = new HashMap<Object, Object>();
+	
+	
+	private MVPBinding mvpBinding;
 
 	@Override
 	public MVPBinding bind(Object view, Object model, Object presenter) {
-//		bindModel(view,model);
+		bindModel(view,model);
 		bindPresenter(view, presenter);
-		return null;
+		mvpBinding = new MVPBindingImpl();
+		mvpBinding.setModel(model);
+		mvpBinding.setPresenter(presenter);
+		mvpBinding.setView(view);
+		return mvpBinding;
 	}
 
 	@Override
@@ -49,9 +56,9 @@ public class AppControllerReflect implements AppController {
 		GWT.log("Bind View :" + view.getClass().getName().toString()
 				+ " with model :" + model.getClass().getName().toString());
 
-//		mvpBinding = new MVPBindingImpl();
-//		mvpBinding.setView(view);
-//		mvpBinding.setModel(model);
+		mvpBinding = new MVPBindingImpl();
+		mvpBinding.setView(view);
+		mvpBinding.setModel(model);
 
 		if (modelViewInfoMap.get(view.getClass().toString()) == null) {
 			processView(view.getClass());
@@ -88,7 +95,7 @@ public class AppControllerReflect implements AppController {
 		
 		GWT.log("Exit Bind View :" + view.getClass().getName().toString()
 				+ " with model :" + model.getClass().getName().toString());
-		return null;
+		return mvpBinding;
 	}
 
 	@Override
@@ -101,9 +108,9 @@ public class AppControllerReflect implements AppController {
 				+ " with presenter :"
 				+ presenter.getClass().getName().toString());
 
-		// mvpBinding = new MVPBindingImpl();
-		// mvpBinding.setView(view);
-		// mvpBinding.setPresenter(presenter);
+		 mvpBinding = new MVPBindingImpl();
+		 mvpBinding.setView(view);
+		 mvpBinding.setPresenter(presenter);
 
 		if (actionInfoMap.get(view.getClass().toString()) == null) {
 			processView(view.getClass());
@@ -140,7 +147,7 @@ public class AppControllerReflect implements AppController {
 		GWT.log(" Exit Bind View :" + view.getClass().getName().toString()
 				+ " with presenter :"
 				+ presenter.getClass().getName().toString());
-		return null;
+		return mvpBinding;
 	}
 
 	@Override
@@ -378,5 +385,11 @@ public class AppControllerReflect implements AppController {
 	public void setModelViewInfoMap(Map<String, ModelViewInfo> modelViewInfoMap) {
 		this.modelViewInfoMap = modelViewInfoMap;
 	}
+
+	public MVPBinding getMvpBinding() {
+		return mvpBinding;
+	}
+	
+	
 
 }

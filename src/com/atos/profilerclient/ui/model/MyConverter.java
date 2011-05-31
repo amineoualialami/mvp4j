@@ -17,7 +17,7 @@ import org.mvp4j.Converter;
 public class MyConverter implements Converter {
 
 	@Override
-	public Object convertComponentToModel(Class<?> type, Object value) {
+	public Object convertComponentToModel(Object type, Object value) {
 		
 		DateFormat formater=new SimpleDateFormat("dd-mm-yyyy");
 		Date dateformat = null;

@@ -79,7 +79,7 @@ public class AppControllerReflect implements AppController {
 			ModelComponent componentModel = (ModelComponent) constructor
 					.newInstance();
 			componentModel.initModelComponent(new ModelBindingImpl(view, model,
-					modelInfo));
+					modelInfo,mvpBinding));
 			modelInfo.setComponentModel(componentModel);
 			componentModel.bind();
 

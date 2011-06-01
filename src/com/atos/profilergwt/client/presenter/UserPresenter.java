@@ -28,8 +28,9 @@ public class UserPresenter implements Reflection{
 		System.out.println("action1");
 		final User user = new User();
 
-		AsyncCallback callback = new AsyncCallback() {
+		final AsyncCallback callback = new AsyncCallback() {
 			public void onSuccess(Object result) {
+				System.out.println("init");
 				initTableValues();
 			}
 
@@ -39,7 +40,11 @@ public class UserPresenter implements Reflection{
 
 		AsyncCallback callback2 = new AsyncCallback() {
 			public void onSuccess(Object result) {
+				Profil profil = (Profil) result;
+				System.out.println("Profil name : "+profil.getName());
+				
 				user.setProfil((Profil) result);
+				getService().addUser(user, callback);
 			}
 
 			public void onFailure(Throwable caught) {
@@ -53,14 +58,14 @@ public class UserPresenter implements Reflection{
 		user.setName(userModel.getName());
 		user.setPhone(userModel.getPhone());
 		user.setMail(userModel.getMail());
-		
+		userView.getProfilsListBox().getSelectedIndex();
 
 		getService().getProfilByName(
 				userView.getProfilsListBox().getItemText(
 						userView.getProfilsListBox().getSelectedIndex()),
 				callback2);
 
-		getService().addUser(user, callback);
+		
 		
 		
 		
@@ -83,8 +88,7 @@ public class UserPresenter implements Reflection{
 				int i = 1;
 				for (User user : listUsers) {
 					userView.getFlexTable().setText(i, 0, user.getName());
-					// getTableRows().setText(i, 1,
-					// user.getProfil().toString());
+					userView.getFlexTable().setText(i, 1,user.getProfil().toString());
 					userView.getFlexTable().setText(i, 2, user.getPhone() + "");
 					userView.getFlexTable().setText(i, 3, user.getMail());
 					i++;

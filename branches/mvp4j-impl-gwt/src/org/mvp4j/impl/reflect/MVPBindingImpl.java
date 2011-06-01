@@ -3,6 +3,7 @@ package org.mvp4j.impl.reflect;
 import java.util.List;
 import java.util.Map;
 
+import org.mvp4j.AppController;
 import org.mvp4j.Converter;
 import org.mvp4j.adapter.MVPBinding;
 import org.mvp4j.adapter.ModelBinding;
@@ -21,6 +22,7 @@ public class MVPBindingImpl implements MVPBinding {
 
 	public static final Converter DEFAULT_CONVERTER = new DefaultConverter();
 	private Converter globalConverter = DEFAULT_CONVERTER;
+	
 
 	@Override
 	public Converter getGlobalConverter() {
@@ -111,5 +113,8 @@ public class MVPBindingImpl implements MVPBinding {
 	public void setView(Object view) {
 		this.view = view;
 	}
+
+	
+	
 
 }

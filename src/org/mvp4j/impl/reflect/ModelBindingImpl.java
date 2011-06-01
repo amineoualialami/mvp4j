@@ -7,11 +7,9 @@ import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.exception.PropertyNotFoundException;
 import org.mvp4j.exception.PropertyNotInitializedException;
 
-import com.google.gwt.core.client.GWT;
 import com.gwtent.reflection.client.ClassType;
 import com.gwtent.reflection.client.Field;
 import com.gwtent.reflection.client.Method;
-import com.gwtent.reflection.client.Type;
 import com.gwtent.reflection.client.TypeOracle;
 
 

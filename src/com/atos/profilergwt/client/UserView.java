@@ -18,6 +18,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -40,21 +41,34 @@ public class UserView implements Reflection {
 	@Model(property = "phone")
 	private TextBox phoneTextBox;
 	
-	@Model(initProperty="profil1" , property="profil")
+//	@Model(initProperty="profil1" , property="profil")
 	private RadioButton profilRadioButton1;
 
-	@Model(initProperty="profil2", property="profil")
+//	@Model(initProperty="profil2", property="profil")
 	private RadioButton profilRadioButton2;
 	
 	
 	private Label nameLabel, mailLabel, phoneLabel, listBoxProfilsLabel;
 	
+	@Model(initProperty="profils",property="profil")
 	private ListBox profilsListBox;
 	
 	private FlexTable flexTable;
 
-	@Actions( { @Action(name="action1"), @Action(name="action2")})
+//	@Actions( { @Action(name="action1"), @Action(name="action2")})
+	@Action(name="action1")
 	private Button ajouterButton;
+	
+	
+	@Model(property="profils2", initProperty="profil1")
+	private CheckBox profil1CheckBox;
+	
+	@Model(property="profils2",initProperty="profil2")
+	private CheckBox profil2CheckBox;
+	
+	@Action(name="action2")
+	private Button testButton;
+	
 
 	public UserView() {
 
@@ -72,7 +86,12 @@ public class UserView implements Reflection {
 		formulairePanel.add(getMailTextBox(), 50, 150);
 		formulairePanel.add(getProfilRadioButton1(),30,200);
 		formulairePanel.add(getProfilRadioButton2(),30,250);
-		formulairePanel.add(getAjouterButton(), 50, 300);
+		formulairePanel.add(getProfil1CheckBox(),30,300);
+		formulairePanel.add(getProfil2CheckBox(),30,350);
+		formulairePanel.add(getAjouterButton(), 50, 400);
+		formulairePanel.add(getTestButton(), 50, 450);
+		
+		
 		
 		
 		formulairePanel.add(getVerticalPanel(), 300, 0);
@@ -107,31 +126,31 @@ public class UserView implements Reflection {
 		if (profilsListBox == null) {
 			profilsListBox = new ListBox();
 			profilsListBox.setWidth("170px");
-			AsyncCallback callback = new AsyncCallback() {
-				public void onSuccess(Object result) {
-					List<Profil> listProfils = (List<Profil>) result;
-					for (Profil profil : listProfils) {
-						profilsListBox.addItem(profil.toString());
-					}
-				}
-
-				public void onFailure(Throwable caught) {
-					// do some UI stuff to show failure
-				}
-			};
-
-			getService().getProfils(callback);
-
-			profilsListBox.addChangeHandler(new ChangeHandler() {
-
-				@Override
-				public void onChange(ChangeEvent event) {
-					Window.alert("Vous avez choisis : "
-							+ profilsListBox.getItemText(profilsListBox
-									.getSelectedIndex()));
-
-				}
-			});
+//			AsyncCallback callback = new AsyncCallback() {
+//				public void onSuccess(Object result) {
+//					List<Profil> listProfils = (List<Profil>) result;
+//					for (Profil profil : listProfils) {
+//						profilsListBox.addItem(profil.toString());
+//					}
+//				}
+//
+//				public void onFailure(Throwable caught) {
+//					// do some UI stuff to show failure
+//				}
+//			};
+//
+//			getService().getProfils(callback);
+//
+//			profilsListBox.addChangeHandler(new ChangeHandler() {
+//
+//				@Override
+//				public void onChange(ChangeEvent event) {
+//					Window.alert("Vous avez choisis : "
+//							+ profilsListBox.getItemText(profilsListBox
+//									.getSelectedIndex()));
+//
+//				}
+//			});
 		}
 		return profilsListBox;
 	}
@@ -267,6 +286,33 @@ public class UserView implements Reflection {
 		endpoint.setServiceEntryPoint(moduleRelativeURL);
 		return service;
 	}
+
+	public CheckBox getProfil1CheckBox() {
+		if(profil1CheckBox==null){
+			profil1CheckBox = new CheckBox("profil 1");
+		}
+		return profil1CheckBox;
+	}
+
+	public CheckBox getProfil2CheckBox() {
+		if(profil2CheckBox==null){
+			profil2CheckBox = new CheckBox("profil 2");
+		}
+		return profil2CheckBox;
+	}
+
+	public Button getTestButton() {
+		if(testButton==null){
+			testButton = new Button();
+			testButton.setText("Test CheckBox");
+			testButton.setSize("100px", "60px");
+		}
+		return testButton;
+	}
+	
+	
+	
+	
 	
 	
 

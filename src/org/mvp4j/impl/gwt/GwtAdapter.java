@@ -5,6 +5,7 @@ import org.mvp4j.adapter.MVPAdapter;
 import org.mvp4j.adapter.ModelComponent;
 
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
@@ -31,6 +32,9 @@ public class GwtAdapter implements MVPAdapter{
 		}
 		if(componentKlass==ListBox.class){
 			return ListBoxModelComponent.class;
+		}
+		if(componentKlass==CheckBox.class){
+			return CheckBoxModelComponent.class;
 		}
 		return null;
 	}

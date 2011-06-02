@@ -18,6 +18,9 @@ public class GwtAdapter implements MVPAdapter{
 		if(componentKlass.equals(Button.class)){
 			return ButtonActionComponent.class;
 		}
+		if(componentKlass.equals(ListBox.class)){
+			return ListBoxActionComponent.class;
+		}
 		return null;
 	}
 

@@ -3,6 +3,7 @@ package com.atos.profilergwt.client;
 import java.util.List;
 
 import org.mvp4j.annotation.Action;
+import org.mvp4j.annotation.Actions;
 import org.mvp4j.annotation.MVP;
 import org.mvp4j.annotation.Model;
 
@@ -20,6 +21,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -38,17 +40,26 @@ public class UserView implements Reflection {
 	@Model(property = "phone")
 	private TextBox phoneTextBox;
 	
+	@Model(initProperty="profil1" , property="profil")
+	private RadioButton profilRadioButton1;
+
+	@Model(initProperty="profil2", property="profil")
+	private RadioButton profilRadioButton2;
+	
+	
 	private Label nameLabel, mailLabel, phoneLabel, listBoxProfilsLabel;
 	
 	private ListBox profilsListBox;
 	
 	private FlexTable flexTable;
 
-	@Action(name = "action1")
+	@Actions( { @Action(name="action1"), @Action(name="action2")})
 	private Button ajouterButton;
 
 	public UserView() {
 
+		
+		
 		formulairePanel = new AbsolutePanel();
 		formulairePanel.setSize("700px", "700px");
 		formulairePanel.add(getNameLabel(), 0, 0);
@@ -59,8 +70,13 @@ public class UserView implements Reflection {
 		formulairePanel.add(getPhoneTextBox(), 50, 100);
 		formulairePanel.add(getMailLabel(), 0, 150);
 		formulairePanel.add(getMailTextBox(), 50, 150);
-		formulairePanel.add(getAjouterButton(), 50, 200);
+		formulairePanel.add(getProfilRadioButton1(),30,200);
+		formulairePanel.add(getProfilRadioButton2(),30,250);
+		formulairePanel.add(getAjouterButton(), 50, 300);
+		
+		
 		formulairePanel.add(getVerticalPanel(), 300, 0);
+		
 
 	}
 	
@@ -224,6 +240,23 @@ public class UserView implements Reflection {
 	public void setFormulairePanel(AbsolutePanel formulairePanel) {
 		this.formulairePanel = formulairePanel;
 	}
+	
+
+	public RadioButton getProfilRadioButton1() {
+		
+		if(profilRadioButton1==null){
+			profilRadioButton1 = new RadioButton("myRadioGroup","Profil 1");
+		}
+		return profilRadioButton1;
+	}
+
+
+	public RadioButton getProfilRadioButton2() {
+		if(profilRadioButton2==null){
+			profilRadioButton2 = new RadioButton("myRadioGroup","Profil 2");
+		}
+		return profilRadioButton2;
+	}
 
 
 	public static UserServicesAsync getService() {
@@ -234,6 +267,8 @@ public class UserView implements Reflection {
 		endpoint.setServiceEntryPoint(moduleRelativeURL);
 		return service;
 	}
+	
+	
 
 	
 	

@@ -5,6 +5,7 @@ import org.mvp4j.adapter.MVPAdapter;
 import org.mvp4j.adapter.ModelComponent;
 
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class GwtAdapter implements MVPAdapter{
@@ -23,6 +24,9 @@ public class GwtAdapter implements MVPAdapter{
 			Class<?> componentKlass) {
 		if(componentKlass==TextBox.class){
 			return TextBoxModelComponent.class;
+		}
+		if(componentKlass==RadioButton.class){
+			return RadioButtonModelComponent.class;
 		}
 		return null;
 	}

@@ -1,6 +1,7 @@
 package com.atos.profilergwt.client;
 
 import org.mvp4j.AppController;
+import org.mvp4j.impl.reflect.AppControllerReflect;
 import org.mvp4j.impl.reflect.AppControllerReflectFactory;
 
 import com.atos.profilergwt.client.UserView;
@@ -23,10 +24,12 @@ public class ProfilerGWT implements EntryPoint {
 		Window.setMargin("300px");
 		UserView view = new UserView();
 		UserModel model = new UserModel();
+		model.init();
 		UserPresenter presenter = new UserPresenter(view,model);
         
-		AppController appController = AppControllerReflectFactory.getAppControllerInstance();
+		AppControllerReflect appController = AppControllerReflectFactory.getAppControllerInstance();
 		appController.bind(view, model, presenter );
+		
 		RootPanel.get().add(view.getFormulairePanel());
 	}
 }

@@ -6,29 +6,27 @@ import com.atos.profilergwt.client.UserServices;
 import com.atos.profilergwt.client.UserServicesAsync;
 import com.atos.profilergwt.client.UserView;
 import com.atos.profilergwt.client.model.UserModel;
-import com.atos.profilergwt.shared.Profil;
 import com.atos.profilergwt.shared.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.gwtent.reflection.client.Reflection;
 
-public class UserPresenter implements Reflection{
-	
+public class UserPresenter implements Reflection {
+
 	private UserView userView;
 	private UserModel userModel;
-	
-	
+
 	public UserPresenter(UserView userView, UserModel userModel) {
-		this.userView= userView;
-		this.userModel=userModel;
+		this.userView = userView;
+		this.userModel = userModel;
 	}
-	
-	public void action1(){
+
+	public void action1() {
 		System.out.println("action1");
 		final User user = new User();
 
-		final AsyncCallback callback = new AsyncCallback() {
+		AsyncCallback callback = new AsyncCallback() {
 			public void onSuccess(Object result) {
 				System.out.println("init");
 				initTableValues();
@@ -38,48 +36,23 @@ public class UserPresenter implements Reflection{
 			}
 		};
 
-		AsyncCallback callback2 = new AsyncCallback() {
-			public void onSuccess(Object result) {
-				Profil profil = (Profil) result;
-				System.out.println("Profil name : "+profil.getName());
-				
-				user.setProfil((Profil) result);
-				getService().addUser(user, callback);
-			}
-
-			public void onFailure(Throwable caught) {
-			}
-		};
-
-//		user.setName(userView.getNameTextBox().getText());
-//		user.setPhone(Integer.parseInt(userView.getPhoneTextBox().getText()));
-//		user.setMail(userView.getMailTextBox().getText());
-		
 		user.setName(userModel.getName());
 		user.setPhone(userModel.getPhone());
 		user.setMail(userModel.getMail());
-		userView.getProfilsListBox().getSelectedIndex();
+		user.setProfil(userModel.getProfil());
 
-		getService().getProfilByName(
-				userView.getProfilsListBox().getItemText(
-						userView.getProfilsListBox().getSelectedIndex()),
-				callback2);
+		getService().addUser(user, callback);
 
-		
-		
-		
-		
 	}
-	
-	public void action2(){
+
+	public void action2() {
 		System.out.println("action2");
 	}
-	
-	public void action3(){
+
+	public void action3() {
 		System.out.println("action3");
 	}
-	
-	
+
 	public void initTableValues() {
 
 		AsyncCallback callback = new AsyncCallback() {
@@ -88,7 +61,8 @@ public class UserPresenter implements Reflection{
 				int i = 1;
 				for (User user : listUsers) {
 					userView.getFlexTable().setText(i, 0, user.getName());
-					userView.getFlexTable().setText(i, 1,user.getProfil().toString());
+					userView.getFlexTable().setText(i, 1,
+							user.getProfil().toString());
 					userView.getFlexTable().setText(i, 2, user.getPhone() + "");
 					userView.getFlexTable().setText(i, 3, user.getMail());
 					i++;
@@ -102,8 +76,7 @@ public class UserPresenter implements Reflection{
 		getService().getUsers(callback);
 
 	}
-	
-	
+
 	public static UserServicesAsync getService() {
 		// Create the client proxy. Note that although you are creating the
 		// service interface proper, you cast the result to the asynchronous

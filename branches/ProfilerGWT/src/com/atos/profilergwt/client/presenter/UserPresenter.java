@@ -6,6 +6,7 @@ import com.atos.profilergwt.client.UserServices;
 import com.atos.profilergwt.client.UserServicesAsync;
 import com.atos.profilergwt.client.UserView;
 import com.atos.profilergwt.client.model.UserModel;
+import com.atos.profilergwt.shared.Profil;
 import com.atos.profilergwt.shared.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -47,6 +48,11 @@ public class UserPresenter implements Reflection {
 
 	public void action2() {
 		System.out.println("action2");
+		 List<Profil> list = userModel.getProfils2();
+		 System.out.println("CHECKBOX : "+userModel.getProfils2().size());
+		 for (Profil profilDTO : list) {
+		 System.out.println("CHECKBOX :"+ profilDTO.getName());
+		 }
 	}
 
 	public void action3() {

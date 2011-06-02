@@ -1,6 +1,7 @@
 package com.atos.profilergwt.client.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.atos.profilergwt.client.UserServices;
@@ -33,6 +34,8 @@ public class UserModel implements Serializable ,Reflection{
 	
 	private List<Profil> profils;
 	
+	private List<Profil> profils2;
+	
 	
 	public void init(){
 		AsyncCallback callback = new AsyncCallback() {
@@ -46,6 +49,7 @@ public class UserModel implements Serializable ,Reflection{
 			@Override
 			public void onSuccess(Object result) {
 				List<Profil> listProfils = (List<Profil>) result;
+				//setProfils(listProfils);
 				profil1 = listProfils.get(0);
 				profil2 = listProfils.get(1);
 				setProfil1(profil1);
@@ -110,6 +114,16 @@ public class UserModel implements Serializable ,Reflection{
 
 
 	public List<Profil> getProfils() {
+		profils = new ArrayList<Profil>();
+		Profil profil1 = new Profil();
+		profil1.setId(1);
+		profil1.setName("profil 1");
+		Profil profil2 = new Profil();
+		profil2.setId(2);
+		profil2.setName("profil 2");
+		profils.add(profil1);
+		profils.add(profil2);
+		
 		return profils;
 	}
 
@@ -153,6 +167,20 @@ public class UserModel implements Serializable ,Reflection{
 		endpoint.setServiceEntryPoint(moduleRelativeURL);
 		return service;
 	}
+
+
+
+	public List<Profil> getProfils2() {
+		return profils2;
+	}
+
+
+
+	public void setProfils2(List<Profil> profils2) {
+		this.profils2 = profils2;
+	}
+	
+	
 
 
 	

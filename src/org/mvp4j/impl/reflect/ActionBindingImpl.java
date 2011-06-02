@@ -5,7 +5,9 @@ import org.mvp4j.adapter.ActionBinding;
 import org.mvp4j.annotation.Action;
 
 import com.google.gwt.core.client.GWT;
+import com.gwtent.reflection.client.ClassType;
 import com.gwtent.reflection.client.Method;
+import com.gwtent.reflection.client.TypeOracle;
 
 public class ActionBindingImpl implements ActionBinding {
 
@@ -55,7 +57,8 @@ public class ActionBindingImpl implements ActionBinding {
 			method.invoke(presenter);
 			}                               
 			else if(method.getParameters().length==1){
-				if(method.getParameters()[0].getType().equals(eventObject.getClass())){
+				ClassType classType=TypeOracle.Instance.getClassType(eventObject.getClass());
+				if(method.getParameters()[0].getType().equals(classType)){
 				method.invoke(presenter,eventObject);
 				}
 				else

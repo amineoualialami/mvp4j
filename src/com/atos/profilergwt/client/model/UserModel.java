@@ -1,8 +1,14 @@
 package com.atos.profilergwt.client.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.atos.profilergwt.client.UserServices;
+import com.atos.profilergwt.client.UserServicesAsync;
 import com.atos.profilergwt.shared.Profil;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.gwtent.reflection.client.Reflection;
 
 
@@ -20,6 +26,37 @@ public class UserModel implements Serializable ,Reflection{
 	private int phone;
 
 	private Profil profil;
+	
+	private Profil profil1;
+	
+	private Profil profil2;
+	
+	private List<Profil> profils;
+	
+	
+	public void init(){
+		AsyncCallback callback = new AsyncCallback() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Object result) {
+				List<Profil> listProfils = (List<Profil>) result;
+				profil1 = listProfils.get(0);
+				profil2 = listProfils.get(1);
+				setProfil1(profil1);
+				setProfil2(profil2);
+			}
+		};
+		getService().getProfils(callback);
+		
+		
+		
+	}
 
 
 
@@ -71,6 +108,51 @@ public class UserModel implements Serializable ,Reflection{
 	}
 
 
+
+	public List<Profil> getProfils() {
+		return profils;
+	}
+
+
+
+	public void setProfils(List<Profil> profils) {
+		this.profils = profils;
+	}
+
+
+
+	public Profil getProfil1() {
+		return profil1;
+	}
+
+
+
+	public void setProfil1(Profil profil1) {
+		this.profil1 = profil1;
+	}
+
+
+
+	public Profil getProfil2() {
+		return profil2;
+	}
+
+
+
+	public void setProfil2(Profil profil2) {
+		this.profil2 = profil2;
+	}
+	
+	
+
+	public static UserServicesAsync getService() {
+		UserServicesAsync service = (UserServicesAsync) GWT
+				.create(UserServices.class);
+		ServiceDefTarget endpoint = (ServiceDefTarget) service;
+		String moduleRelativeURL = GWT.getModuleBaseURL() + "user";
+		endpoint.setServiceEntryPoint(moduleRelativeURL);
+		return service;
+	}
 
 
 	

@@ -37,7 +37,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JTableActionComponent extends ActionComponent {
 
-	private ActionBinding actionBinding;
 	private JTable jtable;
 	private static final Class<?> DEFAULT_EVENT_TYPE = MouseListener.class;
 	private MouseListener mouseListener;
@@ -414,8 +413,8 @@ public class JTableActionComponent extends ActionComponent {
 	}
 
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
-		this.actionBinding=actionBinding;
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		jtable=(JTable)actionBinding.getComponent();
 		
 	}

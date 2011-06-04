@@ -41,7 +41,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JTextActionComponent extends ActionComponent{
 
-	private ActionBinding actionBinding;
 	private JTextComponent jtext;
 	private static final Class<?> DEFAULT_EVENT_TYPE = FocusListener.class;
 
@@ -425,8 +424,8 @@ public class JTextActionComponent extends ActionComponent{
 	}
 
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
-		this.actionBinding=actionBinding;
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		jtext=(JTextComponent)actionBinding.getComponent();
 		
 	}

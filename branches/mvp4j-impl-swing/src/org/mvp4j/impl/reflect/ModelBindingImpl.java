@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 import org.mvp4j.Converter;
 import org.mvp4j.adapter.MVPAdapter;
+import org.mvp4j.adapter.MVPBinding;
 import org.mvp4j.adapter.ModelBinding;
 import org.mvp4j.exception.PropertyNotFoundException;
 import org.mvp4j.exception.PropertyNotInitializedException;
@@ -18,13 +19,15 @@ public class ModelBindingImpl implements ModelBinding {
 	private Object model;
 	private Object view;
 	private Converter converter;
+	private MVPBinding mvpBinding;
 	private Logger logger = LoggerUtils.getLogger();
 
-	public ModelBindingImpl(Object view, Object model, ModelInfo modelInfo) {
+	public ModelBindingImpl(Object view, Object model, ModelInfo modelInfo,MVPBinding mvpBinding) {
 
 		this.model = model;
 		this.view = view;
 		this.modelInfo = modelInfo;
+		this.mvpBinding=mvpBinding;
 
 	}
 
@@ -142,14 +145,16 @@ public class ModelBindingImpl implements ModelBinding {
 
 	private Converter getConverter() {
 		if(modelInfo.getComponentModel().getConverter()==null){
-			AppControllerReflect appController = AppControllerReflectFactory
-			.getAppControllerInstance();
-			converter = appController.getMvpBinding().getGlobalConverter();
+			converter = getMvpBinding().getGlobalConverter();
 		}
 		else{
 			converter=modelInfo.getComponentModel().getConverter();
 		}
 		return converter;
+	}
+
+	public MVPBinding getMvpBinding() {
+		return mvpBinding;
 	}
 
 	

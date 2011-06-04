@@ -39,7 +39,6 @@ public class JMenuItemActionComponent extends ActionComponent {
 	
 	
 	private JMenuItem menuItem;
-	private ActionBinding actionBinding;
 	private static final Class<?> DEFAULT_EVENT_TYPE = ActionListener.class;
 	private ActionListener listener;
 	private MouseListener mouseListener;
@@ -432,10 +431,9 @@ public class JMenuItemActionComponent extends ActionComponent {
 	}
 
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		this.menuItem =  (JMenuItem) actionBinding.getComponent();
-		this.actionBinding = actionBinding;
-		
 	}
 
 }

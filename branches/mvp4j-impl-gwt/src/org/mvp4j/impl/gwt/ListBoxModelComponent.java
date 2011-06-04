@@ -15,14 +15,13 @@ import com.gwtent.reflection.client.Reflection;
 
 public class ListBoxModelComponent extends ModelComponent implements Reflection{
 	
-	private ModelBinding modelBinding;
 	private ListBox listBox;
 	private List<Object> initValues;
 	private ChangeHandler changeHandler;
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
-		this.modelBinding=modelBinding;
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		this.listBox=(ListBox) modelBinding.getComponent();
 		try{
 		initValues=(List<Object>) modelBinding.getInitPropertyValue();}

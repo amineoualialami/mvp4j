@@ -17,7 +17,6 @@ public class JTextModelComponent extends ModelComponent {
 	private JTextComponent textField;
 	private KeyListener keyListener;
 	private FocusListener focusListener;
-	private ModelBinding modelBinding;
 	private Converter converter;
 	private Logger logger = LoggerUtils.getLogger();
 
@@ -91,9 +90,9 @@ public class JTextModelComponent extends ModelComponent {
 	}
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		textField = (JTextComponent) modelBinding.getComponent();
-		this.modelBinding = modelBinding;
 		
 	}
 

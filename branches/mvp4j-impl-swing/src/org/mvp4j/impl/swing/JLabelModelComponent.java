@@ -9,7 +9,6 @@ import org.mvp4j.adapter.ModelComponent;
 public class JLabelModelComponent extends ModelComponent{
 
 	  
-	private ModelBinding modelBinding;
 	private JLabel jlabel;
 
 	
@@ -45,9 +44,9 @@ public class JLabelModelComponent extends ModelComponent{
 	}
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		jlabel=(JLabel)modelBinding.getComponent();
-		this.modelBinding=modelBinding;
 	}
 
 

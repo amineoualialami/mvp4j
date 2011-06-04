@@ -41,7 +41,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JComboBoxActionComponent extends ActionComponent{
 
-	private ActionBinding actionBinding;
 	private JComboBox jcombobox;
 	private static final Class<?> DEFAULT_EVENT_TYPE = ItemListener.class;
 	private ItemListener itemListener;
@@ -485,8 +484,8 @@ public class JComboBoxActionComponent extends ActionComponent{
 	}
 
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
-		this.actionBinding=actionBinding;
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		jcombobox=(JComboBox)actionBinding.getComponent();
 		
 	}

@@ -40,7 +40,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JListActionComponent extends ActionComponent {
 
-	private ActionBinding actionBinding;
 	private JList jlist;
 	private static final Class<?> DEFAULT_EVENT_TYPE = ListSelectionListener.class;
 	private MouseListener mouseListener;
@@ -443,8 +442,8 @@ public class JListActionComponent extends ActionComponent {
 	}
 
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
-		this.actionBinding = actionBinding;
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		jlist = (JList) actionBinding.getComponent();
 
 	}

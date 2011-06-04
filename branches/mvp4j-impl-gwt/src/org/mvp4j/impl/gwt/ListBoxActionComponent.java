@@ -18,108 +18,112 @@ import com.google.gwt.event.dom.client.GestureChangeHandler;
 import com.google.gwt.user.client.ui.ListBox;
 import com.gwtent.reflection.client.Reflection;
 
-public class ListBoxActionComponent extends ActionComponent implements Reflection{
-	public static final Class<?> DEFAULT_EVENT_TYPE=ChangeHandler.class;
+public class ListBoxActionComponent extends ActionComponent implements
+		Reflection {
+	public static final Class<?> DEFAULT_EVENT_TYPE = ChangeHandler.class;
 	private String eventAction;
-	private ActionBinding actionBinding;
 	private ListBox listBox;
 	private ChangeHandler changeHandler;
 	private BlurHandler blurHandler;
-    private ClickHandler clickHandler;
-    private DoubleClickHandler doubleClickHandler;
-    private FocusHandler focusHandler;
-    private GestureChangeHandler gestureChangeHandler;
+	private ClickHandler clickHandler;
+	private DoubleClickHandler doubleClickHandler;
+	private FocusHandler focusHandler;
+	private GestureChangeHandler gestureChangeHandler;
+
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
-		this.actionBinding=actionBinding;
-		listBox=(ListBox)actionBinding.getComponent();
-		
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
+		listBox = (ListBox) actionBinding.getComponent();
+
 	}
 
 	@Override
 	public void bind() {
-		Class<?> eventType=actionBinding.getEventType();
-		eventAction=actionBinding.getEventAction();
-		
-		if(eventType==null){
-			eventType=DEFAULT_EVENT_TYPE;
+		Class<?> eventType = actionBinding.getEventType();
+		eventAction = actionBinding.getEventAction();
+
+		if (eventType == null) {
+			eventType = DEFAULT_EVENT_TYPE;
 		}
-		if(eventType==ChangeHandler.class){
-			changeHandler=new ChangeHandler() {
-				
+		if (eventType == ChangeHandler.class) {
+			changeHandler = new ChangeHandler() {
+
 				@Override
 				public void onChange(ChangeEvent event) {
-					if(eventAction.equals("") || eventAction.equals("onChange")){
+					if (eventAction.equals("")
+							|| eventAction.equals("onChange")) {
 						actionBinding.callAction(event);
 					}
-					
+
 				}
 			};
 			listBox.addChangeHandler(changeHandler);
 		}
-		if(eventType==BlurHandler.class){
-			blurHandler=new BlurHandler(){
+		if (eventType == BlurHandler.class) {
+			blurHandler = new BlurHandler() {
 
 				@Override
 				public void onBlur(BlurEvent event) {
-					if(eventAction.equals("")||eventAction.equals("onBlur")){
-						actionBinding.callAction(event);					}
-					
-								
-			}
-			
+					if (eventAction.equals("") || eventAction.equals("onBlur")) {
+						actionBinding.callAction(event);
+					}
+
+				}
+
 			};
 			listBox.addBlurHandler(blurHandler);
 		}
-		if(eventType==ClickHandler.class){
-			clickHandler=new ClickHandler() {
-				
+		if (eventType == ClickHandler.class) {
+			clickHandler = new ClickHandler() {
+
 				@Override
 				public void onClick(ClickEvent event) {
-					
-					if(eventAction.equals("") || eventAction.equals("onClick")){
+
+					if (eventAction.equals("") || eventAction.equals("onClick")) {
 						actionBinding.callAction(event);
 					}
 				}
 			};
 			listBox.addClickHandler(clickHandler);
 		}
-		if(eventType==DoubleClickHandler.class){
-			doubleClickHandler=new DoubleClickHandler() {
-				
+		if (eventType == DoubleClickHandler.class) {
+			doubleClickHandler = new DoubleClickHandler() {
+
 				@Override
 				public void onDoubleClick(DoubleClickEvent event) {
-					if(eventAction.equals("")|| eventAction.equals("onDoubleClick")){
+					if (eventAction.equals("")
+							|| eventAction.equals("onDoubleClick")) {
 						actionBinding.callAction(event);
 					}
-					
+
 				}
 			};
 			listBox.addDoubleClickHandler(doubleClickHandler);
 		}
-		
-		if(eventType==FocusHandler.class){
-			focusHandler=new FocusHandler() {
-				
+
+		if (eventType == FocusHandler.class) {
+			focusHandler = new FocusHandler() {
+
 				@Override
 				public void onFocus(FocusEvent event) {
-				
-				if(eventAction.equals("")|| eventAction.equals("onFocus")){
-					actionBinding.callAction(event);
-				}
+
+					if (eventAction.equals("") || eventAction.equals("onFocus")) {
+						actionBinding.callAction(event);
+					}
 				}
 			};
 			listBox.addFocusHandler(focusHandler);
 		}
-		if(eventType==GestureChangeHandler.class){
-			gestureChangeHandler=new GestureChangeHandler() {
-				
+		if (eventType == GestureChangeHandler.class) {
+			gestureChangeHandler = new GestureChangeHandler() {
+
 				@Override
 				public void onGestureChange(GestureChangeEvent event) {
-					if(eventAction.equals("")||eventAction.equals("onGestureChange")){
+					if (eventAction.equals("")
+							|| eventAction.equals("onGestureChange")) {
 						actionBinding.callAction(event);
 					}
-					
+
 				}
 			};
 			listBox.addGestureChangeHandler(gestureChangeHandler);
@@ -128,8 +132,7 @@ public class ListBoxActionComponent extends ActionComponent implements Reflectio
 
 	@Override
 	public void unbind() {
-		
-		
+
 	}
 
 }

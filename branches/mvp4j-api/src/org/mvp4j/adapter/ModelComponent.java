@@ -55,14 +55,16 @@ public abstract class  ModelComponent {
 	 * This field is useful to interact with the model and get all binding informations
 	 * between component and model
 	 */
-	private ModelBinding modelBinding;	
+	protected ModelBinding modelBinding;	
 	
 	
 	/**
 	 * initialize the modelComponent with the necessary parameters  
 	 * @param modelBinding
 	 */
-	public abstract void initModelComponent(ModelBinding modelBinding);
+	public  void init(ModelBinding modelBinding){
+		this.modelBinding=modelBinding;
+	}
 
 	/**
 	 * Bind the current component with the current model

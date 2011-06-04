@@ -13,7 +13,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JRadioButtonModelComponent extends ModelComponent {
 
-	private ModelBinding modelBinding;
 	private ActionListener actionListerner;
 	private JRadioButton radionButton;
 	private Logger logger = LoggerUtils.getLogger();
@@ -62,8 +61,8 @@ public class JRadioButtonModelComponent extends ModelComponent {
 	}
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
-		this.modelBinding = modelBinding;
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		radionButton = (JRadioButton) modelBinding.getComponent();
 		
 	}

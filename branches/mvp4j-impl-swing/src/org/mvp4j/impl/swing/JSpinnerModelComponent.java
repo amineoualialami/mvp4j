@@ -14,7 +14,6 @@ import org.mvp4j.adapter.ModelComponent;
 
 public class JSpinnerModelComponent extends ModelComponent {
 
-	private ModelBinding modelBinding;
 	private JSpinner jspinner;
 	private ChangeListener changeListener;
 	private List<Object> initValues;
@@ -76,9 +75,9 @@ public class JSpinnerModelComponent extends ModelComponent {
 	}
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		jspinner=(JSpinner)modelBinding.getComponent();
-		this.modelBinding=modelBinding;
 		
 	}
 

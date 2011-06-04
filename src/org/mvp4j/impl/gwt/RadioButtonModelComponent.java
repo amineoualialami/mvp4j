@@ -15,11 +15,10 @@ public class RadioButtonModelComponent extends ModelComponent implements
 
 	private RadioButton radioButton;
 	private Converter converter;
-	private ModelBinding modelBinding;
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
-		this.modelBinding=modelBinding;
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		radioButton= (RadioButton) modelBinding.getComponent();
 
 	}

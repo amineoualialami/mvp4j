@@ -56,6 +56,7 @@ public class MVPBindingImpl implements MVPBinding {
 //							.newInstance(new ModelBindingImpl(getView(), getModel(),
 //									modelInfo));
 					ModelComponent componentModel = (ModelComponent) constructor.newInstance();
+					componentModel.init(new ModelBindingImpl(getView(), getModel(), modelInfo, this));
 					modelInfo.setComponentModel(componentModel);
 					appController.refreshView(getView());
 				}

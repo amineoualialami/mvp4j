@@ -78,7 +78,7 @@ public class AppControllerReflect implements AppController {
 
 			ModelComponent componentModel = (ModelComponent) constructor
 					.newInstance();
-			componentModel.initModelComponent(new ModelBindingImpl(view, model,
+			componentModel.init(new ModelBindingImpl(view, model,
 					modelInfo,mvpBinding));
 			modelInfo.setComponentModel(componentModel);
 			componentModel.bind();
@@ -136,7 +136,7 @@ public class AppControllerReflect implements AppController {
 			// actionInfo));
 			ActionComponent componentAction = (ActionComponent) constructor
 					.newInstance();
-			componentAction.initActionComponent(new ActionBindingImpl(view,
+			componentAction.init(new ActionBindingImpl(view,
 					presenter, actionInfo));
 			componentAction.bind();
 

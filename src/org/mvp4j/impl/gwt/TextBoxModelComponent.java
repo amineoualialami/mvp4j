@@ -13,14 +13,13 @@ import com.gwtent.reflection.client.Reflection;
 public class TextBoxModelComponent extends ModelComponent implements Reflection{
 
 	private TextBox textBox;
-	private ModelBinding modelBinding;
 	private Converter converter;
 	private BlurHandler blurHandler;
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		textBox = (TextBox) modelBinding.getComponent();
-		this.modelBinding = modelBinding;
 	}
 
 	@Override

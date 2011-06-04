@@ -16,13 +16,12 @@ public class CheckBoxModelComponent extends ModelComponent implements Reflection
 	
 	private CheckBox checkBox;
 	private Converter converter;
-	private ModelBinding modelBinding;
 	
 	private static Collection list;
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
-		this.modelBinding=modelBinding;
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		checkBox = (CheckBox) modelBinding.getComponent();
 		
 	}

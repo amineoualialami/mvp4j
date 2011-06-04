@@ -16,20 +16,19 @@ public class ButtonActionComponent extends ActionComponent implements Reflection
 	private ClickHandler clickHandler;
 	
 	private Button button;
-	private ActionBinding actionbinding;
 	private String eventAction;
 	
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
-		this.actionbinding=actionBinding;
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		this.button=(Button) actionBinding.getComponent();
 		
 	}
 
 	@Override
 	public void bind() {
-		Class<?> eventType = actionbinding.getEventType();
-		eventAction = actionbinding.getEventAction();
+		Class<?> eventType = actionBinding.getEventType();
+		eventAction = actionBinding.getEventAction();
 		
 		if (eventType == null) {
 			eventType = DEFAULT_EVENT_TYPE;
@@ -40,7 +39,7 @@ public class ButtonActionComponent extends ActionComponent implements Reflection
 				@Override
 				public void onClick(ClickEvent event) {
 					if(eventAction.equals("onClick") || eventAction.equals("") ){
-						actionbinding.callAction(event);
+						actionBinding.callAction(event);
 					}
 					
 				}

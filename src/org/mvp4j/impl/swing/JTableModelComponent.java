@@ -26,7 +26,6 @@ public class JTableModelComponent extends ModelComponent {
 
 	private JTable table;
 	private MouseListener mouseListener;
-	private ModelBinding modelBinding;
 	private List<Object> initValues;
 	private DefaultTableModel tableModel;
 	private Map<String, String> customizedColumns;
@@ -129,8 +128,8 @@ public class JTableModelComponent extends ModelComponent {
 	}
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
-		this.modelBinding = modelBinding;
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		table = (JTable) modelBinding.getComponent();
 		try {
 			initValues = (List<Object>) modelBinding.getInitPropertyValue();

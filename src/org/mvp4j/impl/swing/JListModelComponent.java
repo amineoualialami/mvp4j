@@ -20,7 +20,6 @@ public class JListModelComponent extends ModelComponent {
 
 	private JList list;
 	private MouseListener mouseListener;
-	private ModelBinding modelBinding;
 	private List<Object> initValues;
 	private Logger logger = LoggerUtils.getLogger();
 
@@ -91,8 +90,8 @@ public class JListModelComponent extends ModelComponent {
 	}
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
-		this.modelBinding = modelBinding;
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		list = (JList) modelBinding.getComponent();
 		
 	}

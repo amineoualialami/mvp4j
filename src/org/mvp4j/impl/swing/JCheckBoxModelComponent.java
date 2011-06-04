@@ -15,7 +15,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JCheckBoxModelComponent extends ModelComponent {
 
-	private ModelBinding modelBinding;
 	private ActionListener actionListerner;
 	private JCheckBox checkBox;
 	private Logger logger = LoggerUtils.getLogger();
@@ -85,8 +84,8 @@ public class JCheckBoxModelComponent extends ModelComponent {
 	}
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
-		this.modelBinding = modelBinding;
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		checkBox = (JCheckBox) modelBinding.getComponent();
 		
 	}

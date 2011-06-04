@@ -38,7 +38,6 @@ public class AbstractButtonActionComponent extends ActionComponent {
 
 	
 	private AbstractButton abstractButton;
-	private ActionBinding actionBinding;
 	private MouseListener mouseListener;
 	private KeyListener keyListener;
 	
@@ -431,9 +430,10 @@ public class AbstractButtonActionComponent extends ActionComponent {
 	}
 
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		this.abstractButton =  (AbstractButton) actionBinding.getComponent();
-		this.actionBinding = actionBinding;
+		
 	}
 
 }

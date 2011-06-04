@@ -16,7 +16,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JComboBoxModelComponent extends ModelComponent {
 
-	private ModelBinding modelBinding;
 	private JComboBox jcombobox;
 	private ItemListener itemlistener;
 	private List<Object> initValues;
@@ -87,8 +86,8 @@ public class JComboBoxModelComponent extends ModelComponent {
 	}
 
 	@Override
-	public void initModelComponent(ModelBinding modelBinding) {
-		this.modelBinding = modelBinding;
+	public void init(ModelBinding modelBinding) {
+		super.init(modelBinding);
 		jcombobox = (JComboBox) modelBinding.getComponent();
 		try {
 			initValues = (List<Object>) modelBinding.getInitPropertyValue();

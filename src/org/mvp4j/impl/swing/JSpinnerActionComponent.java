@@ -40,7 +40,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JSpinnerActionComponent extends ActionComponent{
 
-	private ActionBinding actionBinding;
 	private JSpinner jspinner;
 	private ChangeListener changeListener;
 	private static final Class<?> DEFAULT_EVENT_TYPE = ChangeListener.class;
@@ -437,8 +436,8 @@ public class JSpinnerActionComponent extends ActionComponent{
 	}
 
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
-		this.actionBinding=actionBinding;
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		jspinner=(JSpinner)actionBinding.getComponent();
 		
 	}

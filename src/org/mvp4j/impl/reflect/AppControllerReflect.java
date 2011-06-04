@@ -40,23 +40,35 @@ public class AppControllerReflect implements AppController {
 	@Override
 	public MVPBinding bind(Object view, Object model, Object presenter) {
 
-		bindModel(view, model);
-		bindPresenter(view, presenter);
 		mvpBinding = new MVPBindingImpl();
-		mvpBinding.setModel(model);
-		mvpBinding.setPresenter(presenter);
-		mvpBinding.setView(view);
+		bindModel(view, model,mvpBinding);
+		bindPresenter(view, presenter,mvpBinding);
 		return mvpBinding;
 
 	}
 
 	@Override
 	public MVPBinding bindModel(Object view, Object model) {
+		mvpBinding = new MVPBindingImpl();
+		bindModel(view, model, mvpBinding);
+		return mvpBinding;
+
+	}
+
+	@Override
+	public MVPBinding bindPresenter(Object view, Object presenter) {
+		mvpBinding = new MVPBindingImpl();
+		bindPresenter(view, presenter, mvpBinding);
+		return mvpBinding;
+
+	}
+
+	private MVPBinding bindModel(Object view, Object model,
+			MVPBinding mvpBinding) {
 
 		logger.info("Bind View :" + view.getClass().getName().toString()
 				+ " with model :" + model.getClass().getName().toString());
-
-		mvpBinding = new MVPBindingImpl();
+		
 		mvpBinding.setView(view);
 		mvpBinding.setModel(model);
 
@@ -83,8 +95,8 @@ public class AppControllerReflect implements AppController {
 				// modelInfo));
 				ModelComponent componentModel = (ModelComponent) constructor
 						.newInstance();
-				componentModel.initModelComponent(new ModelBindingImpl(view,
-						model, modelInfo));
+				componentModel
+						.init(new ModelBindingImpl(view, model, modelInfo,mvpBinding));
 				modelInfo.setComponentModel(componentModel);
 				componentModel.bind();
 
@@ -115,13 +127,12 @@ public class AppControllerReflect implements AppController {
 
 	}
 
-	@Override
-	public MVPBinding bindPresenter(Object view, Object presenter) {
+	private MVPBinding bindPresenter(Object view, Object presenter,
+			MVPBinding mvpBinding) {
 		logger.info("Bind View :" + view.getClass().getName().toString()
 				+ " with presenter :"
 				+ presenter.getClass().getName().toString());
 
-		mvpBinding = new MVPBindingImpl();
 		mvpBinding.setView(view);
 		mvpBinding.setPresenter(presenter);
 
@@ -138,8 +149,7 @@ public class AppControllerReflect implements AppController {
 
 				Class componentActionClass = currentAdapter
 						.getComponentAction(component.getClass());
-				Constructor constructor = componentActionClass
-						.getConstructor();
+				Constructor constructor = componentActionClass.getConstructor();
 
 				// ActionComponent componentAction = (ActionComponent)
 				// constructor
@@ -147,8 +157,8 @@ public class AppControllerReflect implements AppController {
 				// actionInfo));
 				ActionComponent componentAction = (ActionComponent) constructor
 						.newInstance();
-				componentAction.initActionComponent(new ActionBindingImpl(view,
-						presenter, actionInfo));
+				componentAction.init(new ActionBindingImpl(view, presenter,
+						actionInfo));
 				componentAction.bind();
 
 			} catch (IllegalArgumentException e) {
@@ -177,6 +187,7 @@ public class AppControllerReflect implements AppController {
 				+ " with presenter :"
 				+ presenter.getClass().getName().toString());
 		return mvpBinding;
+
 	}
 
 	private void processView(Class<?> viewClass) {

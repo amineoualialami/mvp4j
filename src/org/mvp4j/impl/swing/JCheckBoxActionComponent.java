@@ -39,7 +39,6 @@ import org.mvp4j.impl.swing.utils.LoggerUtils;
 public class JCheckBoxActionComponent extends ActionComponent{
 
 	private JCheckBox jcheckBox;
-	private ActionBinding actionBinding;
 	private static final Class<?> DEFAULT_EVENT_TYPE = ActionListener.class;
 	private ItemListener itemListener;
 	private ActionListener actionListener;
@@ -451,8 +450,8 @@ public class JCheckBoxActionComponent extends ActionComponent{
 	}
 
 	@Override
-	public void initActionComponent(ActionBinding actionBinding) {
-		this.actionBinding=actionBinding;
+	public void init(ActionBinding actionBinding) {
+		super.init(actionBinding);
 		jcheckBox=(JCheckBox)actionBinding.getComponent();
 	}
 

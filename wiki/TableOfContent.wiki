@@ -1,8 +1,8 @@
- * [Tutoriels Swing]
-   *[Action Component]
-    *[How to use JButton]
-   *[Model Component]
- * [Tutoriels GWT]
-   *[Action Component]
-   *[Model Component]
+ * Tutoriels Swing
+   * Action Component
+     * How to use JButton
+   * Model Component
+ * Tutoriels GWT]
+   * Action Component
+   * Model Component
    

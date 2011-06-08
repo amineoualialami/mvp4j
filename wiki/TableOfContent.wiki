@@ -2,6 +2,7 @@
    * Action Component
      * [JButton How to use JButton]
    * Model Component
+     * [JTextField How to use JTextField]
  * Tutoriels GWT]
    * Action Component
    * Model Component

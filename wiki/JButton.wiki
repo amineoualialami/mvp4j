@@ -1,13 +1,39 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
+= How to use JButton =
 
-Add your content here.
+This page explains how to use JButton  component with  MVP4J
+
+we define the class that represents the view
+
+{{{
+@MVP(modelClass = ClientModel.class, presenterClass = ClientPresenter.class)
+public class ClientView extends JFrame {
+
+  @Action(name = "actionExemple" EventType=MouseListener.class , EventAction="mouseEntered")
+  JButton button;
+
+  public ClientView() {
+
+		setTitle("Client Application");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setContentPane(new JPanel());
+		setSize(1000, 600);
+		setLocationRelativeTo(null);
+		setLayout(null);
+		add(getButton());
+	}
 
 
-= Details =
+  
+  public JButton getButton() {
+		if (button == null) {
+			button = new JButton("OK");
+			button.setBounds(10, 10, 70, 40);
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+		}
+		return button;
+	}
+
+}
+}}}

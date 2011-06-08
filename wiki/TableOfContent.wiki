@@ -4,6 +4,7 @@
    * Model Component
      * [JTextField How to use JTextField]
      * [JComboBox How to use JComboBox]
+     * [JRadioButton How to use JRadioButton]
  * Tutoriels GWT
    * Action Component
    * Model Component

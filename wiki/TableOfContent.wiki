@@ -3,7 +3,7 @@
      * [JButton How to use JButton]
    * Model Component
      * [JTextField How to use JTextField]
-     * [JCombobox How to use JCombobox]
+     * [JComboBox How to use JComboBox]
  * Tutoriels GWT
    * Action Component
    * Model Component

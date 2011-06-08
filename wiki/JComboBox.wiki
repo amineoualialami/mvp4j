@@ -58,5 +58,5 @@ public class ClientModel implements Serializable {
 }}}
 
 
- *  *_initProperty_* Attribute contains _profils_ property which is of type List _<ProfilDTO>_ , it will be used to populate the combobox, it must first be initialized in the model (see example), the list can contain any type of object but it must redefine the toString () method.
+ *  *_initProperty_* Attribute contains _profils_ property which is of type List _ProfilDTO_, it will be used to populate the combobox, it must first be initialized in the model (see example), the list can contain any type of object but it must redefine the toString () method.
  * When the selection of the JCombobox changes the property of the model *_profile_* is automatically initialized by the selected profile, the attribute *_property_* must contain the same type as the object present in the attribute *_initProperty_*.

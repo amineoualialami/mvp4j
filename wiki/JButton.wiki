@@ -57,7 +57,7 @@ public class ClientPresenter {
 }}}
 
 
- * The 'name' attribute of the @ Action annotation is the name of the action, in this case 'actionExemple is the method that is raised at the event, it must be defined in the class of Presenter . 
- * Attribute 'EventType is the type of triggering event, it's an optional property of the annotation, if no one defined, MVP4J defines the default ActionListener event. 
+ * The *_name_* attribute of the @ Action annotation is the name of the action, in this case 'actionExemple is the method that is raised at the event, it must be defined in the class of Presenter . 
+ * Attribute *_EventType_* is the type of triggering event, it's an optional property of the annotation, if no one defined, MVP4J defines the default ActionListener event. 
  * If the EventType supports many events, you can specify a single event through the attribute' EventAction ', if it does not specify, all the events of ' EventType 'will be invoked and bind with the action defined in the Presenter. 
- * If the attribute 'name' does not refer to a previous action in the present class, an ActionNotFoundException is thrown. 
+ * If the attribute *_name_* does not refer to a previous action in the present class, an ActionNotFoundException is thrown. 

@@ -10,4 +10,4 @@
  * Tutoriels GWT
    * Action Component
    * Model Component
- *[MVP4JAnnotations MVP4J exceptions]
+ * [MVP4JAnnotations MVP4J exceptions]

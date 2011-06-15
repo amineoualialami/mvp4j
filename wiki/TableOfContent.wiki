@@ -11,3 +11,4 @@
    * Action Component
    * Model Component
  * [MVP4JAnnotations MVP4J exceptions]
+ * [SwingEventSupported Swing Events supported by MVP4J]

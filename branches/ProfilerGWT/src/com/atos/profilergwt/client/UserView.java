@@ -84,12 +84,12 @@ public class UserView implements Reflection {
 		formulairePanel.add(getPhoneTextBox(), 50, 100);
 		formulairePanel.add(getMailLabel(), 0, 150);
 		formulairePanel.add(getMailTextBox(), 50, 150);
-		formulairePanel.add(getProfilRadioButton1(),30,200);
-		formulairePanel.add(getProfilRadioButton2(),30,250);
-		formulairePanel.add(getProfil1CheckBox(),30,300);
-		formulairePanel.add(getProfil2CheckBox(),30,350);
-		formulairePanel.add(getAjouterButton(), 50, 400);
-		formulairePanel.add(getTestButton(), 50, 450);
+		//formulairePanel.add(getProfilRadioButton1(),30,200);
+		//formulairePanel.add(getProfilRadioButton2(),30,250);
+		//formulairePanel.add(getProfil1CheckBox(),30,300);
+		//formulairePanel.add(getProfil2CheckBox(),30,350);
+		formulairePanel.add(getAjouterButton(), 50, 200);
+		//formulairePanel.add(getTestButton(), 50, 450);
 		
 		
 		

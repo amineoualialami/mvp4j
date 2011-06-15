@@ -1,4 +1,4 @@
-= The MVP4J Annotations =
+= The MVP4J Exceptions =
 
  * ActionNotFoundException :
      A runtime exception that describes that an Action could not be found in the presenter class defined

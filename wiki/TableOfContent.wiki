@@ -1,4 +1,4 @@
- * [GetStartedWithMVP4J]
+ * [GetStartedWithMVP4J Get Started With MVP4J]
  * Tutoriels Swing
    * Action Component
      * [JButton How to use JButton]
@@ -10,4 +10,4 @@
  * Tutoriels GWT
    * Action Component
    * Model Component
-   
+ *[MVP4JAnnotations MVP4J exceptions]

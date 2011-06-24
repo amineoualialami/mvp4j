@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.RichTextArea;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.ToggleButton;
 
@@ -28,12 +29,14 @@ public class GwtAdapter implements MVPAdapter{
 		if(componentKlass.equals(ToggleButton.class)){
 			return ButtonActionComponent.class;
 		}
-		
 		if(componentKlass.equals(ListBox.class)){
 			return ListBoxActionComponent.class;
 		}
 		if(componentKlass.equals(RadioButton.class)){
 			return RadioButtonActionComponent.class;
+		}
+		if(componentKlass.equals(RichTextArea.class)){
+			return RichTextAreaActionComponent.class;
 		}
 		return null;
 	}
@@ -45,6 +48,10 @@ public class GwtAdapter implements MVPAdapter{
 			return TextBoxModelComponent.class;
 		}
 		if(componentKlass==PasswordTextBox.class){
+			return TextBoxModelComponent.class;
+		}
+		
+		if(componentKlass==TextArea.class){
 			return TextBoxModelComponent.class;
 		}
 		if(componentKlass==RichTextArea.class){

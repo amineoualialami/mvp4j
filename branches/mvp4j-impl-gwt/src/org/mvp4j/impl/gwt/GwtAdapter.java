@@ -7,8 +7,10 @@ import org.mvp4j.adapter.ModelComponent;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.ToggleButton;
 
@@ -41,6 +43,12 @@ public class GwtAdapter implements MVPAdapter{
 			Class<?> componentKlass) {
 		if(componentKlass==TextBox.class){
 			return TextBoxModelComponent.class;
+		}
+		if(componentKlass==PasswordTextBox.class){
+			return TextBoxModelComponent.class;
+		}
+		if(componentKlass==RichTextArea.class){
+			return RichTextAreaModelComponent.class;
 		}
 		if(componentKlass==RadioButton.class){
 			return RadioButtonModelComponent.class;

@@ -7,8 +7,10 @@ import org.mvp4j.adapter.ModelComponent;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.ToggleButton;
 
 public class GwtAdapter implements MVPAdapter{
 
@@ -18,6 +20,13 @@ public class GwtAdapter implements MVPAdapter{
 		if(componentKlass.equals(Button.class)){
 			return ButtonActionComponent.class;
 		}
+		if(componentKlass.equals(PushButton.class)){
+			return ButtonActionComponent.class;
+		}
+		if(componentKlass.equals(ToggleButton.class)){
+			return ButtonActionComponent.class;
+		}
+		
 		if(componentKlass.equals(ListBox.class)){
 			return ListBoxActionComponent.class;
 		}

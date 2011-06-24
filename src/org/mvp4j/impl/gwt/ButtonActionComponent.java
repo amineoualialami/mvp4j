@@ -41,6 +41,7 @@ import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ButtonBase;
 import com.gwtent.reflection.client.Reflection;
 
 public class ButtonActionComponent extends ActionComponent implements Reflection {
@@ -65,13 +66,13 @@ public class ButtonActionComponent extends ActionComponent implements Reflection
     private TouchCancelHandler touchCancelHandler;
     private  TouchEndHandler touchEndHandler;
     private TouchStartHandler touchStartHandler;
-    private Button button;
+    private ButtonBase button;
 	private String eventAction;
 	
 	@Override
 	public void init(ActionBinding actionBinding) {
 		super.init(actionBinding);
-		this.button=(Button) actionBinding.getComponent();
+		this.button=(ButtonBase) actionBinding.getComponent();
 	
 	}
 

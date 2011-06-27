@@ -18,6 +18,7 @@ import org.mvp4j.exception.ActionNotFoundException;
 import org.mvp4j.impl.gwt.GwtAdapter;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.gwtent.reflection.client.ClassType;
 import com.gwtent.reflection.client.Constructor;
 import com.gwtent.reflection.client.Field;
@@ -38,6 +39,8 @@ public class AppControllerReflect implements AppController {
 
 	@Override
 	public MVPBinding bind(Object view, Object model, Object presenter) {
+		System.out.println("call bind OK");
+		Window.alert("alert");
 		mvpBinding = new MVPBindingImpl();
 		bindModel(view, model,mvpBinding);
 		bindPresenter(view, presenter,mvpBinding);

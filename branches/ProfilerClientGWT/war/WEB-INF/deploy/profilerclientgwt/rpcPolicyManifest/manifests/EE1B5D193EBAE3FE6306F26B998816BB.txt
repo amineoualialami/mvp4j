@@ -1,2 +1,0 @@
-serviceClass: com.atos.profilerclientgwt.model.UserModelService
-path: B1404CFC40094A27187034E299B4B529.gwt.rpc

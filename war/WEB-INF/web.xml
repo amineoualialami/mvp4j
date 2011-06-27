@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+	<servlet>
+		<servlet-name>userServicesImpl</servlet-name>
+		<servlet-class>com.profiler.server.UserServicesImpl</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>gwt-log-remote-logger-servlet</servlet-name>
+		<servlet-class>com.allen_sauer.gwt.log.server.RemoteLoggerServiceImpl</servlet-class>
+		<!-- symbolMaps param provides for stack trace deobfuscation -->
+		<init-param>
+			<param-name>symbolMaps</param-name>
+			<!-- This value assumes a GWT compile with '-deploy war/WEB-INF/deploy/' -->
+			<param-value>WEB-INF/deploy/yourmodulename/symbolMaps/</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>userServicesImpl</servlet-name>
+		<url-pattern>/profilerwebgwt/user</url-pattern>
+	</servlet-mapping>
+
+	
+	<servlet-mapping>
+		<servlet-name>gwt-log-remote-logger-servlet</servlet-name>
+		<url-pattern>/your-module-name/gwt-log</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Servlets -->
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>ProfilerWebGWT.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

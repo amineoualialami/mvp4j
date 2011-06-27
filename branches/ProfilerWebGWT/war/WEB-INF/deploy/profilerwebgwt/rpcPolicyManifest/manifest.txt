@@ -1,0 +1,3 @@
+# Module profilerwebgwt
+# RPC service class, partial path of RPC policy file
+com.profiler.client.UserServices, 676DF375841B4DCE7E7DA0087E732C84.gwt.rpc

@@ -21,7 +21,7 @@ public class ProfilerWebGWT implements EntryPoint {
 		Log.info("Start");
 		Window.setMargin("300px");
 		UserModel model = new UserModel();
-		//model.init();
+		model.init();
 		UserView view = new UserView(model);
 		UserPresenter presenter = new UserPresenter(view,model);
         

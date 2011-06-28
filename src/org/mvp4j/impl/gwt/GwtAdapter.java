@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.ToggleButton;
+import com.google.gwt.user.client.ui.Tree;
 
 public class GwtAdapter implements MVPAdapter{
 
@@ -38,6 +39,10 @@ public class GwtAdapter implements MVPAdapter{
 		if(componentKlass.equals(RichTextArea.class)){
 			return RichTextAreaActionComponent.class;
 		}
+		if(componentKlass.equals(CheckBox.class)){
+			return CheckBoxActionComponent.class;
+		}
+		
 		return null;
 	}
 

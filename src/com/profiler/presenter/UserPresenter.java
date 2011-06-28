@@ -10,6 +10,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.gwtent.reflection.client.Reflection;
+import com.profiler.client.SimpleDataSource;
 import com.profiler.client.UserServices;
 import com.profiler.client.UserServicesAsync;
 import com.profiler.client.UserView;
@@ -69,6 +70,10 @@ public class UserPresenter implements Reflection {
 			}
 		});
 		
+		
+		userView.getTable().setSource(new SimpleDataSource(userModel.getUsers()));
+		userView.getFormulairePanel().remove(userView.getVerticalPanel());
+		userView.getFormulairePanel().add(userView.getVerticalPanel());
 		
 
 	}

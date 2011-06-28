@@ -1,6 +1,8 @@
 package com.profiler.client;
 
 
+import java.util.List;
+
 import org.mvp4j.annotation.Action;
 import org.mvp4j.annotation.MVP;
 import org.mvp4j.annotation.Model;
@@ -21,6 +23,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.gwtent.reflection.client.Reflection;
 import com.profiler.model.UserModel;
 import com.profiler.presenter.UserPresenter;
+import com.profiler.shared.UserGWT;
 
 @MVP(modelClass = UserModel.class, presenterClass = UserPresenter.class)
 public class UserView implements Reflection {
@@ -44,7 +47,7 @@ public class UserView implements Reflection {
 	
 	private Label nameLabel, mailLabel, phoneLabel, listBoxProfilsLabel;
 	
-	//@Model(initProperty="profils",property="profil")
+	@Model(initProperty="profils",property="profil")
 	private ListBox profilsListBox;
 	
 	private FlexTable flexTable;
@@ -63,8 +66,8 @@ public class UserView implements Reflection {
 //	@Action(name="action2")
 //	private Button testButton;
 	
-//	private Table table;
 	
+	private Table table;
 
 	UserModel model;
 	
@@ -88,7 +91,7 @@ public class UserView implements Reflection {
 		formulairePanel.add(getAjouterButton(), 50, 200);
 		//formulairePanel.add(getTestButton(), 50, 450);
 		
-//		formulairePanel.add(getVerticalPanel(), 300, 0);
+		formulairePanel.add(getVerticalPanel(), 300, 0);
 		
 
 	}
@@ -215,7 +218,7 @@ public class UserView implements Reflection {
 		verticalPanel.setSpacing(0);
 //		verticalPanel.add(getTableColumns());
 //		verticalPanel.add(getScrollPane());
-//		verticalPanel.add(getTable());
+		verticalPanel.add(getTable());
 		return verticalPanel;
 	}
 
@@ -271,11 +274,11 @@ public class UserView implements Reflection {
 		return profil2CheckBox;
 	}
 
-//	public Table getTable() {
-//		User[] users = (User[]) model.getUsers().toArray();
-//		table = new Table(new SimpleDataSource((User[]) model.getUsers().toArray(new User[model.getUsers().size()])), "MyTable");
-//		return table;
-//	}
+	public Table getTable() {
+		List<UserGWT> users =  model.getUsers();
+		table = new Table(new SimpleDataSource(users), "MyTable");
+		return table;
+	}
 
 	
 	

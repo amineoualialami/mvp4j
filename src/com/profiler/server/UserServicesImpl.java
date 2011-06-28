@@ -40,15 +40,15 @@ public class UserServicesImpl extends RemoteServiceServlet implements UserServic
 		List<UserGWT> listUsersGWT = new ArrayList<UserGWT>();
 		for (User user : listUsers) {
 			UserGWT userGWT = new UserGWT();
-			ProfilGWT profilGWT = new ProfilGWT();
+//			ProfilGWT profilGWT = new ProfilGWT();
 			userGWT.setIdUser(user.getIdUser());
 			userGWT.setName(user.getName());
 			userGWT.setMail(user.getMail());
-			userGWT.setDate(user.getDate());
+			//userGWT.setDate(user.getDate());
 			userGWT.setPhone(user.getPhone());
-			profilGWT.setId(user.getProfil().getId());
-			profilGWT.setName(user.getProfil().getName());
-			userGWT.setProfil(profilGWT);
+//			profilGWT.setId(user.getProfil().getId());
+//			profilGWT.setName(user.getProfil().getName());
+			//userGWT.setProfil(profilGWT);
 			listUsersGWT.add(userGWT);
 		}
 		return listUsersGWT;

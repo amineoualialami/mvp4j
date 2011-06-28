@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.mvp4j.impl.reflect.Reflectables;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -39,48 +40,45 @@ public class UserModel implements Serializable ,Reflection{
 	
 	private List<ProfilGWT> profils2;
 	
-	private ArrayList users;
+	private List<UserGWT> users;
 	
 	
 	public void init(){
-//		getService().getUsers(new AsyncCallback<List<User>>() {
-//
-//			@Override
-//			public void onFailure(Throwable caught) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void onSuccess(List<User> result) {
-//				List<User> listUsers= result;
-//				setUsers(listUsers);
-//			}
-//			
-//		});
-		AsyncCallback callback = new AsyncCallback() {
+		
+		users = new ArrayList<UserGWT>();
+		getService().getUsers(new AsyncCallback<List<UserGWT>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				Log.info("Retrieve users failed");
 				
 			}
 
 			@Override
-			public void onSuccess(Object result) {
-				List<ProfilGWT> listProfils = (List<ProfilGWT>) result;
-				//setProfils(listProfils);
-				profil1 = listProfils.get(0);
-				profil2 = listProfils.get(1);
-				setProfil1(profil1);
-				setProfil2(profil2);
+			public void onSuccess(List<UserGWT> result) {
+				setUsers(result);
+				Log.info("Retrieve users success");
+				
 			}
-		};
-		getService().getProfils(callback);
+		});
 		
-		
-		
-		
+		profils = new ArrayList<ProfilGWT>();
+		getService().getProfils(new AsyncCallback<List<ProfilGWT>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Log.info("Retrieve profils failed");
+				
+			}
+
+			@Override
+			public void onSuccess(List<ProfilGWT> result) {
+				setProfils(result);
+				Log.info("Retrieve profils success");
+			}
+			
+		});
+
 	}
 
 
@@ -135,16 +133,6 @@ public class UserModel implements Serializable ,Reflection{
 
 
 	public List<ProfilGWT> getProfils() {
-		profils = new ArrayList<ProfilGWT>();
-		ProfilGWT profil1 = new ProfilGWT();
-		profil1.setId(1);
-		profil1.setName("profil 1");
-		ProfilGWT profil2 = new ProfilGWT();
-		profil2.setId(2);
-		profil2.setName("profil 2");
-		profils.add(profil1);
-		profils.add(profil2);
-		
 		return profils;
 	}
 
@@ -180,15 +168,6 @@ public class UserModel implements Serializable ,Reflection{
 	
 	
 
-	public static UserServicesAsync getService() {
-		UserServicesAsync service = (UserServicesAsync) GWT
-				.create(UserServices.class);
-		ServiceDefTarget endpoint = (ServiceDefTarget) service;
-		String moduleRelativeURL = GWT.getModuleBaseURL() + "user";
-		endpoint.setServiceEntryPoint(moduleRelativeURL);
-		return service;
-	}
-
 
 
 	public List<ProfilGWT> getProfils2() {
@@ -203,26 +182,27 @@ public class UserModel implements Serializable ,Reflection{
 
 
 
-	public ArrayList getUsers() {
-		users = new ArrayList();
-		UserGWT user1 = new UserGWT();
-		user1.setName("user 1");
-		UserGWT user2 = new UserGWT();
-		user2.setName("user 2");
-		users.add(user1);
-		users.add(user2);
+	public List<UserGWT> getUsers() {
 		return users;
 	}
 
 
 
-	public void setUsers(ArrayList users) {
+	public void setUsers(List<UserGWT> users) {
 		this.users = users;
 	}
 
 
 
-	
+
+	public static UserServicesAsync getService() {
+		UserServicesAsync service = (UserServicesAsync) GWT
+				.create(UserServices.class);
+		ServiceDefTarget endpoint = (ServiceDefTarget) service;
+		String moduleRelativeURL = GWT.getModuleBaseURL() + "user";
+		endpoint.setServiceEntryPoint(moduleRelativeURL);
+		return service;
+	}
 	
 	
 	

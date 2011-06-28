@@ -42,7 +42,9 @@ public class GwtAdapter implements MVPAdapter{
 		if(componentKlass.equals(CheckBox.class)){
 			return CheckBoxActionComponent.class;
 		}
-		
+		if(componentKlass.equals(Tree.class)){
+			return TreeActionComponent.class;
+		}
 		return null;
 	}
 

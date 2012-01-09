@@ -6,7 +6,7 @@ to integrate MVP4J to your project you need to add the latest jar of
 
 Before we start you must add the latest jar of mvp4j to your project :
  * Swing Application : mvp4j-api-x.x.jar and mvp4j-impl-swing-x.x.jar
- * GWT Application : mvp4j-api-x.x.jar and mvp4j-impl-swing-x.x.jar
+ * GWT Application : mvp4j-api-x.x.jar and mvp4j-impl-gwt-x.x.jar
 
 == Define the entry point==
 We must get the appController object using the factory   AppControllerReflectFactory.getAppControllerInstance ()

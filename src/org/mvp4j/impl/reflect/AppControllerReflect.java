@@ -41,8 +41,8 @@ public class AppControllerReflect implements AppController {
 	public MVPBinding bind(Object view, Object model, Object presenter) {
 
 		mvpBinding = new MVPBindingImpl();
-		bindModel(view, model,mvpBinding);
-		bindPresenter(view, presenter,mvpBinding);
+		bindModel(view, model, mvpBinding);
+		bindPresenter(view, presenter, mvpBinding);
 		return mvpBinding;
 
 	}
@@ -52,7 +52,6 @@ public class AppControllerReflect implements AppController {
 		mvpBinding = new MVPBindingImpl();
 		bindModel(view, model, mvpBinding);
 		return mvpBinding;
-
 	}
 
 	@Override
@@ -68,7 +67,7 @@ public class AppControllerReflect implements AppController {
 
 		logger.info("Bind View :" + view.getClass().getName().toString()
 				+ " with model :" + model.getClass().getName().toString());
-		
+
 		mvpBinding.setView(view);
 		mvpBinding.setModel(model);
 
@@ -95,8 +94,8 @@ public class AppControllerReflect implements AppController {
 				// modelInfo));
 				ModelComponent componentModel = (ModelComponent) constructor
 						.newInstance();
-				componentModel
-						.init(new ModelBindingImpl(view, model, modelInfo,mvpBinding));
+				componentModel.init(new ModelBindingImpl(view, model,
+						modelInfo, mvpBinding));
 				modelInfo.setComponentModel(componentModel);
 				componentModel.bind();
 

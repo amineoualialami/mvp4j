@@ -2,6 +2,11 @@ package org.mvp4j.impl.reflect;
 
 import java.util.List;
 
+/**
+ * A stored cartography of a relationship between a view and a presenter
+ * @author MVP4J Team
+ *
+ */
 public class ActionViewPresenterInfo {
 	private Class<?> viewClass;
 	private Class<?> presenterClass;

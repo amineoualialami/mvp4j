@@ -88,10 +88,4 @@ public interface AppController {
 	 */	
 	public void setAdapter(MVPAdapter adapter);
 	
-	
-	
-	
-	
-	
-
-}
+	}

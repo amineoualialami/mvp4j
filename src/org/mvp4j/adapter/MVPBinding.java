@@ -34,25 +34,49 @@ public interface MVPBinding {
 	public void setComponentModel(Object component,
 			Class<? extends ModelComponent> customizedModelComponent);
 
-	// TODO JavaDoc
+	/**
+	 * retrieve the ModelComponent through graphic component.
+	 *  
+	 * @param component
+	 *          the graphic component
+	 * @return the ModelComponent
+	 */
 	public ModelComponent getComponentModel(Object component);
 
-	// TODO JavaDoc
+	/**
+	 * 
+	 * @return the Presenter Object
+	 */
 	public Object getPresenter();
 
-	// TODO JavaDoc
+	/**
+	 * 
+	 * @return the Model Object
+	 */
 	public Object getModel();
 
-	// TODO JavaDoc
+	/**
+	 * 
+	 * @return the View Object
+	 */
 	public Object getView();
 
-	// TODO JavaDoc
+	/**
+	 * 
+	 * @param presenter
+	 */
 	public void setPresenter(Object presenter);
 
-	// TODO JavaDoc
+	/**
+	 * 
+	 * @param model
+	 */
 	public void setModel(Object model);
 
-	// TODO JavaDoc
+	/**
+	 * 
+	 * @param view
+	 */
 	public void setView(Object view);
 
 }

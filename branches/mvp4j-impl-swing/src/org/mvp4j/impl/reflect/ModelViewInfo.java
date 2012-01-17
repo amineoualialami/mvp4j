@@ -2,6 +2,11 @@ package org.mvp4j.impl.reflect;
 
 import java.util.List;
 
+/**
+ * A stored cartography of a relationship between a view and a model
+ * @author MVP4J Team
+ *
+ */
 public class ModelViewInfo {
 	private Class<?> viewClass;
 	private Class<?> modelClass;

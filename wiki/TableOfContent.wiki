@@ -7,7 +7,7 @@
      * [JComboBox How to use JComboBox]
      * [JRadioButton How to use JRadioButton]
      * [JCheckBox How to use JCheckBox]
-   * [Customized Model Component]
+   *[Customized Model Component]
  * Tutoriels GWT
    * Action Component
    * Model Component

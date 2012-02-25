@@ -1,5 +1,7 @@
 =How to use JTable=
 
+A full example on how to use Jtable with MVP4J to load data and a delete button
+
 ===The view Class==
 
 {{{

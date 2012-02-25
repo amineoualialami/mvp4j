@@ -1,0 +1,66 @@
+=How to use JTable=
+
+===The view Class==
+
+{{{
+
+@MVP(modelClass = ClientModel.class, presenterClass = ClientPresenter.class)
+public class ClientView extends JFrame {
+
+   @Model(initProperty="users", property = "user")
+   private JTable jtable;
+
+   
+   public ClientView() {
+
+		setTitle("Client Application");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setContentPane(new JPanel());
+		setSize(1000, 600);
+		setLocationRelativeTo(null);
+		setLayout(null);
+                add(getScrollPane());
+
+	}
+
+    public JTable getTable() {
+		if(jtable==null){
+			jtable= new JTable();
+		}
+		return jtable;
+	}
+
+     public JScrollPane getScrollPane() {
+		JScrollPane scrollPane = new JScrollPane(getTable());
+		scrollPane.setBounds(10, 10, 350, 350);
+		return scrollPane;
+	}
+}
+}}}
+
+===The model class===
+{{{
+
+public class ClientModel implements Serializable {
+
+        private List<UserDTO> users;
+        private UserDTO user;
+
+        public List<UserDTO> getUsers() {
+		// some code to retrieve your users
+		return users;
+	}
+
+        public void setUsers(List<UserDTO> users) {
+		this.users = users;
+	}
+
+        public UserDTO getUser() {
+		return user;
+	}
+
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
+}
+}}}

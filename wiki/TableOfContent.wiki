@@ -1,17 +1,11 @@
  * [GetStartedWithMVP4J Get Started With MVP4J]
  * Tutoriels Swing
-   * Action Component
      * [JButton How to use JButton]
-   * Model Component
      * [JTextField How to use JTextField]
      * [JComboBox How to use JComboBox]
      * [JRadioButton How to use JRadioButton]
      * [JCheckBox How to use JCheckBox]
      * [JTable How to use JTable]
-   * Customized Components
      * [CustomizedModel Model Component]
- * Tutoriels GWT
-   * Action Component
-   * Model Component
- * [MVP4JAnnotations MVP4J exceptions]
- * [SwingEventSupported Swing Events supported by MVP4J]
+     * [MVP4JAnnotations MVP4J exceptions]
+     * [SwingEventSupported Swing Events supported by MVP4J]

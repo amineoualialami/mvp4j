@@ -2,6 +2,8 @@ package org.mvp4j.impl.reflect;
 
 import java.lang.reflect.Method;
 
+import org.mvp4j.adapter.EventAction;
+
 /**
  * Simple bean that contains detailed information about an action
  * 
@@ -11,7 +13,7 @@ import java.lang.reflect.Method;
 public class ActionInfo {
 	private String action;
 	private Class<?> eventType;
-	private String eventAction;
+	private EventAction eventAction;
 	private Method method;
 	private Method actionMethod;
     
@@ -63,13 +65,15 @@ public class ActionInfo {
 		this.actionMethod = actionMethod;
 	}
 
-	public String getEventAction() {
+	public EventAction getEventAction() {
 		return eventAction;
 	}
 
-	public void setEventAction(String eventAction) {
+	public void setEventAction(EventAction eventAction) {
 		this.eventAction = eventAction;
 	}
+
+	
 	
 	
 

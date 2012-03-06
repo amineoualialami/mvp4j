@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 
 import org.apache.log4j.Logger;
 import org.mvp4j.adapter.ActionBinding;
+import org.mvp4j.adapter.EventAction;
 import org.mvp4j.annotation.Action;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
 
@@ -92,7 +93,7 @@ public class ActionBindingImpl implements ActionBinding {
 	}
 
 	@Override
-	public String getEventAction() {
+	public EventAction getEventAction() {
 		// TODO Auto-generated method stub
 		return actionInfo.getEventAction();
 	}

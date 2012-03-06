@@ -32,6 +32,7 @@ import javax.swing.event.PopupMenuListener;
 import org.apache.log4j.Logger;
 import org.mvp4j.adapter.ActionBinding;
 import org.mvp4j.adapter.ActionComponent;
+import org.mvp4j.adapter.EventAction;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class JMenuItemActionComponent extends ActionComponent {
@@ -56,7 +57,7 @@ public class JMenuItemActionComponent extends ActionComponent {
 	
 	private PropertyChangeListener propertyChangeListener;
 	private Logger logger = LoggerUtils.getLogger();
-	private String eventAction;
+	private EventAction eventAction;
 	
 	public JMenuItemActionComponent() {
 	}

@@ -32,6 +32,7 @@ import javax.swing.event.PopupMenuListener;
 import org.apache.log4j.Logger;
 import org.mvp4j.adapter.ActionBinding;
 import org.mvp4j.adapter.ActionComponent;
+import org.mvp4j.adapter.EventAction;
 import org.mvp4j.impl.swing.utils.LoggerUtils;
 
 public class AbstractButtonActionComponent extends ActionComponent {
@@ -51,7 +52,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 	private MouseMotionListener mouseMotionListener;
 	private MouseWheelListener mouseWheelListener;
 	private PropertyChangeListener propertyChangeListener;
-	private String eventAction;
+	private EventAction eventAction;
 	private static final Class<?> DEFAULT_EVENT_TYPE = ActionListener.class;
 	private ActionListener listener = null;
 	private Logger logger = LoggerUtils.getLogger();
@@ -65,7 +66,6 @@ public class AbstractButtonActionComponent extends ActionComponent {
 		Class<?> eventType = actionBinding.getEventType();
 		
 		eventAction=actionBinding.getEventAction();
-		
 		if (eventType == null) {
 			eventType = DEFAULT_EVENT_TYPE;
 		}
@@ -75,7 +75,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 			listener = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(eventAction.equals("actionPerformed") || eventAction.equals("")){
+					if(eventAction.name().equals(EventAction.ActionPerformed.name()) || eventAction.name().equals(EventAction.Default.name())){
 					actionBinding.callAction(e);
 					}
 				}

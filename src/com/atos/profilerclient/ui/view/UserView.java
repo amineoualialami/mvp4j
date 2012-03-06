@@ -28,6 +28,7 @@ import javax.swing.SpringLayout;
 
 import org.kahvi.paketti.dtobuilder.DtoBuilder;
 import org.kahvi.paketti.dtobuilder.DtoDismantler;
+import org.mvp4j.adapter.EventAction;
 import org.mvp4j.annotation.Action;
 import org.mvp4j.annotation.Actions;
 import org.mvp4j.annotation.MVP;
@@ -44,7 +45,7 @@ public class UserView extends JFrame {
 	JPanel panel2;
 	JPanel buttonPanel;
 	
-	@Action(name = "addUser")
+	@Action(name = "addUser" , EventType=ActionListener.class)
 	JButton okButton;
 	
 	@Action(name = "removeUser")
@@ -114,7 +115,7 @@ public class UserView extends JFrame {
 		setTitle("Profiler Client");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setContentPane(new JPanel());
-		setSize(1000, 600);
+		setSize(1000, 700);
 		setLocationRelativeTo(null);
 		setLayout(null);
 		add(getPanel1());

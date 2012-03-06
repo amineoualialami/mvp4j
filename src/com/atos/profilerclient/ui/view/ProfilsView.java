@@ -20,7 +20,7 @@ import com.atos.profilerclient.ui.presenter.ProfilsPresenter;
 public class ProfilsView extends JFrame {
 	
 	@Model(initProperty="profils", property = "profil")
-	@Action(name="actionTable",EventAction="mousePressed",EventType=MouseListener.class)
+//	@Action(name="actionTable",EventAction="mousePressed",EventType=MouseListener.class)
 	private JTable table;
 	
 	@Model(property="name")

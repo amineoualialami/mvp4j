@@ -27,7 +27,7 @@ public interface ActionBinding {
 	 * 
 	 * @return the method within the event's supported methods that it will be implemented for the current component
 	 */
-	public String getEventAction();
+	public EventAction getEventAction();
 	/** 
 	 * The current component.
 	 * 

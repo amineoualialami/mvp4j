@@ -5,6 +5,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.mvp4j.adapter.EventAction;
 
 import org.mvp4j.AppController;
 
@@ -62,5 +63,5 @@ public @interface Action {
 	 * 
 	 * @return the method within the event's supported methods that it will be implemented
 	 */
-	String EventAction() default "";
+	EventAction EventAction() default EventAction.Default;
 }

@@ -75,7 +75,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 			listener = new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(eventAction.name().equals(EventAction.ActionPerformed.name()) || eventAction.name().equals(EventAction.Default.name())){
+					if(eventAction.equals(EventAction.ActionPerformed) || eventAction.equals(EventAction.Default)){
 					actionBinding.callAction(e);
 					}
 				}
@@ -86,7 +86,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					if(eventAction.equals("mouseReleased")|| eventAction.equals("")){
+					if(eventAction.equals(EventAction.MouseReleased)){
 						actionBinding.callAction(e);
 						
 					}
@@ -96,7 +96,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void mousePressed(MouseEvent e) {
-					if(eventAction.equals("mousePressed" ) || eventAction.equals("") ){
+					if(eventAction.equals(EventAction.MousePressed)){
 						actionBinding.callAction(e);
 						
 					}
@@ -106,7 +106,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseExited(MouseEvent e) {
-					if(eventAction.equals("mouseExited") || eventAction.equals("")  ){
+					if(eventAction.equals(EventAction.MouseExited)){
 						actionBinding.callAction(e);
 						
 					}
@@ -116,7 +116,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					if(eventAction.equals("mouseEntered") || eventAction.equals("") ){
+					if(eventAction.equals(EventAction.MouseEntered)){
 						actionBinding.callAction(e);
 						
 					}
@@ -127,7 +127,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(eventAction.equals("mouseClicked") || eventAction.equals("") ){
+					if(eventAction.equals(EventAction.MouseClicked)){
 						actionBinding.callAction(e);
 						
 					}
@@ -145,7 +145,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(eventAction.equals("keyTyped") || eventAction.equals("") ){
+				if(eventAction.equals(EventAction.keyTyped)){
 					actionBinding.callAction(e);
 					
 				}
@@ -155,7 +155,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(eventAction.equals("keyReleased") || eventAction.equals("") ){
+				if(eventAction.equals(EventAction.keyReleased)){
 					actionBinding.callAction(e);
 					
 				}
@@ -165,7 +165,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(eventAction.equals("keyPressed") || eventAction.equals("") ){
+				if(eventAction.equals(EventAction.keyPressed)){
 					actionBinding.callAction(e);
 					
 				}
@@ -182,7 +182,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentShown(ComponentEvent e) {
-					if(eventAction.equals("componentShown") || eventAction.equals("") ){
+					if(eventAction.equals(EventAction.ComponentShown)){
 						actionBinding.callAction(e);
 						
 					}
@@ -192,7 +192,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentResized(ComponentEvent e) {
-					if(eventAction.equals("componentResized") || eventAction.equals("") ){
+					if(eventAction.equals(EventAction.ComponentResized)){
 						actionBinding.callAction(e);
 						
 					}
@@ -202,7 +202,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentMoved(ComponentEvent e) {
-					if(eventAction.equals("componentMoved") || eventAction.equals("") ){
+					if(eventAction.equals(EventAction.ComponentMoved)){
 						actionBinding.callAction(e);
 						
 					}
@@ -211,7 +211,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentHidden(ComponentEvent e) {
-					if(eventAction.equals("componentHidden") || eventAction.equals("") ){
+					if(eventAction.equals(EventAction.ComponentHidden)){
 						actionBinding.callAction(e);
 						
 					}
@@ -226,7 +226,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorRemoved(AncestorEvent e) {
-					if(eventAction.equals("ancestorRemoved")|| eventAction.equals("") ){
+					if(eventAction.equals("ancestorRemoved")){
 						actionBinding.callAction(e);
 						
 					}
@@ -236,7 +236,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorMoved(AncestorEvent e) {
-					if(eventAction.equals("ancestorMoved")|| eventAction.equals("") ){
+					if(eventAction.equals("ancestorMoved")){
 						actionBinding.callAction(e);
 						
 					}
@@ -246,7 +246,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorAdded(AncestorEvent e) {
-					if(eventAction.equals("ancestorAdded") || eventAction.equals("")){
+					if(eventAction.equals("ancestorAdded")){
 						actionBinding.callAction(e);
 						
 					}
@@ -261,7 +261,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentRemoved(ContainerEvent e) {
-					if(eventAction.equals("componentRemoved") || eventAction.equals("") ){
+					if(eventAction.equals("componentRemoved")){
 						actionBinding.callAction(e);
 						
 					}
@@ -270,7 +270,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void componentAdded(ContainerEvent e) {
-					if(eventAction.equals("componentAdded") || eventAction.equals("")){
+					if(eventAction.equals("componentAdded")){
 						actionBinding.callAction(e);
 						
 					}
@@ -284,7 +284,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void focusLost(FocusEvent e) {
-					if(eventAction.equals("focusLost") || eventAction.equals("")){
+					if(eventAction.equals("focusLost")){
 						actionBinding.callAction(e);
 						
 					}
@@ -293,7 +293,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void focusGained(FocusEvent e) {
-					if(eventAction.equals("focusGained") || eventAction.equals("")){
+					if(eventAction.equals("focusGained")){
 						actionBinding.callAction(e);
 						
 					}
@@ -307,7 +307,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorResized(HierarchyEvent e) {
-					if(eventAction.equals("ancestorResized") || eventAction.equals("")){
+					if(eventAction.equals("ancestorResized")){
 						actionBinding.callAction(e);
 						
 					}
@@ -316,7 +316,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void ancestorMoved(HierarchyEvent e) {
-					if(eventAction.equals("ancestorMoved") || eventAction.equals("")){
+					if(eventAction.equals("ancestorMoved")){
 						actionBinding.callAction(e);
 						
 					}
@@ -331,7 +331,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void hierarchyChanged(HierarchyEvent e) {
-					if(eventAction.equals("hierarchyChanged") || eventAction.equals("")){
+					if(eventAction.equals("hierarchyChanged")){
 						actionBinding.callAction(e);
 						
 					}
@@ -345,7 +345,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void inputMethodTextChanged(InputMethodEvent e) {
-					if(eventAction.equals("inputMethodTextChanged") || eventAction.equals("")){
+					if(eventAction.equals("inputMethodTextChanged")){
 						actionBinding.callAction(e);
 						
 					}
@@ -354,7 +354,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void caretPositionChanged(InputMethodEvent e) {
-					if(eventAction.equals("caretPositionChanged") || eventAction.equals("")){
+					if(eventAction.equals("caretPositionChanged")){
 						actionBinding.callAction(e);
 						
 					}
@@ -368,7 +368,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseMoved(MouseEvent e) {
-					if(eventAction.equals("mouseMoved") || eventAction.equals("")){
+					if(eventAction.equals("mouseMoved")){
 						actionBinding.callAction(e);
 						
 					}
@@ -377,7 +377,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseDragged(MouseEvent e) {
-					if(eventAction.equals("mouseDragged") || eventAction.equals("")){
+					if(eventAction.equals("mouseDragged")){
 						actionBinding.callAction(e);
 						
 					}
@@ -392,7 +392,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void mouseWheelMoved(MouseWheelEvent e) {
-					if(eventAction.equals("mouseWheelMoved") || eventAction.equals("")){
+					if(eventAction.equals("mouseWheelMoved")){
 						actionBinding.callAction(e);
 						
 					}
@@ -408,7 +408,7 @@ public class AbstractButtonActionComponent extends ActionComponent {
 				
 				@Override
 				public void propertyChange(PropertyChangeEvent e) {
-					if(eventAction.equals("propertyChange") || eventAction.equals("")){
+					if(eventAction.equals("propertyChange")){
 						actionBinding.callAction(e);
 						
 					}

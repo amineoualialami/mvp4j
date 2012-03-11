@@ -15,7 +15,22 @@ public enum  EventAction {
 	 ComponentShown,
 	 ComponentResized,
 	 ComponentMoved,
-	 ComponentHidden;
+	 ComponentHidden,
+	 AncestorRemoved,
+	 AncestorMoved,
+	 AncestorAdded,
+	 ComponentRemoved,
+	 ComponentAdded,
+	 FocusLost,
+	 FocusGained,
+	 AncestorResized,
+	 HierarchyChanged,
+	 InputMethodTextChanged,
+	 CaretPositionChanged,
+	 MouseMoved,
+	 MouseDragged,
+	 MouseWheelMoved,
+	 PropertyChange;
 	 
 
 }

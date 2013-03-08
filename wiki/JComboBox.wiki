@@ -8,7 +8,7 @@
 @MVP(modelClass = ClientModel.class, presenterClass = ClientPresenter.class)
 public class ClientView extends JFrame {
 
-@Model(property = " profil ", initProperty = " profils ")
+@Model(property = "profil", initProperty = "profils")
 JComboBox comboBox;
 
 public ClientView() {

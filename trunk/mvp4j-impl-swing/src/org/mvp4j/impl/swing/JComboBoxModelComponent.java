@@ -31,8 +31,12 @@ public class JComboBoxModelComponent extends ModelComponent {
 		if(modelBinding.getPropertyValue()!=null){
 		
 			for(int i=0;i<initValues.size();i++){
-				if(initValues.get(i).toString().equals(modelBinding.getPropertyValue()) & jcombobox.getItemCount()!=0){
+				if(initValues.get(i).toString().equals(modelBinding.getPropertyValue())){
 					jcombobox.setSelectedIndex(i);
+					break;
+				}
+				else{
+					jcombobox.setSelectedIndex(0);
 				}
 			}
 	
@@ -70,7 +74,6 @@ public class JComboBoxModelComponent extends ModelComponent {
 
 	@Override
 	public void unbind() {
-
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import org.mvp4j.Converter;
 public class MyConverter2 implements Converter {
 
 	@Override
-	public Object convertComponentToModel(Class<?> type, Object value) {
+	public Object convertComponentToModel(Object type, Object value) {
 		System.out.println("----------------------MyConverter 2------------------");
 		if (value instanceof String) {
 			if (type == Integer.class)

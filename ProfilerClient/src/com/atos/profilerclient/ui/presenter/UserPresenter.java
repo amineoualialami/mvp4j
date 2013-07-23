@@ -90,8 +90,7 @@ public class UserPresenter {
 		model.setName("");
 		model.setPhone(null);
 		model.setMail("");
-		// model.getProfils2().add(model.getProfil2());
-		// model.getProfils2().add(model.getProfil1());
+		
 		AppControllerReflect appController = AppControllerReflectFactory
 				.getAppControllerInstance();
 

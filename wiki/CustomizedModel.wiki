@@ -15,7 +15,7 @@ public Object initTableModel(Map<String, String> customizedColumns)
                 getCustomizedColumns().put("name","name");
 		getCustomizedColumns().put("date","date");
                 // first param is the name of the property present in the class of initProperty
-                // second param is the name of the customized columns of JTable
+                // second param is the name of the customized column of JTable
 
 		return super.initTableModel(getCustomizedColumns());
 	}	

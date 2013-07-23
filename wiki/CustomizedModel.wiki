@@ -40,7 +40,9 @@ public class Launch {
         UserModel model = new UserModel();
         UserPresenter presenter = new UserPresenter(view, model);
         MVPBinding mvpBinding = appController.bind(view, model, presenter);
-     mvpBinding.setComponentModel(view.getTable(),CustomizedTableModel.class);}
+        mvpBinding.setComponentModel(view.getTable(),CustomizedTableModel.class)
+
+;}
 }
 }}}
 

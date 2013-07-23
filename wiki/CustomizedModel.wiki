@@ -24,7 +24,7 @@ public Object initTableModel(Map<String, String> customizedColumns)
 *JTableModelComponent* contains a method called _initTableModel_ on which mvp4j is based to set the JTable model (*dont confuse the JTable model with the model entity*) by a model based on the values specified on the initProperty on the view:
 
 {{{
-@Model(initProperty = "users", property = "user")
+        @Model(initProperty = "users", property = "user")
 	JTable table;
 }}}
 
@@ -39,8 +39,8 @@ public class Launch {
        	UserView view = new UserView();
         UserModel model = new UserModel();
         UserPresenter presenter = new UserPresenter(view, model);
-MVPBinding mvpBinding = appController.bind(view, model, presenter);
-mvpBinding.setComponentModel(view.getTable(),CustomizedTableModel.class);}
+        MVPBinding mvpBinding = appController.bind(view, model, presenter);
+     mvpBinding.setComponentModel(view.getTable(),CustomizedTableModel.class);}
 }
 }}}
 

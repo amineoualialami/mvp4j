@@ -45,7 +45,7 @@ public class Launch {
 //		modelComponent2.setConverter(new MyConverter2());
 		
 		
-//		mvpBinding.setComponentModel(view.getTable(), CustomizedTableModel.class);
+		mvpBinding.setComponentModel(view.getTable(), CustomizedTableModel.class);
 		//appController.getCurrentAdapter().setComponentModel(view,model, view.getTable(), CustomizedTableModel.class);	
 		
 		view.setVisible(true);

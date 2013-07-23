@@ -11,7 +11,7 @@ public class CustomizedTableModel extends JTableModelComponent {
 
 	@Override
 	public Object initTableModel(Map<String, String> customizedColumns) {
-		getCustomizedColumns().put("name","name");
+		getCustomizedColumns().put("name","nameee");
 		getCustomizedColumns().put("date","date");
 		return super.initTableModel(getCustomizedColumns());
 	}

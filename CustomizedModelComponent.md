@@ -1,0 +1,1 @@
+# How to create your own Model Component for a specific view Component #

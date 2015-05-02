@@ -6,6 +6,8 @@ Mvp4j provides a set of software components flexible and scalable, it's able to 
 
 # Architecture :
 
+![Alt text](http://nsa29.casimages.com/img/2012/12/30/12123010340895171.png "MVP4J Architecture")
+
 ## The View :
 The view is the main element of the framework, it consists of a set of core graphics component used in a single class or in some cases a set of classes with one that manages vision, called the class of the view (View class),access to the graphic components of the class of sight must pass through getter methods like getters of java beans.
 

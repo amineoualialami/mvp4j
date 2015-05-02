@@ -3,6 +3,7 @@
 	<name>ProfilerClient</name>
 	<comment></comment>
 	<projects>
+		<project>mvp4j-impl-swing</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

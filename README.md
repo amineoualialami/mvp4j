@@ -1,6 +1,8 @@
 # mvp4j
 MVP4J is a useful framework that is based primarily on practical design pattern MVP (Model View Presenter), therefore it facilitates the development of presentation layer technologies based on the principle of development events, it supports the different libraries Swing, AWT and JAVAFX ( comming very soon ).
 
+MVP4J uses YourKit tool for java profiling (https://www.yourkit.com/home/)
+
 # Introduction :
 Mvp4j provides a set of software components flexible and scalable, it's able to produce an application easy to maintain, these components are organized to be used in interaction with each other, in some advanced use cases, mvp4j allows the developer to implement its own component. Mvp4j requires an architecture based on the MVP design pattern to separate the layers described in classes and defining the responsibilities of each
 

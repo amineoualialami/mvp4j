@@ -6,6 +6,8 @@ YourKit, LLC is the creator of <a href="https://www.yourkit.com/java/profiler/in
 and <a href="https://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler</a>,
 innovative and intelligent tools for profiling Java and .NET applications.
 
+![Alt text](https://www.yourkit.com/images/yklogo.png "YourKit")
+
 # Introduction :
 Mvp4j provides a set of software components flexible and scalable, it's able to produce an application easy to maintain, these components are organized to be used in interaction with each other, in some advanced use cases, mvp4j allows the developer to implement its own component. Mvp4j requires an architecture based on the MVP design pattern to separate the layers described in classes and defining the responsibilities of each
 

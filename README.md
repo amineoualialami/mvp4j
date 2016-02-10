@@ -1,12 +1,7 @@
 # mvp4j
 MVP4J is a useful framework that is based primarily on practical design pattern MVP (Model View Presenter), therefore it facilitates the development of presentation layer technologies based on the principle of development events, it supports the different libraries Swing, AWT and JAVAFX ( comming very soon ).
 
-YourKit supports open source projects with its full-featured Java Profiler.
-YourKit, LLC is the creator of <a href="https://www.yourkit.com/java/profiler/index.jsp">YourKit Java Profiler</a>
-and <a href="https://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler</a>,
-innovative and intelligent tools for profiling Java and .NET applications.
 
-![Alt text](https://www.yourkit.com/images/yklogo.png "YourKit")
 
 # Introduction :
 Mvp4j provides a set of software components flexible and scalable, it's able to produce an application easy to maintain, these components are organized to be used in interaction with each other, in some advanced use cases, mvp4j allows the developer to implement its own component. Mvp4j requires an architecture based on the MVP design pattern to separate the layers described in classes and defining the responsibilities of each
@@ -128,4 +123,14 @@ This annotation is used to link the view component to the properties of the mode
 		@Model(property="name")
 		JTextField textField;
 
+
+
+
+# Thanks :
+YourKit supports open source projects with its full-featured Java Profiler.
+YourKit, LLC is the creator of <a href="https://www.yourkit.com/java/profiler/index.jsp">YourKit Java Profiler</a>
+and <a href="https://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler</a>,
+innovative and intelligent tools for profiling Java and .NET applications.
+
+![Alt text](https://www.yourkit.com/images/yklogo.png "YourKit")
 
